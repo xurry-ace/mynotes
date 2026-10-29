@@ -13,3 +13,9 @@
 .md-tabs {
   background-color: #81e5db !important;
 }
+
+/* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
+.md-typeset .admonition.question {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
