@@ -206,7 +206,11 @@ markdown_extensions:
   - attr_list     # 支持图片设置属性 {width="50%"}
   - tables #制表
   # --- 原有配置 ---
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - pymdownx.details
   - pymdownx.tabbed:      

@@ -5,7 +5,7 @@
 ## 项目结构
 
 ```
-/Users/xurry/Documents/mynotes/
+/Users/xurry/Documents/mynote/
 ├── mkdocs.yml          # MkDocs 配置文件
 ├── docs/               # 所有 Markdown 源文件
 │   ├── 模式识别/
@@ -98,6 +98,6 @@ D.训练误差大，测试误差小
 
 ### 10. 构建与部署
 
-- 本地预览：`mkdocs serve`（在 `/Users/xurry/Documents/mynotes` 目录下执行）
+- 本地预览：`mkdocs serve`（在 `/Users/xurry/Documents/mynote` 目录下执行）
 - 部署：push 到 `main` 分支后，GitHub Actions 自动执行 `mkdocs gh-deploy`
 - 注意：`mkdocs.yml` 中的 `nav` 配置需要显式添加新文件才能出现在网站导航栏中
