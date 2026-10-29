@@ -12,7 +12,7 @@
 │   ├── c++基础/
 │   ├── python基础/
 │   └── ...
-├── site/               # 本地构建输出（不要手动编辑）
+├── site/               # 本地构建输出（可重建，已忽略）
 └── .github/workflows/  # GitHub Actions 自动部署
 ```
 
@@ -98,6 +98,6 @@ D.训练误差大，测试误差小
 
 ### 10. 构建与部署
 
-- 本地预览：`mkdocs serve`（在 `/Users/xurry/Documents/mynote` 目录下执行）
+- 本地预览：先按 `README.md` 安装依赖，再运行 `.venv/bin/python -m mkdocs serve`
 - 部署：push 到 `main` 分支后，GitHub Actions 自动执行 `mkdocs gh-deploy`
 - 注意：`mkdocs.yml` 中的 `nav` 配置需要显式添加新文件才能出现在网站导航栏中
