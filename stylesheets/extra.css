@@ -1,0 +1,27 @@
+/* 覆盖默认的 Material 颜色变量 */
+:root {
+  /* 全局主色调：使用你上传图片中的明亮青绿色 */
+  --md-primary-fg-color: #10c1af; 
+}
+
+/* 1. 顶部 Header：使用稍深的青绿色，压住重心，让网页显得更稳重 */
+.md-header {
+  background-color: #16b3a3 !important;
+}
+
+/* 2. 下方 Tabs：使用你图片中的原始青绿色，拉开深浅层次 */
+.md-tabs {
+  background-color: #81e5db !important;
+}
+
+/* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
+.md-typeset .admonition.question {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
+
+/* 视频题的折叠解析与题干使用同一字号，便于在手机上阅读。 */
+.md-typeset .admonition.question + details.success {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
