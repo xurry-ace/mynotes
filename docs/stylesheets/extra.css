@@ -19,3 +19,9 @@
   font-size: 0.76rem;
   line-height: 1.65;
 }
+
+/* 视频题的折叠解析与题干使用同一字号，便于在手机上阅读。 */
+.md-typeset .admonition.question + details.success {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
