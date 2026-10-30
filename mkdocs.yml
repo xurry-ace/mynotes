@@ -42,7 +42,6 @@ theme:
     - content.code.copy        # 代码块一键复制按钮
     # 【布局升级】新增的沉浸式高级特性
     - navigation.footer        # 在页面底部显示“上一页/下一页”的漂亮按钮
-    - toc.integrate            # 将当前页的右侧目录树整合进左侧边栏，让版面更清爽大气
     - header.autohide          # 页面向下滚动时自动隐藏顶部栏，提供沉浸式阅读空间
     - search.highlight         # 搜索结果关键词高亮显示
 

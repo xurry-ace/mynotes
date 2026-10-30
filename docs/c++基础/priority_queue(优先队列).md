@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # C++ STL 容器 `priority_queue`（优先队列）常见用法总结
 
 `priority_queue` 是 C++ STL 中的**优先队列**，本质上通常是用**堆**实现的。  

@@ -1,6 +1,11 @@
+---
+hide:
+  - toc
+---
+
 # C++ 字符串函数总结
 
-## 头文件
+### 头文件
 
 ```cpp
 #include <iostream>
@@ -11,9 +16,9 @@ using namespace std;
 
 ---
 
-# 基础函数
+## 基础函数
 
-## `to_string()`
+### `to_string()`
 
 **作用：** 数字 → 字符串
 
@@ -29,7 +34,7 @@ string t = to_string(3.14);
 
 ---
 
-## `stoi()`
+### `stoi()`
 
 **作用：** 字符串 → 整数
 
@@ -44,7 +49,7 @@ int x = stoi("123");
 
 ---
 
-## `size()` / `length()`
+### `size()` / `length()`
 
 **作用：** 求长度（完全等价，常用 `size()`）
 
@@ -54,7 +59,7 @@ cout << s.size();
 
 ---
 
-## `substr()`
+### `substr()`
 
 **作用：** 截取子串
 
@@ -73,7 +78,7 @@ cout << s.substr(2, 3); // cde
 
 ---
 
-## `find()`
+### `find()`
 
 **作用：** 查找第一次出现位置
 
@@ -92,7 +97,7 @@ if (s.find("abc") != string::npos)
 
 ---
 
-## `erase()`
+### `erase()`
 
 **作用：** 删除一段
 
@@ -102,7 +107,7 @@ s.erase(pos, len);
 
 ---
 
-## `insert()`
+### `insert()`
 
 **作用：** 插入字符串
 
@@ -112,7 +117,7 @@ s.insert(2, "XYZ");
 
 ---
 
-## `replace()`
+### `replace()`
 
 **作用：** 替换子串
 
@@ -122,7 +127,7 @@ s.replace(pos, len, str);
 
 ---
 
-## `push_back()` / `pop_back()`
+### `push_back()` / `pop_back()`
 
 ```cpp
 s.push_back('a'); // 添加
@@ -131,7 +136,7 @@ s.pop_back();     // 删除末尾
 
 ---
 
-## `clear()` / `empty()`
+### `clear()` / `empty()`
 
 ```cpp
 s.clear();   // 清空
@@ -140,9 +145,9 @@ s.empty();   // 判空
 
 ---
 
-# 字符串操作
+## 字符串操作
 
-## 拼接
+### 拼接
 
 ```cpp
 string c = a + b;
@@ -151,7 +156,7 @@ s += "abc";
 
 ---
 
-## 访问字符
+### 访问字符
 
 ```cpp
 s[i]
@@ -163,7 +168,7 @@ for (char c : s)
 
 ---
 
-## `reverse()`
+### `reverse()`
 
 ```cpp
 reverse(s.begin(), s.end());
@@ -171,7 +176,7 @@ reverse(s.begin(), s.end());
 
 ---
 
-## `sort()`
+### `sort()`
 
 ```cpp
 sort(s.begin(), s.end());
@@ -179,9 +184,9 @@ sort(s.begin(), s.end());
 
 ---
 
-# 常用模板
+## 常用模板
 
-## 遍历字符串
+### 遍历字符串
 
 ```cpp
 for (int i = 0; i < s.size(); i++)
@@ -189,7 +194,7 @@ for (int i = 0; i < s.size(); i++)
 
 ---
 
-## 判断子串存在
+### 判断子串存在
 
 ```cpp
 if (s.find("abc") != string::npos)
@@ -197,7 +202,7 @@ if (s.find("abc") != string::npos)
 
 ---
 
-## 截取子串
+### 截取子串
 
 ```cpp
 string t = s.substr(l, len);
@@ -205,7 +210,7 @@ string t = s.substr(l, len);
 
 ---
 
-## 反转
+### 反转
 
 ```cpp
 reverse(s.begin(), s.end());
@@ -213,7 +218,7 @@ reverse(s.begin(), s.end());
 
 ---
 
-## 排序
+### 排序
 
 ```cpp
 sort(s.begin(), s.end());
@@ -221,7 +226,7 @@ sort(s.begin(), s.end());
 
 ---
 
-## 数字与字符串互转
+### 数字与字符串互转
 
 ```cpp
 string s = to_string(x);
@@ -230,9 +235,9 @@ int x = stoi(s);
 
 ---
 
-# 高频考点
+## 高频考点
 
-## 回文判断
+### 回文判断
 
 ```cpp
 string t = s;
@@ -242,7 +247,7 @@ if (t == s)
 
 ---
 
-## 统计字符
+### 统计字符
 
 ```cpp
 int cnt = 0;
@@ -252,7 +257,7 @@ for (char c : s)
 
 ---
 
-## 判断包含
+### 判断包含
 
 ```cpp
 if (s.find("2024") != string::npos)
@@ -260,7 +265,7 @@ if (s.find("2024") != string::npos)
 
 ---
 
-## 按位处理数字串
+### 按位处理数字串
 
 ```cpp
 int x = s[i] - '0';
@@ -268,7 +273,7 @@ int x = s[i] - '0';
 
 ---
 
-# 易错点
+## 易错点
 
 **1. find 不是返回 -1**
 
@@ -286,7 +291,7 @@ int x = s[i] - '0';
 
 ---
 
-# 速查表
+## 速查表
 
 | 写法 | 含义 |
 |------|------|
