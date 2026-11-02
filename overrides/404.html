@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block htmltitle %}
+  <title>页面走丢了 - {{ config.site_name }}</title>
+{% endblock %}
+
+{% block content %}
+  <h1>页面走丢了</h1>
+  <p>你访问的页面不存在，可能是链接已经失效，或者地址输入有误。</p>
+  <p>可以先从这些入口继续：</p>
+  <p>
+    <a class="md-button md-button--primary" href="{{ config.site_url }}">返回首页</a>
+    <a class="md-button" href="{{ config.site_url }}操作系统/">操作系统专栏</a>
+    <a class="md-button" href="{{ config.site_url }}洛谷题目/引言/">洛谷题解</a>
+    <a class="md-button" href="{{ config.site_url }}计算机组成原理/引言/">计算机组成原理</a>
+  </p>
+  <p>如果是从旧链接进来的，也可以直接使用右上角的搜索。</p>
+{% endblock %}

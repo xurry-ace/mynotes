@@ -155,5 +155,5 @@ int main() {
 ---
 
 !!! danger
-    那么这个时候就有人要问了这道题完全是利用了cpp里algorithm库，和二分思想一点关系都没有，其实algorithm库里的lower_bound()和upper_bound()函数本质上可以用二分法重新写一下，或者不引入这个库，自己定义这两个函数，一个是找到数组中第一个>=target的位置下标索引，一个是找到一个>target的下标索引，详细见[二分查找](https://kingpoints266-cell.github.io/mynotes/%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/)
+    那么这个时候就有人要问了这道题完全是利用了cpp里algorithm库，和二分思想一点关系都没有，其实algorithm库里的lower_bound()和upper_bound()函数本质上可以用二分法重新写一下，或者不引入这个库，自己定义这两个函数，一个是找到数组中第一个>=target的位置下标索引，一个是找到一个>target的下标索引，详细见[二分查找](二分查找.md)
 
