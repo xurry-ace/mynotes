@@ -1,17 +1,58 @@
-/* 覆盖默认的 Material 颜色变量 */
-:root {
-  /* 全局主色调：使用你上传图片中的明亮青绿色 */
-  --md-primary-fg-color: #10c1af; 
+/* 品牌色：深青绿用于 Header 和按钮，保证白字对比度；
+   浅青绿留给 Tabs，用深色文字，浅色/深色模式分别处理。 */
+body[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0b6f66;
+  --md-primary-fg-color--light: #0f8b80;
+  --md-primary-fg-color--dark: #064e48;
+  --md-accent-fg-color: #0b6f66;
+  --md-accent-fg-color--transparent: #0b6f661a;
+  --md-typeset-a-color: #0b6f66;
 }
 
-/* 1. 顶部 Header：使用稍深的青绿色，压住重心，让网页显得更稳重 */
+body[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0b5f57;
+  --md-primary-fg-color--light: #0f7a70;
+  --md-primary-fg-color--dark: #063f3a;
+  --md-accent-fg-color: #5eead4;
+  --md-accent-fg-color--transparent: #5eead41a;
+  --md-typeset-a-color: #5eead4;
+}
+
 .md-header {
-  background-color: #16b3a3 !important;
+  background-color: var(--md-primary-fg-color);
 }
 
-/* 2. 下方 Tabs：使用你图片中的原始青绿色，拉开深浅层次 */
+/* Tabs 保持原来的浅青绿，但改用深色文字，避免白字在浅底上不可读。 */
 .md-tabs {
-  background-color: #81e5db !important;
+  background-color: #81e5db;
+}
+
+.md-tabs__link {
+  color: #063c37;
+  opacity: 0.8;
+}
+
+.md-tabs__item--active .md-tabs__link,
+.md-tabs__link:hover,
+.md-tabs__link:focus {
+  color: #042f2b;
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #103f3b;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs__link {
+  color: #ccfbf1;
+  opacity: 0.8;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link,
+body[data-md-color-scheme="slate"] .md-tabs__link:hover,
+body[data-md-color-scheme="slate"] .md-tabs__link:focus {
+  color: #ffffff;
+  opacity: 1;
 }
 
 /* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
