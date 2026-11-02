@@ -55,6 +55,14 @@ body[data-md-color-scheme="slate"] .md-tabs__link:focus {
   opacity: 1;
 }
 
+/* 长公式在窄屏上改为横向滚动，避免撑开正文。 */
+.md-typeset mjx-container[jax="CHTML"][display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
 /* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
 .md-typeset .admonition.question {
   font-size: 0.76rem;
