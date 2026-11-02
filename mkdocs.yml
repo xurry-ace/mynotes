@@ -1,6 +1,11 @@
 site_name: xurry的代码空间  # 你的网站标题
 
 site_url: https://www.xurry.xyz # 部署后的网址
+site_description: xurry 的个人编程与计算机学习笔记：C++、Python、算法题解、计算机组成原理、操作系统、模式识别与人生思考。
+site_author: xurry
+repo_url: https://github.com/xurry-ace/mynotes
+repo_name: xurry-ace/mynotes
+edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2026 xurry # 底部版权声明，提升正式感
 
 theme:
@@ -40,6 +45,7 @@ theme:
     - navigation.top           # 显示“回到顶部”按钮
     - search.suggest           # 搜索建议
     - content.code.copy        # 代码块一键复制按钮
+    - content.action.edit      # 页面右上角显示“编辑此页”入口
     # 【布局升级】新增的沉浸式高级特性
     - navigation.footer        # 在页面底部显示“上一页/下一页”的漂亮按钮
     - header.autohide          # 页面向下滚动时自动隐藏顶部栏，提供沉浸式阅读空间
@@ -203,7 +209,7 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github  
-      link: https://github.com/kingpoints266-cell
+      link: https://github.com/xurry-ace
     - icon: fontawesome/solid/paper-plane
       link: mailto:2897964385@qq.com
 
