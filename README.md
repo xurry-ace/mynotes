@@ -13,3 +13,5 @@ python3 -m venv .venv
 需要单独生成静态站点时，运行 `.venv/bin/python -m mkdocs build --clean`。输出目录 `site/`、虚拟环境 `.venv/` 和缓存 `.cache/` 均可重建，已加入 `.gitignore`。
 
 向 GitHub 仓库的 `main` 分支推送源文件后，`.github/workflows/deploy.yml` 会构建网站并发布到 `gh-pages` 分支；线上地址为 <https://www.xurry.xyz/>。
+
+正文图片由 `hooks/image_attrs.py` 在构建时统一补上 `loading="lazy"`、`decoding="async"` 以及宽高（百分比宽度图片改用 `aspect-ratio`）。新增本地图片不需要手工写这些属性；外链图片只补懒加载。
