@@ -16,10 +16,8 @@ theme:
   favicon: assets/dog.png
   # 还可以顺便改一下配色，让它更有个性
 
-  # 1. 【排版升级】设置更优雅的阅读字体和代码字体
-  font:
-    text: Noto Serif SC  # 思源宋体，典雅有书卷气
-    code: Fira Code     # 程序员必备的等宽连字字体，代码块会变得非常好看
+  # 1. 使用本地字体子集（docs/assets/fonts），不再请求 Google Fonts
+  font: false
 
   palette: 
     - media: "(prefers-color-scheme: light)"

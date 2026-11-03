@@ -1,4 +1,21 @@
-/* Google Fonts 不可用时退回系统宋体/等宽字体，避免正文回退成无衬线。 */
+/* 本地字体子集：构建时按站点用字生成，避免请求 Google Fonts。 */
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("../assets/fonts/NotoSerifSC-subset.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Code";
+  src: url("../assets/fonts/FiraCode-subset.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 字体加载失败时退回系统宋体/等宽字体，避免正文回退成无衬线。 */
 :root {
   --md-text-font: "Noto Serif SC", "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
   --md-code-font: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
