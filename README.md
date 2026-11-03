@@ -15,3 +15,7 @@ python3 -m venv .venv
 向 GitHub 仓库的 `main` 分支推送源文件后，`.github/workflows/deploy.yml` 会构建网站并发布到 `gh-pages` 分支；线上地址为 <https://www.xurry.xyz/>。
 
 正文图片由 `hooks/image_attrs.py` 在构建时统一补上 `loading="lazy"`、`decoding="async"` 以及宽高（百分比宽度图片改用 `aspect-ratio`）。新增本地图片不需要手工写这些属性；外链图片只补懒加载。
+
+## 附件
+
+体积较大的 PDF 已迁移到 GitHub Releases 的 [`pdf-assets`](https://github.com/xurry-ace/mynotes/releases/tag/pdf-assets) release，正文通过 release 下载链接引用。仓库中的 `docs/` 不再保存这些 PDF；新增或替换附件时，先上传 release，再同步 Markdown 链接。
