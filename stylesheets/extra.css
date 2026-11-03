@@ -1,0 +1,99 @@
+/* 本地字体子集：构建时按站点用字生成，避免请求 Google Fonts。 */
+@font-face {
+  font-family: "Noto Serif SC";
+  src: url("../assets/fonts/NotoSerifSC-subset.woff2") format("woff2");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fira Code";
+  src: url("../assets/fonts/FiraCode-subset.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 字体加载失败时退回系统宋体/等宽字体，避免正文回退成无衬线。 */
+:root {
+  --md-text-font: "Noto Serif SC", "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+  --md-code-font: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+/* 品牌色：深青绿用于 Header 和按钮，保证白字对比度；
+   浅青绿留给 Tabs，用深色文字，浅色/深色模式分别处理。 */
+body[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0b6f66;
+  --md-primary-fg-color--light: #0f8b80;
+  --md-primary-fg-color--dark: #064e48;
+  --md-accent-fg-color: #0b6f66;
+  --md-accent-fg-color--transparent: #0b6f661a;
+  --md-typeset-a-color: #0b6f66;
+}
+
+body[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0b5f57;
+  --md-primary-fg-color--light: #0f7a70;
+  --md-primary-fg-color--dark: #063f3a;
+  --md-accent-fg-color: #5eead4;
+  --md-accent-fg-color--transparent: #5eead41a;
+  --md-typeset-a-color: #5eead4;
+}
+
+.md-header {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* Tabs 保持原来的浅青绿，但改用深色文字，避免白字在浅底上不可读。 */
+.md-tabs {
+  background-color: #81e5db;
+}
+
+.md-tabs__link {
+  color: #063c37;
+  opacity: 0.8;
+}
+
+.md-tabs__item--active .md-tabs__link,
+.md-tabs__link:hover,
+.md-tabs__link:focus {
+  color: #042f2b;
+  opacity: 1;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs {
+  background-color: #103f3b;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs__link {
+  color: #ccfbf1;
+  opacity: 0.8;
+}
+
+body[data-md-color-scheme="slate"] .md-tabs__item--active .md-tabs__link,
+body[data-md-color-scheme="slate"] .md-tabs__link:hover,
+body[data-md-color-scheme="slate"] .md-tabs__link:focus {
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* 长公式在窄屏上改为横向滚动，避免撑开正文。 */
+.md-typeset mjx-container[jax="CHTML"][display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+}
+
+/* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
+.md-typeset .admonition.question {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
+
+/* 视频题的折叠解析与题干使用同一字号，便于在手机上阅读。 */
+.md-typeset .admonition.question + details.success {
+  font-size: 0.76rem;
+  line-height: 1.65;
+}
