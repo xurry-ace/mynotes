@@ -5,7 +5,7 @@ hide:
 
 # C++ 字符串函数总结
 
-### 头文件
+## 头文件
 
 ```cpp
 #include <iostream>
