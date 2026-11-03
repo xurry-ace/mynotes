@@ -234,7 +234,8 @@ markdown_extensions:
       anchor_linenums: true
       use_pygments: true    # 启用更强大的代码高亮引擎
   - pymdownx.inlinehilite
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      base_path: .
   
   # 3. 【内容表现力升级】让你的笔记更加硬核且美观
   - pymdownx.mark           # 支持 ==高亮文本== 语法，就像用荧光笔划重点

@@ -21,3 +21,7 @@ python3 -m venv .venv
 ## 附件
 
 体积较大的 PDF 已迁移到 GitHub Releases 的 [`pdf-assets`](https://github.com/xurry-ace/mynotes/releases/tag/pdf-assets) release，正文通过 release 下载链接引用。仓库中的 `docs/` 不再保存这些 PDF；新增或替换附件时，先上传 release，再同步 Markdown 链接。
+
+## 共享题面
+
+同一道题在不同章节重复出现时，题面放在 `snippets/` 下，通过 `--8<--` 引入；修改题面只需改共享文件，章节页保留各自的解法与上下文。
