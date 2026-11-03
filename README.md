@@ -10,7 +10,7 @@ python3 -m venv .venv
 .venv/bin/python -m mkdocs serve
 ```
 
-需要单独生成静态站点时，运行 `.venv/bin/python -m mkdocs build --clean`。输出目录 `site/`、虚拟环境 `.venv/` 和缓存 `.cache/` 均可重建，已加入 `.gitignore`。
+需要单独生成静态站点时，运行 `.venv/bin/python -m mkdocs build --clean`。输出目录 `site/`、虚拟环境 `.venv/` 和缓存 `.cache/` 均可重建，已加入 `.gitignore`。构建后可用 `python scripts/check_links.py site` 检查站内链接与锚点；CI 也会在部署前运行这一步。
 
 向 GitHub 仓库的 `main` 分支推送源文件后，`.github/workflows/deploy.yml` 会构建网站并发布到 `gh-pages` 分支；线上地址为 <https://www.xurry.xyz/>。
 
