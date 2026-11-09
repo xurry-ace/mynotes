@@ -1,9 +1,9 @@
+# BFS（广度优先搜索）
+
 !!! tip
     [B站讲解](https://www.bilibili.com/video/BV16C4y1s7EF/)      
     [CSDN](https://blog.csdn.net/m0_73633807/article/details/141162183)
 
-
-    
 ## 1. BFS（广度优先搜索）
 
 BFS 全称：

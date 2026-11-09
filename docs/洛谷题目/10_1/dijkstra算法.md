@@ -1,8 +1,12 @@
-!!! tip
-    [B站讲解](https://www.bilibili.com/video/BV1MU4y1D729)  
-    [CSDN](https://blog.csdn.net/SWEENEY_HE/article/details/81368342)
+# Dijkstra 算法
 
-## 1. Dijkstra 算法
+# Dijkstra 单源最短路径算法
+
+!!! tip "参考资料"
+    - [B站讲解](https://www.bilibili.com/video/BV1MU4y1D729)
+    - [CSDN 博客详解](https://blog.csdn.net/SWEENEY_HE/article/details/81368342)
+
+## 1. Dijkstra 算法简介
 
 Dijkstra 是一种用于求 **单源最短路径** 的经典算法。
 

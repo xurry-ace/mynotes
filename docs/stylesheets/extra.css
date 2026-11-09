@@ -78,22 +78,285 @@ body[data-md-color-scheme="slate"] .md-tabs__link:focus {
   opacity: 1;
 }
 
-/* 长公式在窄屏上改为横向滚动，避免撑开正文。 */
+/* ============================================================
+   1. 正文排版与阅读体验 (Typography & Readability)
+   ============================================================ */
+
+/* 衬线宋体在适度行高下阅读感更舒展，降低视觉疲劳 */
+.md-typeset {
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+}
+
+.md-typeset p {
+  margin-bottom: 1.1em;
+}
+
+/* 文本选中色，契合品牌青绿色调 */
+::selection {
+  background-color: rgba(11, 111, 102, 0.2);
+  color: inherit;
+}
+
+body[data-md-color-scheme="slate"] ::selection {
+  background-color: rgba(94, 234, 212, 0.25);
+  color: inherit;
+}
+
+/* 链接悬停微动效 */
+.md-typeset a {
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+/* 列表项垂直间距微调，紧凑舒适 */
+.md-typeset ol li,
+.md-typeset ul li {
+  margin-bottom: 0.35em;
+}
+
+.md-typeset ol li > p,
+.md-typeset ul li > p {
+  margin-bottom: 0.35em;
+}
+
+/* ============================================================
+   2. 标题层级与视觉结构 (Heading Hierarchy)
+   ============================================================ */
+
+.md-typeset h1 {
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+/* 二级标题带有轻量底部虚实分界线，增强大章节划分感知 */
+.md-typeset h2 {
+  font-weight: 700;
+  font-size: 1.45em;
+  line-height: 1.4;
+  margin-top: 2.2rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  font-size: 1.2em;
+  line-height: 1.45;
+  margin-top: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.md-typeset h4 {
+  font-weight: 600;
+  font-size: 1.05em;
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================
+   3. 行内代码与代码块 (Code & Blocks)
+   ============================================================ */
+
+/* 行内代码微调：前后微小间距、圆角与边框，防止等宽字符与中文挤压 */
+.md-typeset :not(pre) > code {
+  font-size: 0.82em;
+  padding: 0.15em 0.38em;
+  margin: 0 0.2em;
+  border-radius: 4px;
+  background-color: var(--md-code-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  vertical-align: 0.05em;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset :not(pre) > code {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* 代码块：圆角与微阴影，提升独立视觉块质感 */
+.md-typeset pre {
+  border-radius: 8px;
+  line-height: 1.55;
+}
+
+@media screen and (min-width: 60em) {
+  .md-typeset .highlight {
+    border-radius: 8px;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+  }
+
+  body[data-md-color-scheme="slate"] .md-typeset .highlight {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ============================================================
+   4. 表格排版 (Tables)
+   ============================================================ */
+
+/* 表格适度放大字号（原 0.64rem 偏小），增加表头背景与斑马纹 */
+.md-typeset table:not([class]) {
+  font-size: 0.76rem;
+  line-height: 1.6;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--lighter, rgba(0, 0, 0, 0.03));
+  font-weight: 600;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.65rem 0.9rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table:not([class]) tr:first-child td {
+  border-top: none;
+}
+
+/* 隔行交替背景色，长对比表更易阅读 */
+.md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: var(--md-default-bg-color--lightest, rgba(0, 0, 0, 0.015));
+}
+
+body[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ============================================================
+   5. 提示框与折叠块 (Admonitions & Details)
+   ============================================================ */
+
+/* 统一提示框字号与正文舒适对齐，圆角与阴影更柔和 */
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.76rem;
+  line-height: 1.7;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  margin: 1.3em 0;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .admonition,
+body[data-md-color-scheme="slate"] .md-typeset details {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.md-typeset .admonition__title,
+.md-typeset summary {
+  font-weight: 600;
+}
+
+/* ============================================================
+   6. 引用块、高亮与按键 (Blockquotes, Highlights, Keys)
+   ============================================================ */
+
+/* 引用块：主色竖条 + 轻柔背景 */
+.md-typeset blockquote {
+  color: var(--md-default-fg-color--light);
+  border-left: 3.5px solid var(--md-primary-fg-color);
+  background-color: var(--md-accent-fg-color--transparent, rgba(11, 111, 102, 0.04));
+  border-radius: 0 6px 6px 0;
+  padding: 0.65rem 1rem;
+  margin: 1.3em 0;
+  font-style: normal;
+}
+
+.md-typeset blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* 荧光笔高亮 (==mark==) 浅深色模式自适应柔和色彩 */
+.md-typeset mark {
+  background-color: rgba(254, 240, 138, 0.65);
+  color: inherit;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset mark {
+  background-color: rgba(94, 234, 212, 0.22);
+  color: #5eead4;
+}
+
+/* 键盘快捷键 (++ctrl+c++) */
+.md-typeset kbd {
+  box-shadow: 0 2px 0 var(--md-default-fg-color--lighter), 0 0 0 1px var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  font-size: 0.75em;
+  padding: 0.15em 0.45em;
+  font-family: var(--md-code-font);
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+/* 题目与小节之间的分隔线渐变柔化 */
+.md-typeset hr {
+  margin: 2.2rem 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--md-default-fg-color--lighter) 20%,
+    var(--md-default-fg-color--lighter) 80%,
+    transparent
+  );
+  opacity: 0.45;
+}
+
+/* ============================================================
+   7. 数学公式、图片与 Mermaid 图表 (Media & Math)
+   ============================================================ */
+
+/* 长公式横向滚动条平滑处理 */
 .md-typeset mjx-container[jax="CHTML"][display="true"] {
   max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 0.2rem;
+  padding: 0.4rem 0.2rem;
+  margin: 1.2rem 0;
 }
 
-/* 选择题题干与选项在桌面和手机上保持接近正文的字号。 */
-.md-typeset .admonition.question {
-  font-size: 0.76rem;
-  line-height: 1.65;
+/* 调整公式与宋体字形的字号视觉平衡 */
+.md-typeset .MathJax,
+.md-typeset mjx-container {
+  font-size: 105% !important;
 }
 
-/* 视频题的折叠解析与题干使用同一字号，便于在手机上阅读。 */
-.md-typeset .admonition.question + details.success {
-  font-size: 0.76rem;
-  line-height: 1.65;
+/* Mermaid 流程图居中排版 */
+.md-typeset .mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.6rem 0;
+  overflow-x: auto;
+}
+
+/* 正文插图居中、柔和圆角与浮动轻微阴影 */
+.md-typeset img:not([class]) {
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: block;
+  margin: 1.2rem auto;
+  max-width: 100%;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset img:not([class]) {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
 }
