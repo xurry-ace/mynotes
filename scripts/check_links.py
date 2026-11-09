@@ -14,7 +14,7 @@ from functools import lru_cache
 from html import unescape
 from urllib.parse import unquote, urlparse
 
-ATTR_RE = re.compile(r'(?:href|src)="([^"]+)"', re.IGNORECASE)
+ATTR_RE = re.compile(r'(?:href|src)="([^"]*)"', re.IGNORECASE)
 ID_RE = re.compile(r'id="([^"]+)"', re.IGNORECASE)
 
 
@@ -44,9 +44,22 @@ def main(site_dir):
                 content = handle.read()
 
             for raw_url in ATTR_RE.findall(content):
-                url = unescape(raw_url)
+                url = unescape(raw_url).strip()
+                if url == "":
+                    checked += 1
+                    missing.append((html_path, "(empty href/src)"))
+                    continue
+                if url.startswith("#"):
+                    if url == "#":
+                        continue
+                    checked += 1
+                    fragment = unquote(url[1:])
+                    if fragment not in _ids(html_path):
+                        missing.append((html_path, url + " (missing anchor)"))
+                    continue
+
                 parsed = urlparse(url)
-                if parsed.scheme or parsed.netloc or url.startswith(("#", "//")):
+                if parsed.scheme or parsed.netloc or url.startswith("//"):
                     continue
                 if parsed.path == "":
                     continue

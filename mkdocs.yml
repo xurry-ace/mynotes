@@ -257,11 +257,13 @@ extra_javascript:
 
 # 👇 新增这块内容
 hooks:
+  - hooks/notebook_clean.py # 修正 Notebook 页面目录锚点、相对图片路径与冗余标签
   - hooks/image_attrs.py # 给正文图片补 loading="lazy" 与 decoding="async"
 
 plugins:
   - search # MkDocs 自带的搜索功能（建议保留）
   - mkdocs-jupyter:
+      include: ["*.ipynb"]
       execute: false # 推荐设为 false。表示构建网页时不重新运行一遍代码，直接使用原来运行好的结果，这样速度更快。
 
 

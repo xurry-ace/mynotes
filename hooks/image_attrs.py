@@ -95,9 +95,10 @@ def _add_attrs(attrs, docs_dir):
     if has_width and not has_height:
         ratio = f"aspect-ratio: {width} / {height}"
         if style_match:
+            existing_style = style_match.group(1).rstrip("; ")
             attrs = attrs.replace(
                 style_match.group(0),
-                f'style="{style_match.group(1)}; {ratio}"',
+                f'style="{existing_style}; {ratio}"',
                 1,
             )
         else:
