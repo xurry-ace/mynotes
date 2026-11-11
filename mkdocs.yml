@@ -252,9 +252,10 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
-# 配合数学公式渲染所需的外部脚本（由 mathjax.js 在含公式页面按需加载 CDN 脚本）
+# 数学公式按需加载；算法演示只增强显式标记的容器
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/study-viz.js
 
 # 👇 新增这块内容
 hooks:

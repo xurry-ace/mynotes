@@ -27,6 +27,16 @@ DFS 全称：
 
 这就是 DFS。
 
+## 动手看：向下搜索与返回 { #search-demo }
+
+下面与 [BFS 页面](bfs.md#search-demo) 使用同一棵自拟的无权树，孩子按从左到右的顺序访问。DFS 演示采用**递归**：每一步是进入一个节点，或在该节点的孩子处理完后返回；右侧列出当前递归调用链。
+
+<div class="study-viz" data-study-viz="search" data-mode="dfs">
+<p class="study-viz__fallback">静态读图：A 的孩子是 B、C；B 的孩子是 D、E；C 的孩子是 F。DFS 先进入 A → B → D，D 返回后进入 E；B 的子树搜完，再回到 A 搜索 C → F。首次进入顺序是 A、B、D、E、C、F。启用 JavaScript 后可逐步查看返回过程。</p>
+</div>
+
+注意区分**从函数返回**和**撤销选择**：普通图遍历通常保留 `vis` 标记；枚举路径或排列的回溯算法，才按题目要求撤销当前路径上的选择。可以结合 [回溯](../5_2/回溯.md) 与 [stack](../../c++基础/stack.md) 对照理解。
+
 ## 2. DFS 能解决什么问题
 
 DFS 常见用途：

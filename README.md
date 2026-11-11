@@ -14,6 +14,8 @@ python3 -m venv .venv
 
 向 GitHub 仓库的 `main` 分支推送源文件后，`.github/workflows/deploy.yml` 会构建网站并发布到 `gh-pages` 分支；线上地址为 <https://www.xurry.xyz/>。
 
+算法逐步演示由 `docs/javascripts/study-viz.js` 实现，只增强页面中带 `data-study-viz` 的容器，样式限定在 `.study-viz` 内，不依赖外部可视化库。示例包括二分查找、BFS/DFS 对照与 Dijkstra；容器内保留静态过程说明，在 JavaScript 不可用时仍可阅读。
+
 正文图片由 `hooks/image_attrs.py` 在构建时统一补上 `loading="lazy"`、`decoding="async"` 以及宽高（百分比宽度图片改用 `aspect-ratio`）。新增本地图片不需要手工写这些属性；外链图片只补懒加载。Jupyter Notebook 页面由 `hooks/notebook_clean.py` 同步标题锚点与右侧目录、改写 `./` 相对图片路径，并清理 `nbconvert` 生成的空脚本和重复样式标签。
 
 正文字体 Noto Serif SC 与代码字体 Fira Code 使用 `docs/assets/fonts/` 下的本地 woff2 子集，不再请求 Google Fonts；新增大量生僻字后需要用 `pyftsubset` 重新生成。字体来源与 OFL 许可证见同目录 `NOTICE.txt` 和 `OFL-*.txt`。

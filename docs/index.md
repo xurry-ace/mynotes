@@ -6,6 +6,78 @@ description: xurry 的个人笔记网站：记录 C++、算法、计算机组成
 
 这是一个纯粹的、用于记录技术成长与思考的个人数字花园。
 
+## 🧭 从这张知识地图开始
+
+语言和容器是表达工具，算法负责组织求解步骤，计算机系统解释程序怎样运行。下面按这几条线索找入口；它们可以交叉阅读，不必等一门学完再看下一门。
+
+<div class="knowledge-atlas" markdown="1">
+
+<section class="knowledge-lane" markdown="1">
+
+<span class="knowledge-lane__label">01 / 表达与实现</span>
+
+### 把想法写成程序
+
+变量、控制流、函数，再到常用容器。
+
+[C++ 容器](c++基础/vector.md) · [Python 基础](python基础/引言.md)
+
+<span class="knowledge-lane__bridge">↓ 为算法提供实现工具</span>
+
+</section>
+
+<section class="knowledge-lane" markdown="1">
+
+<span class="knowledge-lane__label">02 / 建模与求解</span>
+
+### 从题意找到算法
+
+缩小范围、递推状态、搜索路径。
+
+[算法知识地图](洛谷题目/引言.md#algorithm-map) · [二分逐步演示](洛谷题目/1_1/二分查找.md#binary-demo)
+
+<span class="knowledge-lane__bridge">↔ 用代码验证推理过程</span>
+
+</section>
+
+<section class="knowledge-lane" markdown="1">
+
+<span class="knowledge-lane__label">03 / 运行与管理</span>
+
+### 看懂程序背后的系统
+
+硬件执行指令，操作系统管理资源。
+
+[计算机组成原理](计算机组成原理/引言.md) · [操作系统](操作系统/index.md)
+
+<span class="knowledge-lane__bridge">↔ 把软件行为与硬件机制接起来</span>
+
+</section>
+
+<section class="knowledge-lane" markdown="1">
+
+<span class="knowledge-lane__label">04 / 数据与思考</span>
+
+### 从观察走向理解
+
+一条线学习数据与模型，一条线记录生活中的思考。
+
+[模式识别](模式识别/引言.md) · [人生思考](人生思考/引言.md)
+
+<span class="knowledge-lane__bridge">两条阅读支线，可按兴趣进入</span>
+
+</section>
+
+</div>
+
+<div class="co-pill-bar" markdown="1">
+
+[试试二分查找](洛谷题目/1_1/二分查找.md#binary-demo)
+[对比 BFS / DFS](洛谷题目/8_1/bfs.md#search-demo)
+[观察最短路更新](洛谷题目/10_1/dijkstra算法.md#dijkstra-demo)
+
+</div>
+
 ---
 
 ## 🎯 为什么建立这个空间？

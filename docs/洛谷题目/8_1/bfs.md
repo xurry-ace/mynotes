@@ -29,6 +29,16 @@ BFS 全称：
 
 先搜索近的，再搜索远的。
 
+## 动手看：同一棵树，两种搜索顺序 { #search-demo }
+
+下面是自拟的无权树示例，从 `A` 出发，同一节点的孩子按图中从左到右的顺序访问。BFS 的每一步表示**取出队头，再把未发现的孩子入队**；发现时就标记，避免重复加入。
+
+<div class="study-viz" data-study-viz="search" data-mode="bfs">
+<p class="study-viz__fallback">静态读图：A 的孩子是 B、C；B 的孩子是 D、E；C 的孩子是 F。BFS 出队顺序为 A、B、C、D、E、F；递归 DFS 首次进入节点的顺序为 A、B、D、E、C、F。启用 JavaScript 后可切换两种方式并逐步查看。</p>
+</div>
+
+这里的“层”对应从起点走过的边数，因此适用于**无权图或各边代价相同的图**。若边的代价不同，仅按步数扩展不能保证总代价最小，参见 [Dijkstra 的距离更新](../10_1/dijkstra算法.md#dijkstra-demo)。队列操作可回看 [queue](../../c++基础/queue.md)。
+
 ## 2. BFS 能解决什么问题
 
 最常见用途：

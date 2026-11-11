@@ -522,6 +522,321 @@ body[data-md-color-scheme="slate"] .md-typeset .co-pill-bar a:focus-visible {
   background-color: rgba(94, 234, 212, 0.18);
 }
 
+/* 首页知识地图与算法演示：只作用于显式标记的组件。 */
+.md-typeset .knowledge-atlas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1.2rem 0;
+}
+
+.md-typeset .knowledge-lane {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-top: 3px solid var(--md-typeset-a-color);
+  border-radius: 10px;
+  background: linear-gradient(145deg, var(--md-accent-fg-color--transparent), transparent 75%);
+}
+
+.md-typeset .knowledge-lane__label {
+  color: var(--md-typeset-a-color);
+  font-family: var(--md-code-font);
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.md-typeset .knowledge-lane h3 {
+  margin: 0.45rem 0;
+  font-size: 0.95rem;
+}
+
+.md-typeset .knowledge-lane p {
+  margin: 0.45rem 0;
+  font-size: 0.76rem;
+}
+
+.md-typeset .knowledge-lane__bridge {
+  display: block;
+  padding-top: 0.55rem;
+  margin-top: 0.7rem;
+  border-top: 1px dashed var(--md-default-fg-color--lightest);
+  color: var(--md-default-fg-color--light);
+  font-size: 0.65rem;
+}
+
+.md-typeset .study-viz {
+  --sv-line: #c3d3d1;
+  --sv-edge: #7d9493;
+  --sv-surface: #f4f8f7;
+  --sv-current: #85470c;
+  --sv-current-bg: #fff0d4;
+  --sv-complete: #0b6559;
+  --sv-complete-bg: #e4f3ed;
+  --sv-pending: #215f92;
+  --sv-pending-bg: #eaf3ff;
+  margin: 1.3rem 0;
+  padding: 1.05rem;
+  border: 1px solid var(--sv-line);
+  border-radius: 12px;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 4px 18px rgba(6, 63, 58, 0.04);
+  font-size: 0.76rem;
+  line-height: 1.7;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .study-viz {
+  --sv-line: #4b6269;
+  --sv-edge: #94a9b1;
+  --sv-surface: #25343e;
+  --sv-current: #ffcf8c;
+  --sv-current-bg: #493722;
+  --sv-complete: #9ce1d2;
+  --sv-complete-bg: #163e3a;
+  --sv-pending: #add2ff;
+  --sv-pending-bg: #253d58;
+  box-shadow: none;
+}
+
+.md-typeset .study-viz__eyebrow {
+  display: block;
+  color: var(--md-typeset-a-color);
+  font-size: 0.63rem;
+  letter-spacing: 0.08em;
+}
+
+.md-typeset .study-viz__title {
+  display: block;
+  margin: 0.2rem 0 0.85rem;
+  font-size: 0.95rem;
+}
+
+.md-typeset .study-viz__selector,
+.md-typeset .study-viz__controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.md-typeset .study-viz select,
+.md-typeset .study-viz button {
+  min-height: 2.2rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--sv-line);
+  border-radius: 6px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font: inherit;
+}
+
+.md-typeset .study-viz select {
+  appearance: auto;
+  max-width: 100%;
+}
+
+.md-typeset .study-viz button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.md-typeset .study-viz .study-viz__next {
+  background: var(--sv-complete-bg);
+  border-color: var(--sv-complete);
+  color: var(--sv-complete);
+  font-weight: 700;
+}
+
+.md-typeset .study-viz button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.md-typeset .study-viz button:enabled:hover {
+  border-color: var(--md-typeset-a-color);
+}
+
+.md-typeset .study-viz button:focus-visible,
+.md-typeset .study-viz select:focus-visible,
+.md-typeset .knowledge-lane a:focus-visible {
+  outline: 3px solid var(--md-typeset-a-color);
+  outline-offset: 3px;
+}
+
+.md-typeset .study-viz__stage {
+  margin: 0.85rem 0;
+  padding: 0.8rem;
+  border-radius: 8px;
+  background: var(--sv-surface);
+}
+
+.md-typeset .study-viz__array {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.md-typeset .study-viz__cell {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.45rem 0.1rem;
+  border: 1px solid var(--sv-line);
+  border-radius: 6px;
+  background: var(--md-default-bg-color);
+  text-align: center;
+  font-family: var(--md-code-font);
+}
+
+.md-typeset .study-viz__cell.is-current {
+  border: 2px solid var(--sv-current);
+  background: var(--sv-current-bg);
+  color: var(--sv-current);
+}
+
+.md-typeset .study-viz__cell.is-found {
+  border: 2px solid var(--sv-complete);
+  background: var(--sv-complete-bg);
+  color: var(--sv-complete);
+}
+
+.md-typeset .study-viz__cell.is-excluded {
+  border-style: dashed;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-typeset .study-viz__index,
+.md-typeset .study-viz__cell-state {
+  font-size: 0.55rem;
+}
+
+.md-typeset .study-viz__value {
+  font-size: 1.25rem;
+  line-height: 1.6;
+}
+
+.md-typeset .study-viz__marker {
+  min-height: 1.2rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+}
+
+.md-typeset .study-viz__tokens {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.md-typeset .study-viz__tokens-label {
+  flex-basis: 100%;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.65rem;
+}
+
+.md-typeset .study-viz__token {
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--sv-line);
+  border-radius: 4px;
+  background: var(--md-default-bg-color);
+  font-family: var(--md-code-font);
+}
+
+.md-typeset .study-viz__empty,
+.md-typeset .study-viz__progress {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.65rem;
+}
+
+.md-typeset .study-viz__graph {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+  overflow: visible;
+  font-family: var(--md-text-font);
+}
+
+.md-typeset .study-viz__edge {
+  stroke: var(--sv-edge);
+  stroke-width: 2;
+}
+
+.md-typeset .study-viz__edge.is-current {
+  stroke: var(--sv-current);
+  stroke-width: 3;
+}
+
+.md-typeset .study-viz__arrow {
+  fill: var(--sv-edge);
+}
+
+.md-typeset .study-viz__node circle {
+  fill: var(--md-default-bg-color);
+  stroke: var(--sv-line);
+  stroke-width: 2;
+}
+
+.md-typeset .study-viz__node.is-current circle {
+  fill: var(--sv-current-bg);
+  stroke: var(--sv-current);
+  stroke-width: 3;
+}
+
+.md-typeset .study-viz__node.is-complete circle {
+  fill: var(--sv-complete-bg);
+  stroke: var(--sv-complete);
+}
+
+.md-typeset .study-viz__node.is-pending circle {
+  fill: var(--sv-pending-bg);
+  stroke: var(--sv-pending);
+  stroke-dasharray: 4 2;
+}
+
+.md-typeset .study-viz__node-name,
+.md-typeset .study-viz__weight {
+  fill: var(--md-default-fg-color);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.md-typeset .study-viz__node-detail {
+  fill: var(--md-default-fg-color);
+  font-size: 15px;
+  paint-order: stroke;
+  stroke: var(--sv-surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+.md-typeset .study-viz__explanation {
+  min-height: 4.8em;
+  margin: 0.7rem 0;
+  padding-left: 0.65rem;
+  border-left: 3px solid var(--md-typeset-a-color);
+}
+
+.md-typeset .study-viz__legend {
+  margin: 0.65rem 0 0;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.63rem;
+}
+
+@media screen and (max-width: 36em) {
+  .md-typeset .knowledge-atlas { grid-template-columns: minmax(0, 1fr); }
+  .md-typeset .study-viz { padding: 0.7rem; }
+  .md-typeset .study-viz__stage { padding: 0.5rem; }
+  .md-typeset .study-viz__array { gap: 0.2rem; }
+  .md-typeset .study-viz__progress { flex-basis: 100%; }
+  .md-typeset .study-viz__node-detail { font-size: 21px; }
+  .md-typeset .study-viz__node-name,
+  .md-typeset .study-viz__weight { font-size: 24px; }
+}
+
 /* ============================================================
    9. 计组习题卡片：题干常显，原有答案与手写过程按需展开
    仅作用于显式标记的 co-question，不改变其他栏目的提示框。
