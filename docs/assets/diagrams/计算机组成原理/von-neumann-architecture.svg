@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" width="900" height="440" role="img" aria-label="冯·诺依曼计算机五大基本部件与信息流向">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="892" height="432" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="450" y="32" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">冯·诺依曼体系结构：五大基本部件与信息流（现代以存储器为中心）</text>
+  <rect x="36" y="118" width="150" height="92" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.8"/>
+  <text x="111" y="150" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="16" font-weight="700" fill="#1e293b" text-anchor="middle" dominant-baseline="central">输入设备</text>
+  <text x="111" y="176" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="middle" dominant-baseline="central">键盘 / 鼠标 / 扫描仪</text>
+  <text x="111" y="195" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">外部信息 → 二进制</text>
+  <rect x="285" y="72" width="330" height="108" rx="10" fill="#f0fdfa" stroke="#0b6f66" stroke-width="2.2"/>
+  <text x="450" y="100" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="16" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">存储器（主存 Memory）</text>
+  <text x="450" y="126" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#0f766e" text-anchor="middle" dominant-baseline="central">“存储程序”核心：指令与数据以二进制混合存放</text>
+  <rect x="310" y="144" width="130" height="24" rx="5" fill="#ccfbf1" stroke="#14b8a6" stroke-width="1"/>
+  <text x="375" y="156" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#065f46" text-anchor="middle" dominant-baseline="central">指令区 (OP + Addr)</text>
+  <rect x="460" y="144" width="130" height="24" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1"/>
+  <text x="525" y="156" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#075985" text-anchor="middle" dominant-baseline="central">数据区 (Operands)</text>
+  <rect x="714" y="118" width="150" height="92" rx="10" fill="#f8fafc" stroke="#475569" stroke-width="1.8"/>
+  <text x="789" y="150" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="16" font-weight="700" fill="#1e293b" text-anchor="middle" dominant-baseline="central">输出设备</text>
+  <text x="789" y="176" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#64748b" text-anchor="middle" dominant-baseline="central">显示器 / 打印机</text>
+  <text x="789" y="195" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">二进制结果 → 人类可读</text>
+  <rect x="235" y="232" width="430" height="148" rx="12" fill="#fffbeb" stroke="#d97706" stroke-width="1.8" stroke-dasharray="7 5"/>
+  <rect x="382" y="220" width="136" height="24" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="1.3"/>
+  <text x="450" y="232" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#92400e" text-anchor="middle" dominant-baseline="central">中央处理器 (CPU)</text>
+  <rect x="256" y="258" width="182" height="104" rx="8" fill="#ffffff" stroke="#0b6f66" stroke-width="1.8"/>
+  <text x="347" y="284" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">运算器 (ALU)</text>
+  <text x="347" y="309" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">算术运算（加减乘除）</text>
+  <text x="347" y="329" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">逻辑运算（与或非移位）</text>
+  <text x="347" y="348" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle" dominant-baseline="central">含 ACC / MQ / X 寄存器</text>
+  <rect x="462" y="258" width="182" height="104" rx="8" fill="#ffffff" stroke="#b45309" stroke-width="1.8"/>
+  <text x="553" y="284" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#92400e" text-anchor="middle" dominant-baseline="central">控制器 (CU)</text>
+  <text x="553" y="309" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">按 PC 顺序取指、IR 译码</text>
+  <text x="553" y="329" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">向全机发出微命令控制信号</text>
+  <text x="553" y="348" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#64748b" text-anchor="middle" dominant-baseline="central">含 PC / IR / CU 控制单元</text>
+  <polyline points="186,146 235,146 235,118 283,118" fill="none" stroke="#0b6f66" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-teal)"/>
+  <text x="234" y="103" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">原始程序/数据</text>
+  <polyline points="615,118 665,118 665,146 712,146" fill="none" stroke="#0b6f66" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-teal)"/>
+  <text x="666" y="103" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">处理结果数据</text>
+  <line x1="335" y1="182" x2="335" y2="255" stroke="#0b6f66" stroke-width="2.2" stroke-linecap="round" marker-start="url(#arr-teal)" marker-end="url(#arr-teal)"/>
+  <text x="294" y="206" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">数据读写</text>
+  <line x1="542" y1="182" x2="542" y2="255" stroke="#4338ca" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arr-indigo)"/>
+  <text x="580" y="206" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#4338ca" text-anchor="middle" dominant-baseline="central">取指令流</text>
+  <line x1="460" y1="310" x2="440" y2="310" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arr-amber)"/>
+  <line x1="495" y1="256" x2="495" y2="183" stroke="#d97706" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arr-amber)"/>
+  <rect x="463" y="196" width="64" height="20" rx="4" fill="#ffffff" stroke="none" stroke-width="0"/>
+  <text x="495" y="206" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#b45309" text-anchor="middle" dominant-baseline="central">读写命令</text>
+  <polyline points="553,362 553,392 111,392 111,213" fill="none" stroke="#d97706" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#arr-amber)"/>
+  <polyline points="585,362 585,392 789,392 789,213" fill="none" stroke="#d97706" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4" marker-end="url(#arr-amber)"/>
+  <rect x="195" y="404" width="510" height="26" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="215" y1="417" x2="255" y2="417" stroke="#0b6f66" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arr-teal)"/>
+  <text x="264" y="417" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#0f172a" text-anchor="start" dominant-baseline="central">数据流</text>
+  <line x1="335" y1="417" x2="375" y2="417" stroke="#4338ca" stroke-width="2.2" stroke-linecap="round" marker-end="url(#arr-indigo)"/>
+  <text x="384" y="417" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#0f172a" text-anchor="start" dominant-baseline="central">指令流</text>
+  <line x1="455" y1="417" x2="495" y2="417" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#arr-amber)"/>
+  <text x="504" y="417" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#0f172a" text-anchor="start" dominant-baseline="central">控制流（控制器发出微命令信号）</text>
+</svg>

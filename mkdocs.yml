@@ -213,7 +213,9 @@ extra:
       link: mailto:2897964385@qq.com
 
 markdown_extensions:
-  - attr_list     # 支持图片设置属性 {width="50%"}
+  - attr_list     # 支持图片与容器设置属性 {width="50%"} / {.grid .cards}
+  - md_in_html    # 支持网格卡片等 HTML 容器内解析 Markdown
+  - def_list      # 支持术语定义列表语法（名词解释词条排版）
   - tables #制表
   - toc:
       toc_depth: 2-3  # 目录只显示二级/三级标题，避免深层讲义式目录过长

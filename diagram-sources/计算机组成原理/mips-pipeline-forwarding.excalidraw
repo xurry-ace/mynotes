@@ -1,0 +1,1559 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://www.xurry.xyz",
+  "elements": [
+    {
+      "id": "el_2",
+      "type": "rectangle",
+      "x": 4,
+      "y": 4,
+      "width": 932,
+      "height": 487,
+      "strokeColor": "#e2e8f0",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_3",
+      "type": "text",
+      "x": 240.5,
+      "y": 17.8,
+      "width": 459.0,
+      "height": 22.1,
+      "text": "经典五级流水线结构（图 5-4）与旁路转发路径（图 5-7 / 5-8）",
+      "fontSize": 17,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_4",
+      "type": "rectangle",
+      "x": 36,
+      "y": 92,
+      "width": 132,
+      "height": 86,
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_5",
+      "type": "text",
+      "x": 73.875,
+      "y": 113.0,
+      "width": 56.25,
+      "height": 19.5,
+      "text": "IF 取指",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_6",
+      "type": "text",
+      "x": 60.75,
+      "y": 142.4,
+      "width": 82.5,
+      "height": 14.3,
+      "text": "PC + 指令存储器",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_7",
+      "type": "rectangle",
+      "x": 216,
+      "y": 92,
+      "width": 132,
+      "height": 86,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#f0fdfa",
+      "fillStyle": "solid",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_8",
+      "type": "text",
+      "x": 253.875,
+      "y": 113.0,
+      "width": 56.25,
+      "height": 19.5,
+      "text": "ID 译码",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_9",
+      "type": "text",
+      "x": 240.75,
+      "y": 142.4,
+      "width": 82.5,
+      "height": 14.3,
+      "text": "寄存器堆读 + 扩展",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_10",
+      "type": "rectangle",
+      "x": 396,
+      "y": 92,
+      "width": 132,
+      "height": 86,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_11",
+      "type": "text",
+      "x": 433.875,
+      "y": 113.0,
+      "width": 56.25,
+      "height": 19.5,
+      "text": "EX 执行",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_12",
+      "type": "text",
+      "x": 412.5,
+      "y": 142.4,
+      "width": 99.0,
+      "height": 14.3,
+      "text": "ALU 运算 / 算地址",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_13",
+      "type": "rectangle",
+      "x": 576,
+      "y": 92,
+      "width": 132,
+      "height": 86,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ede9fe",
+      "fillStyle": "solid",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_14",
+      "type": "text",
+      "x": 608.25,
+      "y": 113.0,
+      "width": 67.5,
+      "height": 19.5,
+      "text": "MEM 访存",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_15",
+      "type": "text",
+      "x": 609.0,
+      "y": 142.4,
+      "width": 66.0,
+      "height": 14.3,
+      "text": "数据存储器读/写",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_16",
+      "type": "rectangle",
+      "x": 756,
+      "y": 92,
+      "width": 132,
+      "height": 86,
+      "strokeColor": "#e11d48",
+      "backgroundColor": "#ffe4e6",
+      "fillStyle": "solid",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_17",
+      "type": "text",
+      "x": 793.875,
+      "y": 113.0,
+      "width": 56.25,
+      "height": 19.5,
+      "text": "WB 写回",
+      "fontSize": 15,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_18",
+      "type": "text",
+      "x": 789.0,
+      "y": 142.4,
+      "width": 66.0,
+      "height": 14.3,
+      "text": "结果写回寄存器堆",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_19",
+      "type": "rectangle",
+      "x": 178,
+      "y": 84,
+      "width": 28,
+      "height": 104,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "#1e293b",
+      "fillStyle": "solid",
+      "strokeWidth": 1.2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_20",
+      "type": "text",
+      "x": 171.375,
+      "y": 65.4,
+      "width": 41.25,
+      "height": 14.3,
+      "text": "IF/ID",
+      "fontSize": 11,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_21",
+      "type": "text",
+      "x": 184.5,
+      "y": 130.0,
+      "width": 15.0,
+      "height": 13.0,
+      "text": "锁存",
+      "fontSize": 10,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#f8fafc",
+      "opacity": 100
+    },
+    {
+      "id": "el_22",
+      "type": "rectangle",
+      "x": 358,
+      "y": 84,
+      "width": 28,
+      "height": 104,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "#1e293b",
+      "fillStyle": "solid",
+      "strokeWidth": 1.2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_23",
+      "type": "text",
+      "x": 351.375,
+      "y": 65.4,
+      "width": 41.25,
+      "height": 14.3,
+      "text": "ID/EX",
+      "fontSize": 11,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_24",
+      "type": "text",
+      "x": 364.5,
+      "y": 130.0,
+      "width": 15.0,
+      "height": 13.0,
+      "text": "锁存",
+      "fontSize": 10,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#f8fafc",
+      "opacity": 100
+    },
+    {
+      "id": "el_25",
+      "type": "rectangle",
+      "x": 538,
+      "y": 84,
+      "width": 28,
+      "height": 104,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "#1e293b",
+      "fillStyle": "solid",
+      "strokeWidth": 1.2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_26",
+      "type": "text",
+      "x": 527.25,
+      "y": 65.4,
+      "width": 49.5,
+      "height": 14.3,
+      "text": "EX/MEM",
+      "fontSize": 11,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_27",
+      "type": "text",
+      "x": 544.5,
+      "y": 130.0,
+      "width": 15.0,
+      "height": 13.0,
+      "text": "锁存",
+      "fontSize": 10,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#f8fafc",
+      "opacity": 100
+    },
+    {
+      "id": "el_28",
+      "type": "rectangle",
+      "x": 718,
+      "y": 84,
+      "width": 28,
+      "height": 104,
+      "strokeColor": "#0f172a",
+      "backgroundColor": "#1e293b",
+      "fillStyle": "solid",
+      "strokeWidth": 1.2,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_29",
+      "type": "text",
+      "x": 707.25,
+      "y": 65.4,
+      "width": 49.5,
+      "height": 14.3,
+      "text": "MEM/WB",
+      "fontSize": 11,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_30",
+      "type": "text",
+      "x": 724.5,
+      "y": 130.0,
+      "width": 15.0,
+      "height": 13.0,
+      "text": "锁存",
+      "fontSize": 10,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#f8fafc",
+      "opacity": 100
+    },
+    {
+      "id": "el_31",
+      "type": "arrow",
+      "x": 168,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_32",
+      "type": "arrow",
+      "x": 206,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_33",
+      "type": "arrow",
+      "x": 348,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_34",
+      "type": "arrow",
+      "x": 386,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_35",
+      "type": "arrow",
+      "x": 528,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_36",
+      "type": "arrow",
+      "x": 566,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_37",
+      "type": "arrow",
+      "x": 708,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_38",
+      "type": "arrow",
+      "x": 746,
+      "y": 135,
+      "width": 8,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ]
+      ],
+      "strokeColor": "#475569",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_39",
+      "type": "arrow",
+      "x": 822,
+      "y": 92,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -36
+        ],
+        [
+          -540,
+          -36
+        ],
+        [
+          -540,
+          -2
+        ]
+      ],
+      "strokeColor": "#e11d48",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.6,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_40",
+      "type": "rectangle",
+      "x": 356,
+      "y": 44,
+      "width": 392,
+      "height": 20,
+      "strokeColor": "#fecdd3",
+      "backgroundColor": "#fff1f2",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_41",
+      "type": "text",
+      "x": 448.875,
+      "y": 47.4,
+      "width": 206.25,
+      "height": 14.3,
+      "text": "WB 正常写回通路（无转发时需等第 5 周期写回）",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#be123c",
+      "opacity": 100
+    },
+    {
+      "id": "el_42",
+      "type": "arrow",
+      "x": 552,
+      "y": 188,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          32
+        ],
+        [
+          -120,
+          32
+        ],
+        [
+          -120,
+          -8
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_43",
+      "type": "rectangle",
+      "x": 444,
+      "y": 208,
+      "width": 102,
+      "height": 22,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#ccfbf1",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_44",
+      "type": "text",
+      "x": 453.75,
+      "y": 212.4,
+      "width": 82.5,
+      "height": 14.3,
+      "text": "EX→EX 旁路转发",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#064e48",
+      "opacity": 100
+    },
+    {
+      "id": "el_45",
+      "type": "arrow",
+      "x": 732,
+      "y": 188,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          62
+        ],
+        [
+          -320,
+          62
+        ],
+        [
+          -320,
+          -8
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_46",
+      "type": "rectangle",
+      "x": 520,
+      "y": 238,
+      "width": 128,
+      "height": 22,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 1,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_47",
+      "type": "text",
+      "x": 538.625,
+      "y": 242.4,
+      "width": 90.75,
+      "height": 14.3,
+      "text": "MEM→EX 旁路转发",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#92400e",
+      "opacity": 100
+    },
+    {
+      "id": "el_48",
+      "type": "rectangle",
+      "x": 36,
+      "y": 276,
+      "width": 868,
+      "height": 198,
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "#f8fafc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.3,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_49",
+      "type": "text",
+      "x": 56,
+      "y": 290.2,
+      "width": 468.0,
+      "height": 16.900000000000002,
+      "text": "五级流水线时空图与 RAW 数据相关转发时序（图 5-3 / 图 5-7）：消除算术指令停顿气泡",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_50",
+      "type": "text",
+      "x": 295.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC1",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_51",
+      "type": "text",
+      "x": 381.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC2",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_52",
+      "type": "text",
+      "x": 467.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC3",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_53",
+      "type": "text",
+      "x": 553.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC4",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_54",
+      "type": "text",
+      "x": 639.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC5",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_55",
+      "type": "text",
+      "x": 725.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC6",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_56",
+      "type": "text",
+      "x": 811.5,
+      "y": 314.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "CC7",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_57",
+      "type": "text",
+      "x": 56,
+      "y": 340.8,
+      "width": 162.0,
+      "height": 15.600000000000001,
+      "text": "I1: ADD R1, R2, R3",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#1e293b",
+      "opacity": 100
+    },
+    {
+      "id": "el_58",
+      "type": "rectangle",
+      "x": 272,
+      "y": 334,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_59",
+      "type": "text",
+      "x": 300.0,
+      "y": 340.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "IF",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_60",
+      "type": "rectangle",
+      "x": 358,
+      "y": 334,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#f0fdfa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_61",
+      "type": "text",
+      "x": 386.0,
+      "y": 340.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "ID",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_62",
+      "type": "rectangle",
+      "x": 444,
+      "y": 334,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_63",
+      "type": "text",
+      "x": 472.0,
+      "y": 340.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "EX",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_64",
+      "type": "rectangle",
+      "x": 530,
+      "y": 334,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ede9fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_65",
+      "type": "text",
+      "x": 553.5,
+      "y": 340.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "MEM",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_66",
+      "type": "rectangle",
+      "x": 616,
+      "y": 334,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#e11d48",
+      "backgroundColor": "#ffe4e6",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_67",
+      "type": "text",
+      "x": 644.0,
+      "y": 340.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "WB",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_68",
+      "type": "text",
+      "x": 56,
+      "y": 382.8,
+      "width": 162.0,
+      "height": 15.600000000000001,
+      "text": "I2: SUB R4, R1, R5",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#1e293b",
+      "opacity": 100
+    },
+    {
+      "id": "el_69",
+      "type": "rectangle",
+      "x": 358,
+      "y": 376,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_70",
+      "type": "text",
+      "x": 386.0,
+      "y": 382.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "IF",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_71",
+      "type": "rectangle",
+      "x": 444,
+      "y": 376,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#f0fdfa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_72",
+      "type": "text",
+      "x": 472.0,
+      "y": 382.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "ID",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_73",
+      "type": "rectangle",
+      "x": 530,
+      "y": 376,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_74",
+      "type": "text",
+      "x": 558.0,
+      "y": 382.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "EX",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_75",
+      "type": "rectangle",
+      "x": 616,
+      "y": 376,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ede9fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_76",
+      "type": "text",
+      "x": 639.5,
+      "y": 382.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "MEM",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_77",
+      "type": "rectangle",
+      "x": 702,
+      "y": 376,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#e11d48",
+      "backgroundColor": "#ffe4e6",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_78",
+      "type": "text",
+      "x": 730.0,
+      "y": 382.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "WB",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_79",
+      "type": "text",
+      "x": 56,
+      "y": 424.8,
+      "width": 162.0,
+      "height": 15.600000000000001,
+      "text": "I3: AND R6, R1, R7",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#1e293b",
+      "opacity": 100
+    },
+    {
+      "id": "el_80",
+      "type": "rectangle",
+      "x": 444,
+      "y": 418,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_81",
+      "type": "text",
+      "x": 472.0,
+      "y": 424.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "IF",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_82",
+      "type": "rectangle",
+      "x": 530,
+      "y": 418,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#f0fdfa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_83",
+      "type": "text",
+      "x": 558.0,
+      "y": 424.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "ID",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_84",
+      "type": "rectangle",
+      "x": 616,
+      "y": 418,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_85",
+      "type": "text",
+      "x": 644.0,
+      "y": 424.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "EX",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_86",
+      "type": "rectangle",
+      "x": 702,
+      "y": 418,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ede9fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_87",
+      "type": "text",
+      "x": 725.5,
+      "y": 424.8,
+      "width": 27.0,
+      "height": 15.600000000000001,
+      "text": "MEM",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_88",
+      "type": "rectangle",
+      "x": 788,
+      "y": 418,
+      "width": 74,
+      "height": 28,
+      "strokeColor": "#e11d48",
+      "backgroundColor": "#ffe4e6",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_89",
+      "type": "text",
+      "x": 816.0,
+      "y": 424.8,
+      "width": 18.0,
+      "height": 15.600000000000001,
+      "text": "WB",
+      "fontSize": 12,
+      "fontFamily": 3,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_90",
+      "type": "arrow",
+      "x": 512,
+      "y": 360,
+      "width": 26,
+      "height": 16,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          26,
+          16
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_91",
+      "type": "arrow",
+      "x": 598,
+      "y": 360,
+      "width": 26,
+      "height": 58,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          26,
+          58
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

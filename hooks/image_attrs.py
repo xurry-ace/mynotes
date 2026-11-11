@@ -23,10 +23,21 @@ _LOADING_ATTR = re.compile(r"\bloading\s*=", re.IGNORECASE)
 _DECODING_ATTR = re.compile(r"\bdecoding\s*=", re.IGNORECASE)
 
 _SOF_MARKERS = set(range(0xC0, 0xD0)) - {0xC4, 0xC8, 0xCC}
+_SVG_VIEWBOX = re.compile(r'\bviewBox\s*=\s*"[\d.\s+-]*?([\d.]+)\s+([\d.]+)\s*"')
 
 
 def _image_size(path):
-    """读取 PNG/JPEG/GIF 的像素尺寸；其他格式返回 None。"""
+    """读取 PNG/JPEG/GIF/SVG 的像素尺寸；其他格式返回 None。"""
+    if path.lower().endswith(".svg"):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                head_text = f.read(1024)
+            m = _SVG_VIEWBOX.search(head_text)
+            if m:
+                return int(float(m.group(1))), int(float(m.group(2)))
+        except (OSError, ValueError):
+            pass
+        return None
     try:
         with open(path, "rb") as f:
             head = f.read(32)
@@ -68,7 +79,7 @@ def _image_sizes(docs_dir):
     sizes = {}
     for root, _, filenames in os.walk(docs_dir):
         for name in filenames:
-            if os.path.splitext(name)[1].lower() not in (".png", ".jpg", ".jpeg", ".gif"):
+            if os.path.splitext(name)[1].lower() not in (".png", ".jpg", ".jpeg", ".gif", ".svg"):
                 continue
             size = _image_size(os.path.join(root, name))
             if size:

@@ -358,5 +358,357 @@ body[data-md-color-scheme="slate"] .md-typeset mark {
 }
 
 body[data-md-color-scheme="slate"] .md-typeset img:not([class]) {
+  background-color: #f8fafc;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   8. 网格卡片、术语词典与视觉胶囊 (Cards, Glossary & Chips)
+   ============================================================ */
+
+/* Material 网格卡片圆角、分隔线间距与悬停质感统一 */
+.md-typeset .grid.cards > ol > li,
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid > .card {
+  border-radius: 8px;
+  padding: 0.9rem 1.05rem;
+  font-size: 0.78rem;
+  line-height: 1.68;
+  background-color: var(--md-default-bg-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li,
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+body[data-md-color-scheme="slate"] .md-typeset .grid > .card {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.09);
+}
+
+.md-typeset .grid.cards > ol > li:hover,
+.md-typeset .grid.cards > ol > li:focus-within,
+.md-typeset .grid.cards > ul > li:hover,
+.md-typeset .grid.cards > ul > li:focus-within,
+.md-typeset .grid > .card:hover,
+.md-typeset .grid > .card:focus-within {
+  border-color: var(--md-accent-fg-color);
+  box-shadow: 0 4px 14px rgba(11, 111, 102, 0.08);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li:hover,
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ol > li:focus-within,
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:hover,
+body[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:focus-within,
+body[data-md-color-scheme="slate"] .md-typeset .grid > .card:hover,
+body[data-md-color-scheme="slate"] .md-typeset .grid > .card:focus-within {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+.md-typeset .grid.cards > ol > li > hr,
+.md-typeset .grid.cards > ul > li > hr,
+.md-typeset .grid > .card > hr {
+  margin: 0.6rem 0;
+}
+
+/* 避免卡片外层 ul 把卡片内部的一级有序列表变成 a. b. c.，并防止长公式撑破卡片 */
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li,
+.md-typeset .grid > .card {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.md-typeset .grid.cards > ul > li > ol,
+.md-typeset .grid.cards > ul > li > ul > li > ol {
+  list-style-type: decimal;
+}
+
+.md-typeset mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 定义列表（名词解释词典）：移动端纵向堆叠，宽屏左词条右释义双栏对齐 */
+.md-typeset dl {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--md-default-bg-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset dl {
+  background-color: rgba(255, 255, 255, 0.015);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.md-typeset dl > dt {
+  margin: 0;
+  padding: 0.65rem 0.95rem 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--md-typeset-a-color);
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset dl > dt:first-child {
+  border-top: none;
+}
+
+.md-typeset dl > dd {
+  margin: 0;
+  padding: 0.15rem 0.95rem 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.68;
+  color: var(--md-default-fg-color);
+}
+
+@media screen and (min-width: 48em) {
+  .md-typeset dl {
+    display: grid;
+    grid-template-columns: minmax(10.5rem, 14rem) 1fr;
+  }
+
+  .md-typeset dl > dt {
+    grid-column: 1;
+    padding: 0.7rem 0.95rem;
+    background-color: var(--md-accent-fg-color--transparent, rgba(11, 111, 102, 0.04));
+    border-right: 1px solid var(--md-default-fg-color--lightest);
+  }
+
+  .md-typeset dl > dd {
+    grid-column: 2;
+    padding: 0.7rem 1.05rem;
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+  }
+
+  .md-typeset dl > dt:first-child + dd {
+    border-top: none;
+  }
+}
+
+/* 章节快速跳转胶囊栏与双语核心词汇条 */
+.md-typeset .co-pill-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0.8rem 0 1.3rem;
+}
+
+.md-typeset .co-pill-bar a,
+.md-typeset .co-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  background-color: var(--md-accent-fg-color--transparent, rgba(11, 111, 102, 0.05));
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.md-typeset .co-pill-bar a:hover,
+.md-typeset .co-pill-bar a:focus-visible {
+  border-color: var(--md-accent-fg-color);
+  background-color: rgba(11, 111, 102, 0.14);
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .co-pill-bar a:hover,
+body[data-md-color-scheme="slate"] .md-typeset .co-pill-bar a:focus-visible {
+  background-color: rgba(94, 234, 212, 0.18);
+}
+
+/* ============================================================
+   9. 计组习题卡片：题干常显，原有答案与手写过程按需展开
+   仅作用于显式标记的 co-question，不改变其他栏目的提示框。
+   ============================================================ */
+
+.md-typeset .co-question {
+  --co-card-accent: #0b6f66;
+  --co-card-tint: #f2f8f7;
+  --co-card-border: #d5e4e1;
+  min-width: 0;
+  margin: 1.2rem 0;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid var(--co-card-border);
+  border-top: 3px solid var(--co-card-accent);
+  border-radius: 12px;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 3px 12px rgba(6, 63, 58, 0.04);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+body[data-md-color-scheme="slate"] .md-typeset .co-question {
+  --co-card-accent: #7ddfcb;
+  --co-card-tint: #243b3c;
+  --co-card-border: #3b5152;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.md-typeset .co-question > h3,
+.md-typeset .co-question > .co-question-title {
+  margin: -0.95rem -1.05rem 0.85rem;
+  padding: 0.8rem 1.05rem;
+  border-bottom: 1px solid var(--co-card-border);
+  background: var(--co-card-tint);
+  border-radius: 9px 9px 0 0;
+  color: var(--md-default-fg-color);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.md-typeset .co-question > :first-child:not(h3, .co-question-title) {
+  margin-top: 0;
+}
+
+.md-typeset .co-question > :last-child {
+  margin-bottom: 0;
+}
+
+/* 题干沿用 Markdown question 语法，融入卡片以避免嵌套两层边框。 */
+.md-typeset .co-question > .admonition.question {
+  margin: 0.7rem 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.md-typeset .co-question > .admonition.question > .admonition-title {
+  margin: 0 0 0.45rem;
+  padding: 0 0 0 1.15rem;
+  background: transparent;
+  color: var(--co-card-accent);
+  font-size: 0.72rem;
+}
+
+.md-typeset .co-question > .admonition.question > .admonition-title::before {
+  top: 0.12rem;
+  left: 0;
+  background-color: var(--co-card-accent);
+}
+
+.md-typeset .co-question > .admonition.question > :last-child {
+  margin-bottom: 0;
+}
+
+/* 使用原生 details，支持点击、触摸和键盘；卡片保持单列供长公式阅读。 */
+.md-typeset .co-question > details.co-answer {
+  margin: 0.95rem -1.05rem -0.95rem;
+  padding: 0 1.05rem 0.85rem;
+  border: 0;
+  border-top: 1px solid var(--co-card-border);
+  border-radius: 0 0 11px 11px;
+  background: transparent;
+  box-shadow: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.md-typeset .co-question > details.co-answer:not([open]) {
+  padding-bottom: 0;
+}
+
+.md-typeset .co-question > details.co-answer > summary {
+  min-height: 44px;
+  margin: 0 -1.05rem;
+  padding: 0.65rem 2.25rem 0.65rem 1.05rem;
+  border-radius: 0 0 11px 11px;
+  background: var(--co-card-tint);
+  color: var(--co-card-accent);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.md-typeset .co-question > details.co-answer[open] > summary {
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid var(--co-card-border);
+  border-radius: 0;
+}
+
+.md-typeset .co-question > details.co-answer > summary::before {
+  display: none;
+}
+
+.md-typeset .co-question > details.co-answer > summary::after {
+  top: 0.75rem;
+  right: 0.85rem;
+}
+
+.md-typeset .co-question > details.co-answer > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.md-typeset .co-question > details.co-answer > summary:focus-visible {
+  outline: 2px solid var(--co-card-accent);
+  outline-offset: -4px;
+}
+
+.md-typeset .co-question .md-typeset__scrollwrap {
+  margin: 1em 0;
+}
+
+.md-typeset .co-question .md-typeset__table {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.md-typeset .co-question table:not([class]) {
+  margin: 0;
+  font-size: 0.73rem;
+}
+
+.md-typeset .co-question .highlight {
+  max-width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* 行内公式也可能长过屏幕；只在计组习题所在章节内允许局部横向滚动。 */
+.md-content__inner:has(.co-question) span.arithmatex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 44.984375em) {
+  .md-typeset .co-question {
+    padding: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .md-typeset .co-question > h3,
+  .md-typeset .co-question > .co-question-title {
+    margin: -0.8rem -0.8rem 0.75rem;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.84rem;
+  }
+
+  .md-typeset .co-question > details.co-answer {
+    margin: 0.8rem -0.8rem -0.8rem;
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+  }
+
+  .md-typeset .co-question > details.co-answer > summary {
+    margin-right: -0.8rem;
+    margin-left: -0.8rem;
+    padding-left: 0.8rem;
+  }
 }

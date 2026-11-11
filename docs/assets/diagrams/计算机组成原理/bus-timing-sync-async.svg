@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" width="920" height="460" role="img" aria-label="同步总线读操作四周期时序与异步总线全互锁四步握手对比">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="912" height="452" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="30" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">总线定时机制对比：同步定时读周期（图 6-3） vs 异步全互锁握手</text>
+  <rect x="32" y="54" width="856" height="192" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="52" y="75" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#064e48" text-anchor="start" dominant-baseline="central">（a）同步总线：一次读操作时序（由统一时钟 CLK 定拍，T1~T4 构成一个总线周期）</text>
+  <line x1="185" y1="92" x2="185" y2="234" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <text x="265.0" y="98" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">T1 周期</text>
+  <line x1="345" y1="92" x2="345" y2="234" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <text x="425.0" y="98" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">T2 周期</text>
+  <line x1="505" y1="92" x2="505" y2="234" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <text x="585.0" y="98" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">T3 周期</text>
+  <line x1="665" y1="92" x2="665" y2="234" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <text x="745.0" y="98" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">T4 周期</text>
+  <line x1="825" y1="92" x2="825" y2="234" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <text x="60" y="124" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="start" dominant-baseline="central">时钟信号 CLK</text>
+  <polyline points="185,134 185,114 265.0,114 265.0,134 345,134 345,114 425.0,114 425.0,134 505,134 505,114 585.0,114 585.0,134 665,134 665,114 745.0,114 745.0,134 825,134" fill="none" stroke="#0f172a" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="158" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="start" dominant-baseline="central">地址总线 Addr</text>
+  <polygon points="203,158 217,146 797,146 811,158 797,170 217,170" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.6" stroke-linejoin="round"/>
+  <text x="505" y="158" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#075985" text-anchor="middle" dominant-baseline="central">T1 主设备给出有效主存/设备地址并保持稳定</text>
+  <text x="60" y="192" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="start" dominant-baseline="central">读命令信号 /RD</text>
+  <polyline points="185,184 355,184 367,202 735,202 747,184 825,184" fill="none" stroke="#be123c" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="553.0" y="193" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#9f1239" text-anchor="middle" dominant-baseline="central">低电平有效：T2 发读命令，T4 撤销</text>
+  <text x="60" y="224" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="start" dominant-baseline="central">数据总线 Data</text>
+  <line x1="185" y1="224" x2="520" y2="224" stroke="#94a3b8" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 3"/>
+  <polygon points="520,224 535,212 793,212 807,224 793,236 535,236" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1.6" stroke-linejoin="round"/>
+  <text x="665" y="224" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#064e48" text-anchor="middle" dominant-baseline="central">T3 从设备放数据 → T4 主设备采样读取</text>
+  <rect x="32" y="260" width="856" height="176" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.4"/>
+  <text x="52" y="282" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400e" text-anchor="start" dominant-baseline="central">（b）异步总线：全互锁（Full-Interlocked）四步握手协议（无公共时钟，快慢设备自适应，可靠性最高）</text>
+  <text x="60" y="326" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="start" dominant-baseline="central">主设备请求 Req</text>
+  <polyline points="195,338 265,338 280,310 575,310 590,338 835,338" fill="none" stroke="#0b6f66" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="60" y="386" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#4338ca" text-anchor="start" dominant-baseline="central">从设备回答 Ack</text>
+  <polyline points="195,398 415,398 430,370 725,370 740,398 835,398" fill="none" stroke="#4338ca" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="284,324 350,324 418,382" fill="none" stroke="#d97706" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-amber)"/>
+  <text x="350" y="300" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">① 发请求</text>
+  <polyline points="435,372 505,355 576,324" fill="none" stroke="#d97706" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-amber)"/>
+  <text x="435" y="416" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">② 数据就绪发回答</text>
+  <polyline points="592,328 660,355 726,384" fill="none" stroke="#d97706" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-amber)"/>
+  <text x="595" y="300" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">③ 已读数据撤请求</text>
+  <text x="748" y="416" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">④ 撤回答，总线释放</text>
+</svg>

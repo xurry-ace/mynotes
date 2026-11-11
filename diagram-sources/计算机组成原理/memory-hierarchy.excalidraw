@@ -1,0 +1,608 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://www.xurry.xyz",
+  "elements": [
+    {
+      "id": "el_2",
+      "type": "rectangle",
+      "x": 4,
+      "y": 4,
+      "width": 912,
+      "height": 432,
+      "strokeColor": "#e2e8f0",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_3",
+      "type": "text",
+      "x": 281.5,
+      "y": 21.8,
+      "width": 357.0,
+      "height": 22.1,
+      "text": "多级存储体系金字塔：速度 · 容量 · 成本的层次化折中",
+      "fontSize": 17,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_4",
+      "type": "arrow",
+      "x": 68,
+      "y": 375,
+      "width": 0,
+      "height": 293,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -293
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.6,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_5",
+      "type": "text",
+      "x": 18.5,
+      "y": 58.8,
+      "width": 99.0,
+      "height": 15.600000000000001,
+      "text": "速度更快 · 位价更高",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_6",
+      "type": "text",
+      "x": 18.5,
+      "y": 388.8,
+      "width": 99.0,
+      "height": 15.600000000000001,
+      "text": "容量更大 · 位价更低",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_7",
+      "type": "line",
+      "x": 295.0,
+      "y": 76,
+      "points": [
+        [
+          0.0,
+          0
+        ],
+        [
+          140.0,
+          0
+        ],
+        [
+          185.0,
+          66
+        ],
+        [
+          -45.0,
+          66
+        ],
+        [
+          0.0,
+          0
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "#fef3c7",
+      "fillStyle": "solid",
+      "strokeWidth": 1.8,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_8",
+      "type": "text",
+      "x": 265.25,
+      "y": 90.6,
+      "width": 199.5,
+      "height": 18.2,
+      "text": "CPU 寄存器 (Registers)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_9",
+      "type": "text",
+      "x": 284.0,
+      "y": 113.8,
+      "width": 162.0,
+      "height": 15.600000000000001,
+      "text": "< 1 ns  |  数十～数百 B",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_10",
+      "type": "line",
+      "x": 245.0,
+      "y": 150,
+      "points": [
+        [
+          0.0,
+          0
+        ],
+        [
+          240.0,
+          0
+        ],
+        [
+          292.5,
+          72
+        ],
+        [
+          -52.5,
+          72
+        ],
+        [
+          0.0,
+          0
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#ccfbf1",
+      "fillStyle": "solid",
+      "strokeWidth": 1.8,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_11",
+      "type": "text",
+      "x": 275.75,
+      "y": 167.6,
+      "width": 178.5,
+      "height": 18.2,
+      "text": "高速缓存 Cache (SRAM)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_12",
+      "type": "text",
+      "x": 207.5,
+      "y": 190.8,
+      "width": 315.0,
+      "height": 15.600000000000001,
+      "text": "1 ~ 10 ns  |  KB ~ 数十 MB (L1/L2/L3)",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_13",
+      "type": "line",
+      "x": 187.5,
+      "y": 230,
+      "points": [
+        [
+          0.0,
+          0
+        ],
+        [
+          355.0,
+          0
+        ],
+        [
+          410.0,
+          74
+        ],
+        [
+          -55.0,
+          74
+        ],
+        [
+          0.0,
+          0
+        ]
+      ],
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.8,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_14",
+      "type": "text",
+      "x": 244.25,
+      "y": 248.6,
+      "width": 241.5,
+      "height": 18.2,
+      "text": "主存储器 Main Memory (DRAM)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_15",
+      "type": "text",
+      "x": 248.0,
+      "y": 271.8,
+      "width": 234.0,
+      "height": 15.600000000000001,
+      "text": "50 ~ 100 ns  |  GB 级（断电易失）",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_16",
+      "type": "line",
+      "x": 127.5,
+      "y": 312,
+      "points": [
+        [
+          0.0,
+          0
+        ],
+        [
+          475.0,
+          0
+        ],
+        [
+          530.0,
+          76
+        ],
+        [
+          -55.0,
+          76
+        ],
+        [
+          0.0,
+          0
+        ]
+      ],
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#ede9fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.8,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_17",
+      "type": "text",
+      "x": 244.25,
+      "y": 331.6,
+      "width": 241.5,
+      "height": 18.2,
+      "text": "辅助存储器 (SSD / 磁盘 / 光盘磁带)",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_18",
+      "type": "text",
+      "x": 252.5,
+      "y": 354.8,
+      "width": 225.0,
+      "height": 15.600000000000001,
+      "text": "μs ~ ms 级  |  TB 级（断电非易失）",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_19",
+      "type": "line",
+      "x": 545,
+      "y": 186,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          130,
+          0
+        ],
+        [
+          130,
+          81
+        ],
+        [
+          60,
+          81
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_20",
+      "type": "arrow",
+      "x": 675,
+      "y": 226,
+      "width": 20,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          20,
+          0
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_21",
+      "type": "rectangle",
+      "x": 700,
+      "y": 172,
+      "width": 196,
+      "height": 108,
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#f0fdfa",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_22",
+      "type": "text",
+      "x": 735.0,
+      "y": 186.6,
+      "width": 126.0,
+      "height": 18.2,
+      "text": "Cache — 主存层次",
+      "fontSize": 14,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#064e48",
+      "opacity": 100
+    },
+    {
+      "id": "el_23",
+      "type": "text",
+      "x": 715.5,
+      "y": 211.4,
+      "width": 165.0,
+      "height": 14.3,
+      "text": "• 核心目标：弥补 CPU 与主存速度差",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_24",
+      "type": "text",
+      "x": 740.25,
+      "y": 231.4,
+      "width": 115.5,
+      "height": 14.3,
+      "text": "• 实现方式：纯硬件自动调度",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f766e",
+      "opacity": 100
+    },
+    {
+      "id": "el_25",
+      "type": "text",
+      "x": 736.125,
+      "y": 251.4,
+      "width": 123.75,
+      "height": 14.3,
+      "text": "• 透明性：对所有程序员均透明",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    },
+    {
+      "id": "el_26",
+      "type": "line",
+      "x": 608,
+      "y": 285,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          67,
+          0
+        ],
+        [
+          67,
+          75
+        ],
+        [
+          54,
+          75
+        ]
+      ],
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_27",
+      "type": "arrow",
+      "x": 675,
+      "y": 344,
+      "width": 20,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          20,
+          0
+        ]
+      ],
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow",
+      "startArrowhead": null
+    },
+    {
+      "id": "el_28",
+      "type": "rectangle",
+      "x": 700,
+      "y": 294,
+      "width": 196,
+      "height": 108,
+      "strokeColor": "#6d28d9",
+      "backgroundColor": "#f5f3ff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_29",
+      "type": "text",
+      "x": 724.875,
+      "y": 309.2,
+      "width": 146.25,
+      "height": 16.900000000000002,
+      "text": "主存 — 辅存层次（虚拟存储）",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#4c1d95",
+      "opacity": 100
+    },
+    {
+      "id": "el_30",
+      "type": "text",
+      "x": 736.125,
+      "y": 333.4,
+      "width": 123.75,
+      "height": 14.3,
+      "text": "• 核心目标：解决主存容量不足",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_31",
+      "type": "text",
+      "x": 715.5,
+      "y": 353.4,
+      "width": 165.0,
+      "height": 14.3,
+      "text": "• 实现方式：硬件 MMU + 操作系统",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#5b21b6",
+      "opacity": 100
+    },
+    {
+      "id": "el_32",
+      "type": "text",
+      "x": 736.125,
+      "y": 373.4,
+      "width": 123.75,
+      "height": 14.3,
+      "text": "• 透明性：仅对应用程序员透明",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#475569",
+      "opacity": 100
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}

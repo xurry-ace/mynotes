@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" width="920" height="420" role="img" aria-label="机械硬盘（HDD）磁道扇区几何结构与读写三阶段耗时拆解">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="912" height="412" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="30" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">机械硬盘（HDD）物理几何结构与读写总时间三阶段拆解</text>
+  <rect x="32" y="54" width="396" height="340" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="230" y="76" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">盘面同心磁道（Track）与扇区（Sector）俯视图</text>
+  <circle cx="202" cy="232" r="108" fill="#f1f5f9" stroke="#475569" stroke-width="2.0"/>
+  <circle cx="202" cy="232" r="86" fill="none" stroke="#0b6f66" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <circle cx="202" cy="232" r="63" fill="none" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4 4"/>
+  <circle cx="202" cy="232" r="40" fill="#fff1f2" stroke="#e11d48" stroke-width="2.0"/>
+  <circle cx="202" cy="232" r="15" fill="#334155" stroke="#0f172a" stroke-width="1.5"/>
+  <path d="M 235.4 178.6 L 247.6 159.1 A 86 86 0 0 1 283.8 205.4 L 261.9 212.5 A 63 63 0 0 0 235.4 178.6 Z" fill="#99f6e4" stroke="#0b6f66" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="366,332 378,320 260,238 253,246" fill="#cbd5e1" stroke="#334155" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="244" y="230" width="15" height="15" rx="3" fill="#f59e0b" stroke="#b45309" stroke-width="1.5"/>
+  <line x1="255" y1="170" x2="310" y2="114" stroke="#0b6f66" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="306" y="98" width="108" height="24" rx="4" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="360" y="110" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">扇区 (常 512B)</text>
+  <line x1="174" y1="204" x2="108" y2="128" stroke="#e11d48" stroke-width="1.5" stroke-linecap="round"/>
+  <rect x="42" y="92" width="154" height="38" rx="5" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+  <text x="119" y="103" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#be123c" text-anchor="middle" dominant-baseline="central">最内圈磁道 (d_min)</text>
+  <text x="119" y="119" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#be123c" text-anchor="middle" dominant-baseline="central">周长最短 → 位密度最高</text>
+  <rect x="310" y="260" width="104" height="22" rx="4" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+  <text x="362" y="271" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#b45309" text-anchor="middle" dominant-baseline="central">磁头臂径向寻道</text>
+  <text x="230" y="372" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">注：每道总字节数 N 相同，故内圈位密度 &gt; 外圈位密度</text>
+  <rect x="448" y="54" width="440" height="340" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="668" y="76" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">读写一块数据总时间 T_总 的三阶段构成</text>
+  <rect x="472" y="102" width="148" height="56" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.8"/>
+  <text x="546" y="121" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400e" text-anchor="middle" dominant-baseline="central">① 寻道时间 Ts</text>
+  <text x="546" y="142" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#78350f" text-anchor="middle" dominant-baseline="central">磁头移到目标磁道</text>
+  <rect x="626" y="102" width="134" height="56" rx="6" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1.8"/>
+  <text x="693" y="121" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">② 旋转延迟 1/(2r)</text>
+  <text x="693" y="142" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#065f46" text-anchor="middle" dominant-baseline="central">等扇区转半圈到位</text>
+  <rect x="766" y="102" width="98" height="56" rx="6" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.8"/>
+  <text x="815" y="121" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#312e81" text-anchor="middle" dominant-baseline="central">③ 传输 b/(rN)</text>
+  <text x="815" y="142" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#3730a3" text-anchor="middle" dominant-baseline="central">扫过扇区读写</text>
+  <rect x="472" y="174" width="392" height="104" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.3"/>
+  <text x="488" y="196" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="start" dominant-baseline="central">• 转速换算：r = (RPM ÷ 60) 转/秒</text>
+  <text x="488" y="218" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="start" dominant-baseline="central">• 数据传输率：D = r × N （字节/秒，N 为每道容量）</text>
+  <text x="488" y="240" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="start" dominant-baseline="central">• 非格式化总容量 = 记录面数 S × 柱面(磁道)数 C × 每道容量 N</text>
+  <text x="488" y="262" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="start" dominant-baseline="central">• 单次读写总耗时：T_总 = Ts + 1/(2r) + b/(rN)</text>
+  <text x="472" y="300" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="start" dominant-baseline="central">磁盘物理寻址四元组（从高到低）：</text>
+  <rect x="472" y="318" width="82" height="46" rx="6" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+  <text x="513.0" y="341" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">驱动器(台)号</text>
+  <rect x="560" y="318" width="108" height="46" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+  <text x="614.0" y="341" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">柱面(磁道)号</text>
+  <rect x="674" y="318" width="96" height="46" rx="6" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1.5"/>
+  <text x="722.0" y="341" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">盘面(磁头)号</text>
+  <rect x="776" y="318" width="88" height="46" rx="6" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.5"/>
+  <text x="820.0" y="341" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">扇区号</text>
+</svg>

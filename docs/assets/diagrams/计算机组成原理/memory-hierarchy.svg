@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="920" height="440" role="img" aria-label="计算机多级存储体系金字塔">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="912" height="432" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="32" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">多级存储体系金字塔：速度 · 容量 · 成本的层次化折中</text>
+  <line x1="68" y1="375" x2="68" y2="82" stroke="#0b6f66" stroke-width="2.6" stroke-linecap="round" marker-end="url(#arr-teal)"/>
+  <text x="68" y="66" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">速度更快 · 位价更高</text>
+  <text x="68" y="396" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">容量更大 · 位价更低</text>
+  <polygon points="295.0,76 435.0,76 480.0,142 250.0,142" fill="#fef3c7" stroke="#d97706" stroke-width="1.8" stroke-linejoin="round"/>
+  <text x="365" y="99.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">CPU 寄存器 (Registers)</text>
+  <text x="365" y="121.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">&lt; 1 ns  |  数十～数百 B</text>
+  <polygon points="245.0,150 485.0,150 537.5,222 192.5,222" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1.8" stroke-linejoin="round"/>
+  <text x="365" y="176.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">高速缓存 Cache (SRAM)</text>
+  <text x="365" y="198.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">1 ~ 10 ns  |  KB ~ 数十 MB (L1/L2/L3)</text>
+  <polygon points="187.5,230 542.5,230 597.5,304 132.5,304" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" stroke-linejoin="round"/>
+  <text x="365" y="257.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">主存储器 Main Memory (DRAM)</text>
+  <text x="365" y="279.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">50 ~ 100 ns  |  GB 级（断电易失）</text>
+  <polygon points="127.5,312 602.5,312 657.5,388 72.5,388" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.8" stroke-linejoin="round"/>
+  <text x="365" y="340.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">辅助存储器 (SSD / 磁盘 / 光盘磁带)</text>
+  <text x="365" y="362.0" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">μs ~ ms 级  |  TB 级（断电非易失）</text>
+  <polyline points="545,186 675,186 675,267 605,267" fill="none" stroke="#0b6f66" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="675" y1="226" x2="695" y2="226" stroke="#0b6f66" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-teal)"/>
+  <rect x="700" y="172" width="196" height="108" rx="8" fill="#f0fdfa" stroke="#0b6f66" stroke-width="1.5"/>
+  <text x="798" y="195" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="14" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">Cache — 主存层次</text>
+  <text x="798" y="218" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f172a" text-anchor="middle" dominant-baseline="central">• 核心目标：弥补 CPU 与主存速度差</text>
+  <text x="798" y="238" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#0f766e" text-anchor="middle" dominant-baseline="central">• 实现方式：纯硬件自动调度</text>
+  <text x="798" y="258" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">• 透明性：对所有程序员均透明</text>
+  <polyline points="608,285 675,285 675,360 662,360" fill="none" stroke="#6d28d9" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="675" y1="344" x2="695" y2="344" stroke="#6d28d9" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-indigo)"/>
+  <rect x="700" y="294" width="196" height="108" rx="8" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="798" y="317" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#4c1d95" text-anchor="middle" dominant-baseline="central">主存 — 辅存层次（虚拟存储）</text>
+  <text x="798" y="340" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#0f172a" text-anchor="middle" dominant-baseline="central">• 核心目标：解决主存容量不足</text>
+  <text x="798" y="360" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#5b21b6" text-anchor="middle" dominant-baseline="central">• 实现方式：硬件 MMU + 操作系统</text>
+  <text x="798" y="380" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">• 透明性：仅对应用程序员透明</text>
+</svg>

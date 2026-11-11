@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 425" width="920" height="425" role="img" aria-label="IEEE 754 单精度浮点数 32 位存储格式与转换拆解">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="912" height="417" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="32" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">IEEE 754 单精度浮点数（32-bit float）存储格式与实例拆解</text>
+  <text x="90" y="64" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#be123c" text-anchor="middle" dominant-baseline="central">31</text>
+  <text x="152" y="64" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">30</text>
+  <text x="368" y="64" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">23</text>
+  <text x="406" y="64" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">22</text>
+  <text x="858" y="64" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">0</text>
+  <rect x="54" y="78" width="72" height="74" rx="8" fill="#fff1f2" stroke="#e11d48" stroke-width="2.0"/>
+  <text x="90" y="102" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#9f1239" text-anchor="middle" dominant-baseline="central">数符 S</text>
+  <text x="90" y="128" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="600" fill="#be123c" text-anchor="middle" dominant-baseline="central">1 位</text>
+  <rect x="134" y="78" width="248" height="74" rx="8" fill="#f0fdfa" stroke="#0b6f66" stroke-width="2.0"/>
+  <text x="258" y="102" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">阶码 E（移码，偏置值 127）</text>
+  <text x="258" y="128" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#0f766e" text-anchor="middle" dominant-baseline="central">8 位  |  真实指数 e = E - 127</text>
+  <rect x="390" y="78" width="484" height="74" rx="8" fill="#eef2ff" stroke="#4338ca" stroke-width="2.0"/>
+  <text x="632" y="102" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#312e81" text-anchor="middle" dominant-baseline="central">尾数 M（规格化原码小数部分，最高位隐含整数 1.）</text>
+  <text x="632" y="128" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="600" fill="#4338ca" text-anchor="middle" dominant-baseline="central">23 位  |  实际有效尾数 = 1.M（白赚 1 位精度，共 24 位有效数字）</text>
+  <rect x="54" y="168" width="820" height="44" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.4"/>
+  <text x="464" y="190" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">规格化数真值公式（1 ≤ E ≤ 254）：   X = (-1)^S  ×  (1.M)₂  ×  2^(E - 127)</text>
+  <rect x="54" y="228" width="820" height="174" rx="10" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="74" y="252" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400e" text-anchor="start" dominant-baseline="central">实战拆解：将十进制 +20.59375 转为 IEEE 754 单精度机器码   →   (10100.10011)₂ = 1.010010011 × 2⁴</text>
+  <rect x="74" y="274" width="62" height="46" rx="6" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.4"/>
+  <text x="105" y="290" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="16" font-weight="700" fill="#9f1239" text-anchor="middle" dominant-baseline="central">0</text>
+  <text x="105" y="309" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="10" font-weight="500" fill="#9f1239" text-anchor="middle" dominant-baseline="central">正数 S=0</text>
+  <rect x="146" y="274" width="224" height="46" rx="6" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1.4"/>
+  <text x="258" y="290" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="16" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">1000 0011</text>
+  <text x="258" y="309" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#065f46" text-anchor="middle" dominant-baseline="central">E = 4 + 127 = 131</text>
+  <rect x="380" y="274" width="474" height="46" rx="6" fill="#e0e7ff" stroke="#4338ca" stroke-width="1.4"/>
+  <text x="617" y="290" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="15" font-weight="700" fill="#312e81" text-anchor="middle" dominant-baseline="central">0100 1001 1000 0000 0000 000</text>
+  <text x="617" y="309" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#3730a3" text-anchor="middle" dominant-baseline="central">去掉小数点前的隐含 1，右侧补 0 至满 23 位</text>
+  <rect x="74" y="334" width="780" height="54" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="88" y="361" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="12" font-weight="700" fill="#334155" text-anchor="start" dominant-baseline="central">4 位一组转 Hex：</text>
+  <rect x="216" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="244" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0100</text>
+  <text x="244" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">4</text>
+  <rect x="278" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="306" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0001</text>
+  <text x="306" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">1</text>
+  <rect x="340" y="341" width="56" height="40" rx="5" fill="#fff1f2" stroke="#e11d48" stroke-width="1.1"/>
+  <text x="368" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">1010</text>
+  <text x="368" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#be123c" text-anchor="middle" dominant-baseline="central">A</text>
+  <rect x="402" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="430" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0100</text>
+  <text x="430" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">4</text>
+  <rect x="464" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="492" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">1100</text>
+  <text x="492" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#4338ca" text-anchor="middle" dominant-baseline="central">C</text>
+  <rect x="526" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="554" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0000</text>
+  <text x="554" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#64748b" text-anchor="middle" dominant-baseline="central">0</text>
+  <rect x="588" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="616" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0000</text>
+  <text x="616" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#64748b" text-anchor="middle" dominant-baseline="central">0</text>
+  <rect x="650" y="341" width="56" height="40" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.1"/>
+  <text x="678" y="353" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="500" fill="#475569" text-anchor="middle" dominant-baseline="central">0000</text>
+  <text x="678" y="371" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="14" font-weight="700" fill="#64748b" text-anchor="middle" dominant-baseline="central">0</text>
+  <text x="780" y="361" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="15" font-weight="700" fill="#0b6f66" text-anchor="middle" dominant-baseline="central">= 41A4C000H</text>
+</svg>

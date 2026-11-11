@@ -1,0 +1,867 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://www.xurry.xyz",
+  "elements": [
+    {
+      "id": "el_2",
+      "type": "rectangle",
+      "x": 4,
+      "y": 4,
+      "width": 912,
+      "height": 452,
+      "strokeColor": "#e2e8f0",
+      "backgroundColor": "#ffffff",
+      "fillStyle": "solid",
+      "strokeWidth": 1.5,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_3",
+      "type": "text",
+      "x": 243.25,
+      "y": 19.8,
+      "width": 433.5,
+      "height": 22.1,
+      "text": "总线定时机制对比：同步定时读周期（图 6-3） vs 异步全互锁握手",
+      "fontSize": 17,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0f172a",
+      "opacity": 100
+    },
+    {
+      "id": "el_4",
+      "type": "rectangle",
+      "x": 32,
+      "y": 54,
+      "width": 856,
+      "height": 192,
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "#f8fafc",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_5",
+      "type": "text",
+      "x": 52,
+      "y": 67.2,
+      "width": 429.0,
+      "height": 16.900000000000002,
+      "text": "（a）同步总线：一次读操作时序（由统一时钟 CLK 定拍，T1~T4 构成一个总线周期）",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#064e48",
+      "opacity": 100
+    },
+    {
+      "id": "el_6",
+      "type": "line",
+      "x": 185,
+      "y": 92,
+      "width": 0,
+      "height": 142,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          142
+        ]
+      ],
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_7",
+      "type": "text",
+      "x": 242.5,
+      "y": 90.8,
+      "width": 45.0,
+      "height": 15.600000000000001,
+      "text": "T1 周期",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_8",
+      "type": "line",
+      "x": 345,
+      "y": 92,
+      "width": 0,
+      "height": 142,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          142
+        ]
+      ],
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_9",
+      "type": "text",
+      "x": 402.5,
+      "y": 90.8,
+      "width": 45.0,
+      "height": 15.600000000000001,
+      "text": "T2 周期",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_10",
+      "type": "line",
+      "x": 505,
+      "y": 92,
+      "width": 0,
+      "height": 142,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          142
+        ]
+      ],
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_11",
+      "type": "text",
+      "x": 562.5,
+      "y": 90.8,
+      "width": 45.0,
+      "height": 15.600000000000001,
+      "text": "T3 周期",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_12",
+      "type": "line",
+      "x": 665,
+      "y": 92,
+      "width": 0,
+      "height": 142,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          142
+        ]
+      ],
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_13",
+      "type": "text",
+      "x": 722.5,
+      "y": 90.8,
+      "width": 45.0,
+      "height": 15.600000000000001,
+      "text": "T4 周期",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_14",
+      "type": "line",
+      "x": 825,
+      "y": 92,
+      "width": 0,
+      "height": 142,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          142
+        ]
+      ],
+      "strokeColor": "#cbd5e1",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.2,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_15",
+      "type": "text",
+      "x": 60,
+      "y": 116.8,
+      "width": 72.0,
+      "height": 15.600000000000001,
+      "text": "时钟信号 CLK",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_16",
+      "type": "line",
+      "x": 185,
+      "y": 134,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -20
+        ],
+        [
+          80.0,
+          -20
+        ],
+        [
+          80.0,
+          0
+        ],
+        [
+          160,
+          0
+        ],
+        [
+          160,
+          -20
+        ],
+        [
+          240.0,
+          -20
+        ],
+        [
+          240.0,
+          0
+        ],
+        [
+          320,
+          0
+        ],
+        [
+          320,
+          -20
+        ],
+        [
+          400.0,
+          -20
+        ],
+        [
+          400.0,
+          0
+        ],
+        [
+          480,
+          0
+        ],
+        [
+          480,
+          -20
+        ],
+        [
+          560.0,
+          -20
+        ],
+        [
+          560.0,
+          0
+        ],
+        [
+          640,
+          0
+        ]
+      ],
+      "strokeColor": "#0f172a",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.9,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_17",
+      "type": "text",
+      "x": 60,
+      "y": 150.8,
+      "width": 81.0,
+      "height": 15.600000000000001,
+      "text": "地址总线 Addr",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_18",
+      "type": "line",
+      "x": 203,
+      "y": 158,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          14,
+          -12
+        ],
+        [
+          594,
+          -12
+        ],
+        [
+          608,
+          0
+        ],
+        [
+          594,
+          12
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "strokeColor": "#0284c7",
+      "backgroundColor": "#e0f2fe",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_19",
+      "type": "text",
+      "x": 414.25,
+      "y": 151.4,
+      "width": 181.5,
+      "height": 14.3,
+      "text": "T1 主设备给出有效主存/设备地址并保持稳定",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#075985",
+      "opacity": 100
+    },
+    {
+      "id": "el_20",
+      "type": "text",
+      "x": 60,
+      "y": 184.8,
+      "width": 81.0,
+      "height": 15.600000000000001,
+      "text": "读命令信号 /RD",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_21",
+      "type": "line",
+      "x": 185,
+      "y": 184,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          170,
+          0
+        ],
+        [
+          182,
+          18
+        ],
+        [
+          550,
+          18
+        ],
+        [
+          562,
+          0
+        ],
+        [
+          640,
+          0
+        ]
+      ],
+      "strokeColor": "#be123c",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_22",
+      "type": "text",
+      "x": 474.625,
+      "y": 186.4,
+      "width": 156.75,
+      "height": 14.3,
+      "text": "低电平有效：T2 发读命令，T4 撤销",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#9f1239",
+      "opacity": 100
+    },
+    {
+      "id": "el_23",
+      "type": "text",
+      "x": 60,
+      "y": 216.8,
+      "width": 81.0,
+      "height": 15.600000000000001,
+      "text": "数据总线 Data",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#334155",
+      "opacity": 100
+    },
+    {
+      "id": "el_24",
+      "type": "line",
+      "x": 185,
+      "y": 224,
+      "width": 335,
+      "height": 0,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          335,
+          0
+        ]
+      ],
+      "strokeColor": "#94a3b8",
+      "backgroundColor": "transparent",
+      "strokeWidth": 1.6,
+      "strokeStyle": "dashed",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null,
+      "startArrowhead": null
+    },
+    {
+      "id": "el_25",
+      "type": "line",
+      "x": 520,
+      "y": 224,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          15,
+          -12
+        ],
+        [
+          273,
+          -12
+        ],
+        [
+          287,
+          0
+        ],
+        [
+          273,
+          12
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "#ccfbf1",
+      "fillStyle": "solid",
+      "strokeWidth": 1.6,
+      "roughness": 0,
+      "opacity": 100
+    },
+    {
+      "id": "el_26",
+      "type": "text",
+      "x": 574.25,
+      "y": 217.4,
+      "width": 181.5,
+      "height": 14.3,
+      "text": "T3 从设备放数据 → T4 主设备采样读取",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#064e48",
+      "opacity": 100
+    },
+    {
+      "id": "el_27",
+      "type": "rectangle",
+      "x": 32,
+      "y": 260,
+      "width": 856,
+      "height": 176,
+      "strokeColor": "#f59e0b",
+      "backgroundColor": "#fffbeb",
+      "fillStyle": "solid",
+      "strokeWidth": 1.4,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "roundness": {
+        "type": 3
+      }
+    },
+    {
+      "id": "el_28",
+      "type": "text",
+      "x": 52,
+      "y": 274.2,
+      "width": 546.0,
+      "height": 16.900000000000002,
+      "text": "（b）异步总线：全互锁（Full-Interlocked）四步握手协议（无公共时钟，快慢设备自适应，可靠性最高）",
+      "fontSize": 13,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#92400e",
+      "opacity": 100
+    },
+    {
+      "id": "el_29",
+      "type": "text",
+      "x": 60,
+      "y": 318.8,
+      "width": 81.0,
+      "height": 15.600000000000001,
+      "text": "主设备请求 Req",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_30",
+      "type": "line",
+      "x": 195,
+      "y": 338,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          70,
+          0
+        ],
+        [
+          85,
+          -28
+        ],
+        [
+          380,
+          -28
+        ],
+        [
+          395,
+          0
+        ],
+        [
+          640,
+          0
+        ]
+      ],
+      "strokeColor": "#0b6f66",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.3,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_31",
+      "type": "text",
+      "x": 60,
+      "y": 378.8,
+      "width": 81.0,
+      "height": 15.600000000000001,
+      "text": "从设备回答 Ack",
+      "fontSize": 12,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#4338ca",
+      "opacity": 100
+    },
+    {
+      "id": "el_32",
+      "type": "line",
+      "x": 195,
+      "y": 398,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          220,
+          0
+        ],
+        [
+          235,
+          -28
+        ],
+        [
+          530,
+          -28
+        ],
+        [
+          545,
+          0
+        ],
+        [
+          640,
+          0
+        ]
+      ],
+      "strokeColor": "#4338ca",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.3,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": null
+    },
+    {
+      "id": "el_33",
+      "type": "arrow",
+      "x": 284,
+      "y": 324,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          66,
+          0
+        ],
+        [
+          134,
+          58
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_34",
+      "type": "text",
+      "x": 329.375,
+      "y": 293.4,
+      "width": 41.25,
+      "height": 14.3,
+      "text": "① 发请求",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_35",
+      "type": "arrow",
+      "x": 435,
+      "y": 372,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          70,
+          -17
+        ],
+        [
+          141,
+          -48
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_36",
+      "type": "text",
+      "x": 397.875,
+      "y": 409.4,
+      "width": 74.25,
+      "height": 14.3,
+      "text": "② 数据就绪发回答",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#4338ca",
+      "opacity": 100
+    },
+    {
+      "id": "el_37",
+      "type": "arrow",
+      "x": 592,
+      "y": 328,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          68,
+          27
+        ],
+        [
+          134,
+          56
+        ]
+      ],
+      "strokeColor": "#d97706",
+      "backgroundColor": "transparent",
+      "strokeWidth": 2.0,
+      "strokeStyle": "solid",
+      "roughness": 0,
+      "opacity": 100,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "el_38",
+      "type": "text",
+      "x": 557.875,
+      "y": 293.4,
+      "width": 74.25,
+      "height": 14.3,
+      "text": "③ 已读数据撤请求",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#0b6f66",
+      "opacity": 100
+    },
+    {
+      "id": "el_39",
+      "type": "text",
+      "x": 706.75,
+      "y": 409.4,
+      "width": 82.5,
+      "height": 14.3,
+      "text": "④ 撤回答，总线释放",
+      "fontSize": 11,
+      "fontFamily": 1,
+      "textAlign": "center",
+      "strokeColor": "#4338ca",
+      "opacity": 100
+    }
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  },
+  "files": {}
+}
