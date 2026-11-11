@@ -175,6 +175,51 @@
 .md-typeset .score-samples { display: grid; gap: .25rem; }
 .md-typeset .score-sample { padding: .3rem .5rem; border-radius: 4px; font-size: .6rem; }
 
+/* 算法实验：下标、边界与状态使用文字同步标识。 */
+.md-typeset .algo-array { display: grid; gap: .25rem; margin: .55rem 0 .85rem; }
+.md-typeset .algo-cell { min-width: 0; padding: .4rem .1rem; border: 1px solid var(--sv-line); border-radius: 5px; background: var(--md-default-bg-color); text-align: center; font-family: var(--md-code-font); }
+.md-typeset .algo-cell > strong { display: block; font-size: .95rem; }
+.md-typeset .algo-index { display: block; font-size: .5rem; }
+.md-typeset .algo-marker { display: block; min-height: 1rem; margin-top: .2rem; font-size: .6rem; }
+.md-typeset .algo-cell.is-current { border: 2px solid var(--sv-current); background: var(--sv-current-bg); color: var(--sv-current); }
+.md-typeset .algo-cell.is-selected { border-color: var(--sv-complete); background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset .algo-cell.is-right { border-color: var(--sv-pending); background: var(--sv-pending-bg); color: var(--sv-pending); }
+.md-typeset .algo-cell.is-removed { border-style: dashed; color: var(--md-default-fg-color--light); }
+.md-typeset .range-equation { margin: .85rem 0 .2rem; padding: .65rem; border-left: 3px solid var(--sv-complete); background: var(--md-default-bg-color); color: var(--sv-complete); font-family: var(--md-code-font); font-size: .85rem; }
+.md-typeset .queen-board { width: 100%; max-width: 19rem; margin: 0 auto; table-layout: fixed; border-collapse: collapse; text-align: center; }
+.md-typeset .queen-board caption { margin-bottom: .5rem; color: var(--md-default-fg-color--light); font-size: .62rem; text-align: left; }
+.md-typeset .queen-board th { padding: .2rem; font-size: .6rem; font-weight: 400; }
+.md-typeset .queen-board th:first-child { width: 2rem; }
+.md-typeset .queen-board td { padding: 0; border: 1px solid var(--sv-line); background: var(--md-default-bg-color); }
+.md-typeset .queen-square { display: grid; place-items: center; width: 100%; aspect-ratio: 1; font-family: var(--md-code-font); font-size: 1.25rem; font-weight: 700; }
+.md-typeset .queen-board td.is-dark { background: var(--sv-pending-bg); }
+.md-typeset .queen-board td.is-attacked { color: var(--sv-current); }
+.md-typeset .queen-board td.has-queen { background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset .queen-board td.is-current { outline: 3px solid var(--sv-current); outline-offset: -3px; }
+.md-typeset .queen-path { padding: .35rem 0; font-family: var(--md-code-font); font-size: .7rem; text-align: center; }
+.md-typeset .heap-tree { display: block; width: 100%; max-width: 26rem; margin: 0 auto; }
+.md-typeset .heap-edge { stroke: var(--sv-edge); stroke-width: 2; }
+.md-typeset .heap-edge.is-violation { stroke: var(--sv-current); stroke-width: 3; stroke-dasharray: 5 3; }
+.md-typeset .heap-node circle { fill: var(--md-default-bg-color); stroke: var(--sv-line); stroke-width: 2; }
+.md-typeset .heap-node.is-current circle { fill: var(--sv-current-bg); stroke: var(--sv-current); stroke-width: 3; }
+.md-typeset .heap-value { fill: var(--md-default-fg-color); font-family: var(--md-code-font); font-size: 30px; font-weight: 700; }
+.md-typeset .heap-index { fill: var(--md-default-fg-color); font-family: var(--md-code-font); font-size: 20px; paint-order: stroke; stroke: var(--sv-surface); stroke-width: 4px; }
+
+/* 实验目录的筛选只在显式标记的目录中生效；无脚本时保留完整目录。 */
+.md-typeset .lab-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .6rem; margin: 1.5rem 0; padding: .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 10px; background: var(--md-accent-fg-color--transparent); }
+.md-typeset .lab-filters { display: flex; flex-wrap: wrap; gap: .4rem; grid-column: 1 / -1; }
+.md-typeset .lab-toolbar button { min-height: 2.2rem; padding: .35rem .6rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 6px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); font: inherit; font-size: .7rem; cursor: pointer; }
+.md-typeset .lab-filters button[aria-pressed="true"] { border-color: var(--md-typeset-a-color); color: var(--md-typeset-a-color); font-weight: 700; }
+.md-typeset .lab-search { display: flex; flex-direction: column; gap: .3rem; min-width: 0; font-size: .68rem; }
+.md-typeset .lab-search input { width: 100%; min-height: 2.2rem; padding: .4rem .6rem; border: 1px solid var(--md-default-fg-color--lighter); border-radius: 6px; background: var(--md-default-bg-color); color: var(--md-default-fg-color); font: inherit; }
+.md-typeset .lab-toolbar button:focus-visible,
+.md-typeset .lab-search input:focus-visible { outline: 3px solid var(--md-typeset-a-color); outline-offset: 3px; }
+.md-typeset .lab-filter-status { grid-column: 1 / -1; margin: 0; font-size: .65rem; }
+.md-typeset .lab-empty { padding: 1rem; border: 1px dashed var(--md-default-fg-color--lighter); border-radius: 8px; }
+.md-typeset .lab-section[hidden],
+.md-typeset .lab-directory li[hidden],
+.md-typeset .lab-empty[hidden] { display: none; }
+
 @media screen and (max-width: 60em) {
   .md-typeset .home-hero__copy { padding: 1.5rem; }
   .md-typeset .home-hero h1 { font-size: 1.7rem; }
@@ -203,6 +248,10 @@
   .md-typeset .concept-roc text { font-size: 22px; }
 }
 @media screen and (max-width: 36em) {
+  .md-typeset .algo-cell > strong { font-size: .8rem; }
+  .md-typeset .algo-array { gap: .15rem; }
+  .md-typeset .lab-toolbar { grid-template-columns: minmax(0, 1fr); }
+  .md-typeset .lab-filter-reset { justify-self: start; }
   .md-typeset .lab-catalog > ul { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .home-hero__copy { padding: 1.05rem .9rem .8rem; }
   .md-typeset .home-hero h1 { margin: .3rem 0 .4rem; font-size: 1.3rem; }
@@ -216,6 +265,7 @@
   .md-typeset .object-shared { margin-left: 0; }
   .md-typeset .concept-settings { align-items: stretch; }
   .md-typeset .concept-field { flex: 1; min-width: 0; }
+  .md-typeset [data-concept-viz="prefix"] .concept-field:first-child { flex-basis: 100%; }
   .md-typeset .concept-lab input[type="number"] { width: 100%; }
   .md-typeset .bit-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .2rem; }
   .md-typeset .bit-strip { gap: .1rem; }

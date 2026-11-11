@@ -26,7 +26,7 @@ hide:
 
 </div>
 
-<span class="home-hero__note">9 个交互主题 · 从原笔记出发 · 一步步观察机制</span>
+<span class="home-hero__note">13 个交互主题 · 从原笔记出发 · 一步步观察机制</span>
 
 </div>
 

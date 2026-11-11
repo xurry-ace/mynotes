@@ -57,4 +57,79 @@ assert.deepEqual(refs[4].outputs, { a: "[1,[2,3],4]", b: "[1,[2,3],4]", c: "[1,[
 assert.deepEqual(refs[0].inner, [2]);
 assert.equal(M.vector()[1].moved, false);
 assert.equal(M.vector()[2].moved, true);
-console.log("PASS: 65,536 signed additions; cache conflict and LRU; 12 pipeline schedules; classification thresholds and AUC; reference snapshots; vector states.");
+
+// 穷举短数组，分别核对分区不变量、元素多重集与完整递归后的排序结果。
+let partitionCases = 0, rangeCases = 0;
+function allArrays(n, visit, prefix = []) {
+  if (!n) { visit(prefix); return; }
+  for (const value of [-1, 0, 1]) allArrays(n - 1, visit, [...prefix, value]);
+}
+function recursivelySort(input) {
+  if (input.length < 2) return input;
+  const f = M.partitionFrames(input).at(-1);
+  const left = f.values.slice(0, f.j + 1), middle = f.values.slice(f.j + 1, f.i), right = f.values.slice(f.i);
+  assert.ok(left.length < input.length && right.length < input.length);
+  return [...recursivelySort(left), ...middle, ...recursivelySort(right)];
+}
+for (let n = 1; n <= 7; n++) allArrays(n, input => {
+  const original = [...input], frames = M.partitionFrames(input), f = frames.at(-1);
+  assert.deepEqual(input, original);
+  assert.deepEqual(frames[0].values, input);
+  assert.deepEqual([...f.values].sort((a, b) => a - b), [...input].sort((a, b) => a - b));
+  assert.ok(f.i > f.j);
+  assert.ok(f.values.slice(0, f.j + 1).every(v => v <= f.pivot));
+  assert.ok(f.values.slice(f.i).every(v => v >= f.pivot));
+  assert.ok(f.values.slice(f.j + 1, f.i).every(v => v === f.pivot));
+  assert.deepEqual(recursivelySort(input), [...input].sort((a, b) => a - b));
+  partitionCases++;
+});
+for (let n = 1; n <= 5; n++) allArrays(n, input => {
+  for (let l = 1; l <= n; l++) for (let r = l; r <= n; r++) {
+    assert.equal(M.prefixQuery(input, l, r).sum, input.slice(l - 1, r).reduce((a, b) => a + b, 0));
+    rangeCases++;
+  }
+});
+assert.throws(() => M.prefixQuery([1, 2], 2, 1), RangeError);
+assert.throws(() => M.prefixQuery([1, 2], 0, 1), RangeError);
+assert.throws(() => M.prefixQuery([1, 2], 1, 3), RangeError);
+
+// 与不剪枝的完整排列枚举交叉验证皇后解，不复用被测的冲突标记算法。
+function bruteQueens(n) {
+  const results = [];
+  function enumerate(path) {
+    if (path.length === n) {
+      const valid = path.every((c, r) => path.every((d, s) => r === s || (c !== d && Math.abs(r - s) !== Math.abs(c - d))));
+      if (valid) results.push(path);
+      return;
+    }
+    for (let c = 0; c < n; c++) enumerate([...path, c]);
+  }
+  enumerate([]); return results;
+}
+for (let n = 1; n <= 5; n++) {
+  const frames = M.queensFrames(n), solutions = frames.filter(f => f.phase === "solution");
+  assert.deepEqual(solutions.map(f => f.positions), bruteQueens(n));
+  assert.deepEqual(frames.at(-1).positions, []);
+  assert.equal(frames.at(-1).solutions, solutions.length);
+  for (const f of frames) {
+    assert.ok(f.positions.every((c, r) => f.positions.every((d, s) => r === s || (c !== d && Math.abs(r - s) !== Math.abs(c - d)))));
+    if (f.phase === "reject") assert.ok(f.conflicts.length > 0 && f.positions.length === f.row);
+  }
+}
+assert.deepEqual(M.queensFrames().filter(f => f.phase === "solution").map(f => f.positions), [[1, 3, 0, 2], [2, 0, 3, 1]]);
+
+// 独立用有序多重集核对 push/pop 的元素结果，并检查最终父子关系。
+let seed = 11;
+for (let t = 0; t < 200; t++) {
+  seed = (seed * 48271) % 2147483647;
+  const input = Array.from({ length: t % 8 + 1 }, (_, i) => (seed + i * 7) % 17 - 8).sort((a, b) => b - a);
+  for (const operation of ["push", "pop"]) {
+    const expected = operation === "push" ? [...input, 10] : input.slice(1);
+    const frames = M.heapFrames(input, operation), actual = frames.at(-1).values;
+    assert.deepEqual([...actual].sort((a, b) => a - b), expected.sort((a, b) => a - b));
+    assert.ok(actual.every((v, i) => i === 0 || actual[Math.floor((i - 1) / 2)] >= v));
+    assert.deepEqual(frames[0].values, input);
+  }
+}
+console.log("PASS: existing arithmetic, cache, pipeline, metrics and reference checks.");
+console.log(`PASS: ${partitionCases} partition arrays; ${rangeCases} range sums; queens 1..5 vs exhaustive search; 400 heap operations.`);

@@ -57,7 +57,7 @@ description: 按访问方式与数据关系选择 C++ STL 容器：vector、stac
 
     [priority_queue](priority_queue(优先队列).md) 默认取当前最大元素，也可定义小根堆。
 
-    [Dijkstra](../洛谷题目/10_1/dijkstra算法.md#dijkstra-demo) 需要优先取当前最小暂定距离。
+    [观察堆的上浮与下沉](priority_queue(优先队列).md#heap-lab)，再看 [Dijkstra](../洛谷题目/10_1/dijkstra算法.md#dijkstra-demo) 为什么需要小根堆。
 
 - **有序键与键值关系**
 

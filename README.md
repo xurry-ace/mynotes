@@ -16,7 +16,7 @@ python3 -m venv .venv
 
 算法逐步演示由 `docs/javascripts/study-viz.js` 实现，只增强页面中带 `data-study-viz` 的容器，样式限定在 `.study-viz` 内，不依赖外部可视化库。示例包括二分查找、BFS/DFS 对照与 Dijkstra；容器内保留静态过程说明，在 JavaScript 不可用时仍可阅读。
 
-机制实验由 `concept-models.js` 计算、`concept-lab.js` 绘制，通过 `data-concept-viz` 显式启用；包括补码、Cache、流水线、vector、Python 引用与分类阈值。运行 `node scripts/check_concept_models.cjs` 可核对计算模型。导航与实验样式在 `docs/stylesheets/learning.css`，主要限定到显式组件；手机端的回到顶部按钮放在右下角，避免遮挡锚点标题。新实验应保留静态过程说明，并说明简化条件。
+机制实验由 `concept-models.js` 计算、`concept-lab.js` 绘制，通过 `data-concept-viz` 显式启用；包括补码、Cache、流水线、vector、Python 引用、分类阈值、快排分区、前缀和、四皇后与堆。运行 `node scripts/check_concept_models.cjs` 可核对计算模型。图解实验室的分类与本地关键词筛选只增强 `data-lab-directory`，无脚本时保留完整目录。导航与实验样式在 `docs/stylesheets/learning.css`，主要限定到显式组件；手机端的回到顶部按钮放在右下角，避免遮挡锚点标题。新实验应保留静态过程说明，并说明简化条件。
 
 首页使用内置 imagegen 生成的知识花园插画，发布版 WebP 约 108 KiB；最终提示词保存在 `diagram-sources/站点首页/knowledge-garden.prompt.md`。PCA/Fisher 图的自拟数据、独立数值核对和 Matplotlib 导出代码在 `diagram-sources/模式识别/projection_comparison.py`；绘图依赖仅用于重生成图片，不是构建与网页运行依赖。
 

@@ -79,7 +79,10 @@
     next.addEventListener("click", () => { if (index < count - 1) { index++; update(); } });
     reset.addEventListener("click", () => { index = 0; update(); });
     update();
-    return newLength => { count = newLength; index = 0; update(); };
+    const rebuild = newLength => { count = newLength; index = 0; update(); };
+    rebuild.position = () => index;
+    rebuild.jumpTo = target => { index = Math.max(0, Math.min(count - 1, target)); update(); };
+    return rebuild;
   }
 
   function cache(root) {
@@ -273,11 +276,161 @@
     input.addEventListener("input", render); render();
   }
 
-  const renderers = { cache, pipeline, references, vector, signed, metrics };
-  const mount = () => document.querySelectorAll("[data-concept-viz]").forEach(root => {
-    if (root.dataset.ready || !renderers[root.dataset.conceptViz]) return;
-    renderers[root.dataset.conceptViz](root); root.dataset.ready = "true";
-  });
+  function arrayRow(values, describe) {
+    const row = e("div", "algo-array");
+    row.style.gridTemplateColumns = `repeat(${Math.max(1, values.length)}, minmax(0, 1fr))`;
+    values.forEach((value, i) => {
+      const hint = describe(i), cell = e("div", `algo-cell ${hint.className || ""}`);
+      cell.append(e("span", "algo-index", hint.label || `[${i}]`), e("strong", "", value === null ? "—" : String(value)));
+      if (hint.marker !== undefined) cell.append(e("span", "algo-marker", hint.marker || "·"));
+      row.append(cell);
+    });
+    return row;
+  }
+
+  function partition(root) {
+    const ui = shell(root, "快速排序 · 一轮分区怎样结束？");
+    const examples = [[4, 2, 4, 5, 1], [4, 4, 4, 4, 4], [6, 5, 4, 3, 2, 1]];
+    const choice = select(ui, "输入数组", [["0", "本页样例 · 含重复值"], ["1", "全部相等"], ["2", "逆序数组"]], "0");
+    let frames = M.partitionFrames(examples[0]);
+    const render = index => {
+      const f = frames[index];
+      const cells = arrayRow(f.values, i => ({
+        className: f.changed.includes(i) ? "is-current" : f.phase === "done" && i <= f.j ? "is-selected" : f.phase === "done" && i >= f.i ? "is-right" : "",
+        marker: [f.i === i ? "i" : "", f.j === i ? "j" : ""].filter(Boolean).join(" / ")
+      }));
+      ui.stage.replaceChildren(e("p", "concept-caption", `pivot 固定为 ${f.pivot}（从初始下标 ${f.origin} 取值）`), cells,
+        stats([["左指针 i", String(f.i)], ["右指针 j", String(f.j)]]));
+      if (f.phase === "done") ui.stage.append(e("p", "concept-caption", `左子区间 [0, ${f.j}]：值 ≤ ${f.pivot}；右子区间 [${f.i}, ${f.values.length - 1}]：值 ≥ ${f.pivot}。`));
+      ui.status.textContent = f.message;
+    };
+    const rebuild = steps(ui, frames.length, render);
+    choice.addEventListener("change", () => { frames = M.partitionFrames(examples[Number(choice.value)]); rebuild(frames.length); });
+  }
+
+  function prefix(root) {
+    const ui = shell(root, "前缀和 · 大区间减去不需要的前半段");
+    const examples = [[2, 4, 1, 6, 3], [3, -1, 4, 2, -2, 5]];
+    const choice = select(ui, "数组示例", [["0", "本页示例 · 全为正数"], ["1", "含负数的示例"]], "0");
+    let values = examples[0];
+    const bounds = [2, 4].map((value, i) => {
+      const label = e("label", "concept-field"); label.append(e("span", "", i ? "右端 R" : "左端 L"));
+      const input = e("input"); input.type = "number"; input.min = "1"; input.max = String(values.length); input.step = "1"; input.value = String(value);
+      label.append(input); ui.settings.append(label); return input;
+    });
+    const render = () => {
+      let result;
+      try { result = M.prefixQuery(values, ...bounds.map(x => x.value === "" ? NaN : Number(x.value))); }
+      catch (error) { ui.stage.replaceChildren(e("p", "concept-error", error.message)); ui.status.textContent = "本演示采用从 1 开始的下标，要求非空区间 L ≤ R。"; return; }
+      const { left, right, prefix, sum, whole, removed } = result;
+      const original = arrayRow([null, ...values], i => ({ label: `a[${i}]`, className: i >= left && i <= right ? "is-selected" : i > 0 && i < left ? "is-removed" : "" }));
+      const sums = arrayRow(prefix, i => ({ label: `S[${i}]`, className: i === right ? "is-selected" : i === left - 1 ? "is-current" : "" }));
+      const number = n => n < 0 ? `(${n})` : String(n);
+      ui.stage.replaceChildren(e("p", "concept-caption", "原数组：着色区间是本次要保留的元素，a[0] 不使用。"), original,
+        e("p", "concept-caption", "累计到每个位置的前缀和，S[0] = 0 表示空前缀。"), sums,
+        e("p", "range-equation", `S[${right}] − S[${left - 1}] = ${number(whole)} − ${number(removed)} = ${sum}`));
+      ui.status.textContent = `前 ${right} 项的和减去前 ${left - 1} 项的和，留下第 ${left}～${right} 项。直接相加核对：${values.slice(left - 1, right).map(number).join(" + ")} = ${sum}。`;
+    };
+    bounds.forEach(input => input.addEventListener("input", render));
+    choice.addEventListener("change", () => { values = examples[Number(choice.value)]; bounds.forEach((x, i) => { x.max = String(values.length); x.value = i ? "4" : "2"; }); render(); });
+    render();
+  }
+
+  function queens(root) {
+    const ui = shell(root, "四皇后 · 尝试、剪枝与撤销");
+    const frames = M.queensFrames(4), jump = e("button", "", "跳到下一个解"); jump.type = "button"; ui.settings.append(jump);
+    const navigator = steps(ui, frames.length, index => {
+      const f = frames[index], board = e("table", "queen-board");
+      board.append(e("caption", "", "Q 已放置 · × 本步被拒绝 · ↶ 本步撤销 · 点号表示已受攻击的空格"));
+      const head = e("thead"), row = e("tr");
+      for (let c = 0; c <= f.n; c++) { const th = e("th", "", c ? String(c) : "行 / 列"); th.scope = "col"; row.append(th); } head.append(row);
+      const body = e("tbody");
+      for (let r = 0; r < f.n; r++) {
+        const tr = e("tr"), label = e("th", "", String(r + 1)); label.scope = "row"; tr.append(label);
+        for (let c = 0; c < f.n; c++) {
+          const occupied = f.positions[r] === c, current = f.row === r && f.col === c;
+          const attacked = f.positions.some((q, qr) => qr === r || q === c || Math.abs(qr - r) === Math.abs(q - c));
+          const symbol = occupied ? "Q" : current && f.phase === "reject" ? "×" : current && f.phase === "remove" ? "↶" : attacked ? "·" : "";
+          const cell = e("td", `${(r + c) % 2 ? "is-dark " : ""}${occupied ? "has-queen" : attacked ? "is-attacked" : ""}${current ? " is-current" : ""}`);
+          const square = e("div", "queen-square", symbol); square.setAttribute("aria-hidden", "true"); cell.append(square);
+          cell.setAttribute("aria-label", `第 ${r + 1} 行第 ${c + 1} 列：${occupied ? "有皇后" : current && f.phase === "reject" ? "本步拒绝" : "空格"}`);
+          tr.append(cell);
+        }
+        body.append(tr);
+      }
+      board.append(head, body);
+      ui.stage.replaceChildren(board, e("p", "queen-path", `已放置行的列号：[${f.positions.map(c => c + 1).join(", ")}]`), stats([["本轨迹已尝试位置", String(f.attempts)], ["本轨迹已找到解", String(f.solutions)]]));
+      ui.status.textContent = f.message;
+      jump.disabled = !frames.some((x, i) => i > index && x.phase === "solution");
+    });
+    jump.addEventListener("click", () => navigator.jumpTo(frames.findIndex((f, i) => i > navigator.position() && f.phase === "solution")));
+  }
+
+  function heap(root) {
+    const ui = shell(root, "大根堆 · 树与数组同步看维护过程");
+    const choice = select(ui, "执行的操作", [["pop", "弹出最大值：下沉"], ["push", "插入 10：上浮"], ["small", "插入 1：无需上浮"]], "pop");
+    let frames = M.heapFrames([9, 7, 8, 2, 5, 1, 4], "pop");
+    const render = index => {
+      const f = frames[index], plot = svg("svg", { viewBox: "0 0 500 315", role: "img", "aria-label": `二叉堆的层序数组为 ${f.values.join(", ")}`, class: "heap-tree" });
+      const points = f.values.map((_, i) => { const d = Math.floor(Math.log2(i + 1)); return [10 + (i - (2 ** d - 1) + .5) * 480 / (2 ** d), 35 + d * 76]; });
+      f.values.forEach((value, i) => {
+        if (i) { const p = Math.floor((i - 1) / 2); plot.append(svg("line", { x1: points[p][0], y1: points[p][1], x2: points[i][0], y2: points[i][1], class: `heap-edge${f.values[p] < value ? " is-violation" : ""}` })); }
+      });
+      f.values.forEach((value, i) => {
+        const [x, y] = points[i], group = svg("g", { class: `heap-node${f.active.includes(i) ? " is-current" : ""}` });
+        group.append(svg("circle", { cx: x, cy: y, r: 26 }), svg("text", { x, y: y + 10, "text-anchor": "middle", class: "heap-value" }, value), svg("text", { x, y: y + 46, "text-anchor": "middle", class: "heap-index" }, `[${i}]`)); plot.append(group);
+      });
+      ui.stage.replaceChildren(plot, e("p", "concept-caption", "相同下标连接树与数组；橙色标出本步维护的位置。"), arrayRow(f.values, i => ({ className: f.active.includes(i) ? "is-current" : "" })),
+        stats([["元素数", String(f.values.length)], ["维护状态", f.phase === "done" ? "完成" : f.phase === "start" ? "尚未操作" : "维护中"]]));
+      ui.status.textContent = f.message;
+    };
+    const rebuild = steps(ui, frames.length, render);
+    choice.addEventListener("change", () => { frames = M.heapFrames([9, 7, 8, 2, 5, 1, 4], choice.value === "pop" ? "pop" : "push", choice.value === "small" ? 1 : 10); rebuild(frames.length); });
+  }
+
+  function directory(root) {
+    if (root.dataset.labReady) return;
+    const sections = [...root.querySelectorAll(".lab-section")];
+    const groups = sections.map(section => ({ section, category: section.dataset.category, cards: [...section.querySelectorAll(".lab-catalog > ul > li")] }));
+    const all = groups.flatMap(g => g.cards), normalize = s => s.normalize("NFKC").toLowerCase();
+    const text = new Map(all.map(card => [card, normalize(`${card.closest("section").querySelector("h2").textContent} ${card.textContent}`)]));
+    const toolbar = e("div", "lab-toolbar"), filters = e("div", "lab-filters"), field = e("label", "lab-search");
+    field.append(e("span", "", "搜索图解主题"));
+    const input = e("input"); input.type = "search"; input.placeholder = "例如：快排、对象、Cache"; field.append(input);
+    const status = e("p", "lab-filter-status"); status.setAttribute("role", "status"); status.setAttribute("aria-live", "polite");
+    const empty = e("p", "lab-empty", "没有匹配的主题。试试其他关键词，或清除筛选。"); empty.hidden = true;
+    let category = "all";
+    const buttons = [];
+    [["all", "全部", all.length], ...groups.map(g => [g.category, g.section.dataset.label, g.cards.length])].forEach(([key, title, count]) => {
+      const button = e("button", "", `${title}（${count}）`); button.type = "button";
+      button.addEventListener("click", () => { category = key; render(); }); filters.append(button); buttons.push([key, button]);
+    });
+    const reset = e("button", "lab-filter-reset", "清除筛选"); reset.type = "button";
+    reset.addEventListener("click", () => { category = "all"; input.value = ""; render(); });
+    toolbar.append(filters, field, reset, status); root.prepend(toolbar, empty);
+    function render() {
+      const words = normalize(input.value.trim()).split(/\s+/).filter(Boolean);
+      let count = 0;
+      groups.forEach(g => {
+        let shown = 0;
+        g.cards.forEach(card => { const visible = (category === "all" || category === g.category) && words.every(word => text.get(card).includes(word)); card.hidden = !visible; if (visible) shown++; });
+        g.section.hidden = shown === 0; count += shown;
+      });
+      buttons.forEach(([key, button]) => { button.setAttribute("aria-pressed", String(key === category)); });
+      status.textContent = `显示 ${count} / ${all.length} 个主题`;
+      empty.hidden = count > 0;
+    }
+    input.addEventListener("input", render); render(); root.dataset.labReady = "true";
+  }
+
+  const renderers = { cache, pipeline, references, vector, signed, metrics, partition, prefix, queens, heap };
+  const mount = () => {
+    document.querySelectorAll("[data-concept-viz]").forEach(root => {
+      if (root.dataset.ready || !renderers[root.dataset.conceptViz]) return;
+      renderers[root.dataset.conceptViz](root); root.dataset.ready = "true";
+    });
+    document.querySelectorAll("[data-lab-directory]").forEach(directory);
+  };
   if (typeof document$ !== "undefined") document$.subscribe(mount);
   else if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount, { once: true });
   else mount();
