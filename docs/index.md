@@ -1,14 +1,86 @@
 ---
-description: xurry 的个人笔记网站：记录 C++、算法、计算机组成原理、操作系统、模式识别与人生思考。
+description: xurry 的个人笔记网站：用知识地图、机制图解与交互实验连接 C++、Python、算法、计算机系统和模式识别。
+hide:
+  - navigation
+  - toc
 ---
 
-# 欢迎来到 xurry 的代码空间 👋
+<div class="learning-home" markdown="1">
+
+<div class="home-hero" markdown="1">
+
+<div class="home-hero__copy" markdown="1">
+
+<span class="home-eyebrow">代码 · 系统 · 思考</span>
+
+# xurry 的代码空间
+
+<p class="home-hero__lead">把零散知识，连成能解释问题的线索。</p>
 
 这是一个纯粹的、用于记录技术成长与思考的个人数字花园。
 
-## 🧭 从这张知识地图开始
+<div class="home-actions" markdown="1">
 
-语言和容器是表达工具，算法负责组织求解步骤，计算机系统解释程序怎样运行。下面按这几条线索找入口；它们可以交叉阅读，不必等一门学完再看下一门。
+[进入图解实验室](图解实验室.md){ .md-button .md-button--primary }
+[查看知识地图](#knowledge-map){ .md-button }
+
+</div>
+
+<span class="home-hero__note">9 个交互主题 · 从原笔记出发 · 一步步观察机制</span>
+
+</div>
+
+<div class="home-hero__art" markdown="1">
+
+![书页、树状节点、书籍和电路组成的知识花园插画](assets/illustrations/knowledge-garden.webp){ width="1536" height="1024" loading="eager" fetchpriority="high" }
+
+</div>
+
+</div>
+
+## 先带着一个问题来 { #start-with-a-question }
+
+抽象概念读起来容易相似，真正拉开差别的是**条件、状态和变化过程**。从一个具体问题出发，看清机制，再回到完整笔记。
+
+<div class="lab-catalog home-experiments" markdown="1">
+
+- <span class="lab-tag">计算机组成 · 可交互</span>
+
+    **Cache 明明还有空行，为什么照样冲突？**
+
+    同样的容量，两种映射；看一块数据究竟能放在哪里。
+
+    [观察 Cache 落点 →](计算机组成原理/第3章：存储系统.md#cache-lab)
+
+- <span class="lab-tag">Python · 可交互</span>
+
+    **只改了一个列表，为什么三个名字都变了？**
+
+    把变量绑定、外层复制与内层共享分开画出来。
+
+    [观察对象引用 →](python基础/第2章：字符串、列表、字典、元组.md#reference-lab)
+
+- <span class="lab-tag">模式识别 · 可交互</span>
+
+    **降低分类阈值，得到的都是真正例吗？**
+
+    从四个样本出发，联动看预测、混淆矩阵和 ROC。
+
+    [移动阈值看看 →](模式识别/考试复习.md#metrics-lab)
+
+- <span class="lab-tag">算法 · 可交互</span>
+
+    **同一棵树，队列和递归会先处理谁？**
+
+    不只看访问顺序，还看队列与调用链怎样变化。
+
+    [对照 BFS / DFS →](洛谷题目/8_1/bfs.md#search-demo)
+
+</div>
+
+## 按知识地图阅读 { #knowledge-map }
+
+语言和容器是表达工具，算法组织求解步骤，计算机系统解释程序怎样运行。它们可以交叉阅读，不必等一门学完再看下一门。
 
 <div class="knowledge-atlas" markdown="1">
 
@@ -20,7 +92,7 @@ description: xurry 的个人笔记网站：记录 C++、算法、计算机组成
 
 变量、控制流、函数，再到常用容器。
 
-[C++ 容器](c++基础/vector.md) · [Python 基础](python基础/引言.md)
+[C++ 容器](c++基础/index.md) · [Python 基础](python基础/引言.md)
 
 <span class="knowledge-lane__bridge">↓ 为算法提供实现工具</span>
 
@@ -70,15 +142,19 @@ description: xurry 的个人笔记网站：记录 C++、算法、计算机组成
 
 </div>
 
-<div class="co-pill-bar" markdown="1">
 
-[试试二分查找](洛谷题目/1_1/二分查找.md#binary-demo)
-[对比 BFS / DFS](洛谷题目/8_1/bfs.md#search-demo)
-[观察最短路更新](洛谷题目/10_1/dijkstra算法.md#dijkstra-demo)
+<div class="learning-route" markdown="1">
+
+<span class="learning-route__label">把栏目连起来</span>
+
+[容器与访问规则](c++基础/index.md) → [算法与状态变化](洛谷题目/引言.md#algorithm-map) → [指令怎样执行](计算机组成原理/第5章：中央处理器.md#pipeline-lab)
+
+[Python 对象](python基础/引言.md#python-map) → [数据与数组](python基础/第7章：重点突破--Numpy库.ipynb) → [模型与评估](模式识别/引言.md#pattern-map)
 
 </div>
 
----
+<details class="home-about" markdown="1">
+<summary>关于这个空间：初衷、施工计划与内容进度</summary>
 
 ## 🎯 为什么建立这个空间？
 
@@ -109,7 +185,7 @@ description: xurry 的个人笔记网站：记录 C++、算法、计算机组成
 !!! tip "动态更新"
     带有 `[x]` 的表示已经初步整理并在左侧导航栏上线，带有 `[ ]` 的模块还在整理中；具体进度以各栏目首页为准。
 
----
+</details>
 
 ## 💡 共勉
 
@@ -117,3 +193,5 @@ description: xurry 的个人笔记网站：记录 C++、算法、计算机组成
     **“人生就像一段没有回退键的程序，或许会有 Bug，会有死循环，但只要一直在 Run，总能跑出属于自己的美丽花束。”**
     
     怕什么真理无穷，进一寸有进一寸的欢喜
+
+</div>

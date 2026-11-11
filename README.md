@@ -16,6 +16,10 @@ python3 -m venv .venv
 
 算法逐步演示由 `docs/javascripts/study-viz.js` 实现，只增强页面中带 `data-study-viz` 的容器，样式限定在 `.study-viz` 内，不依赖外部可视化库。示例包括二分查找、BFS/DFS 对照与 Dijkstra；容器内保留静态过程说明，在 JavaScript 不可用时仍可阅读。
 
+机制实验由 `concept-models.js` 计算、`concept-lab.js` 绘制，通过 `data-concept-viz` 显式启用；包括补码、Cache、流水线、vector、Python 引用与分类阈值。运行 `node scripts/check_concept_models.cjs` 可核对计算模型。导航与实验样式在 `docs/stylesheets/learning.css`，主要限定到显式组件；手机端的回到顶部按钮放在右下角，避免遮挡锚点标题。新实验应保留静态过程说明，并说明简化条件。
+
+首页使用内置 imagegen 生成的知识花园插画，发布版 WebP 约 108 KiB；最终提示词保存在 `diagram-sources/站点首页/knowledge-garden.prompt.md`。PCA/Fisher 图的自拟数据、独立数值核对和 Matplotlib 导出代码在 `diagram-sources/模式识别/projection_comparison.py`；绘图依赖仅用于重生成图片，不是构建与网页运行依赖。
+
 正文图片由 `hooks/image_attrs.py` 在构建时统一补上 `loading="lazy"`、`decoding="async"` 以及宽高（百分比宽度图片改用 `aspect-ratio`）。新增本地图片不需要手工写这些属性；外链图片只补懒加载。Jupyter Notebook 页面由 `hooks/notebook_clean.py` 同步标题锚点与右侧目录、改写 `./` 相对图片路径，并清理 `nbconvert` 生成的空脚本和重复样式标签。
 
 正文字体 Noto Serif SC 与代码字体 Fira Code 使用 `docs/assets/fonts/` 下的本地 woff2 子集，不再请求 Google Fonts；新增大量生僻字后需要用 `pyftsubset` 重新生成。字体来源与 OFL 许可证见同目录 `NOTICE.txt` 和 `OFL-*.txt`。

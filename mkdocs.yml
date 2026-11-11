@@ -53,7 +53,9 @@ theme:
 # 这里是核心：手动定义导航结构，实现示例那种层级
 nav:
   - 🏠首页: index.md
+  - 🧭图解实验室: 图解实验室.md
   - 🧩C++ 基础:
+      - 容器学习地图: c++基础/index.md
       - vector: c++基础/vector.md
       - stack: c++基础/stack.md
       - queue: c++基础/queue.md
@@ -251,11 +253,14 @@ markdown_extensions:
 #在文件最底部引入 CSS
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/learning.css
 
 # 数学公式按需加载；算法演示只增强显式标记的容器
 extra_javascript:
   - javascripts/mathjax.js
   - javascripts/study-viz.js
+  - javascripts/concept-models.js
+  - javascripts/concept-lab.js
 
 # 👇 新增这块内容
 hooks:
