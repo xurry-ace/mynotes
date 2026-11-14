@@ -214,6 +214,92 @@ const boundary = M.scheduleFrames([{ id: "A", arrival: 0, burst: 5 }, { id: "B",
 assert.deepEqual(boundary.find(f => f.clock === 4).ready, ["A", "C", "B"]);
 assert.throws(() => M.scheduleFrames([{ id: "A", arrival: 0, burst: 0 }], "RR"), RangeError);
 
+// 穷举两进程各自程序的合法交错执行；独立对等待边做 DFS 环检测。
+function graphHasCycle(edges) {
+  const visit = (node, path) => {
+    if (path.includes(node)) return true;
+    return edges.filter(e => e.from === node).some(e => visit(e.to, [...path, node]));
+  };
+  return ["A", "B"].some(p => visit(p, []));
+}
+let lockPaths = 0, deadlockPaths = 0;
+for (const opposite of [false, true]) {
+  const program = p => {
+    const order = opposite && p === "B" ? ["L2", "L1"] : ["L1", "L2"];
+    return [...order.map(lock => ({ process: p, lock, op: "acquire" })), ...[...order].reverse().map(lock => ({ process: p, lock, op: "release" }))];
+  };
+  const programs = { A: program("A"), B: program("B") }; let cyclic = 0, complete = 0;
+  function interleave(events, counters) {
+    const history = M.resourceTrace(events), f = history.at(-1);
+    assert.deepEqual(history[0].owners, { L1: null, L2: null });
+    assert.equal(f.deadlocked, graphHasCycle(f.edges));
+    for (const [p, lock] of Object.entries(f.waiting)) if (lock !== null) assert.ok(f.owners[lock] !== null && f.owners[lock] !== p);
+    const runnable = ["A", "B"].filter(p => counters[p] < 4 && f.waiting[p] === null);
+    if (!runnable.length) {
+      lockPaths++;
+      if (counters.A === 4 && counters.B === 4) { complete++; assert.deepEqual(f.owners, { L1: null, L2: null }); assert.equal(f.deadlocked, false); }
+      else { cyclic++; deadlockPaths++; assert.equal(f.deadlocked, true); }
+      return;
+    }
+    for (const p of runnable) interleave([...events, programs[p][counters[p]]], { ...counters, [p]: counters[p] + 1 });
+  }
+  interleave([], { A: 0, B: 0 });
+  assert.ok(complete > 0);
+  if (opposite) assert.ok(cyclic > 0); else assert.equal(cyclic, 0);
+}
+assert.throws(() => M.resourceTrace([{ process: "A", lock: "L1", op: "release" }]), RangeError);
+assert.throws(() => M.resourceTrace([{ process: "A", lock: "L1", op: "acquire" }, { process: "A", lock: "L1", op: "acquire" }]), RangeError);
+
+// 独立展开“文件中每个字节到设备字节”的固定映射，不复用被测查询的索引分支。
+const fileByteMap = [12, 7, 25, 9, 31, 18, 44, 21, 52, 16].flatMap(block => Array.from({ length: 1024 }, (_, i) => block * 1024 + i)).slice(0, 9500);
+fileByteMap.forEach((deviceOffset, offset) => {
+  const r = M.fileLookup(offset);
+  assert.equal(r.deviceOffset, deviceOffset);
+  assert.equal(r.diskBlock, Math.floor(deviceOffset / 1024));
+  assert.equal(r.within, offset & 1023);
+  assert.equal(r.indirect, offset >= 4096);
+  assert.equal(r.entry, Math.floor(offset / 1024) - (offset < 4096 ? 0 : 4));
+});
+assert.equal(M.fileLookup(9500).status, "eof"); assert.equal(M.fileLookup(9500).deviceOffset, null);
+for (const invalid of [-1, 9501, .5, NaN]) assert.throws(() => M.fileLookup(invalid), RangeError);
+
+// 参考 SCAN / LOOK 每次只移动一个磁道；与事件跳转实现比较总距离和服务次序。
+function walkDisk(requests, head, policy, direction, maxTrack) {
+  let position = head, total = 0;
+  const pending = requests.map((track, id) => ({ track, id })), served = [];
+  const take = index => { const [r] = pending.splice(index, 1); total += Math.abs(r.track - position); position = r.track; served.push(r.id); };
+  if (policy === "FCFS") while (pending.length) take(0);
+  else if (policy === "SSTF") while (pending.length) {
+    let best = 0;
+    pending.forEach((r, i) => { const a = Math.abs(r.track - position), b = Math.abs(pending[best].track - position); if (a < b || (a === b && r.track < pending[best].track)) best = i; });
+    take(best);
+  } else while (pending.length) {
+    for (let i = 0; i < pending.length;) { if (pending[i].track === position) take(i); else i++; }
+    if (!pending.length) break;
+    if (policy === "LOOK" && !pending.some(r => (r.track - position) * direction > 0)) direction *= -1;
+    if (policy === "SCAN" && (position === 0 && direction < 0 || position === maxTrack && direction > 0)) direction *= -1;
+    position += direction; total++;
+    assert.ok(position >= 0 && position <= maxTrack);
+  }
+  return { position, total, served };
+}
+let diskCases = 0;
+for (let n = 0; n <= 5; n++) allArrays(n, values => {
+  const requests = values.map(v => v + 2), original = [...requests];
+  for (let head = 0; head <= 4; head++) for (const direction of [-1, 1]) for (const policy of ["FCFS", "SSTF", "SCAN", "LOOK"]) {
+    const frames = M.diskFrames(requests, head, policy, direction, 4), f = frames.at(-1), oracle = walkDisk(requests, head, policy, direction, 4);
+    assert.deepEqual({ position: f.position, total: f.total, served: f.served }, oracle);
+    assert.equal(f.total, f.path.slice(1).reduce((sum, p, i) => sum + Math.abs(p.track - f.path[i].track), 0));
+    assert.deepEqual([...f.served].sort((a, b) => a - b), requests.map((_, i) => i));
+    frames.forEach((state, i) => { if (state.kind === "turn") { assert.equal(state.requestId, null); assert.ok([0, 4].includes(state.position)); assert.equal(state.served.length, frames[i - 1].served.length); } });
+    assert.deepEqual(requests, original); diskCases++;
+  }
+});
+const diskExample = [98, 183, 37, 122, 14, 124, 65, 67];
+assert.deepEqual(["FCFS", "SSTF", "SCAN", "LOOK"].map(p => M.diskFrames(diskExample, 53, p).at(-1).total), [640, 236, 331, 299]);
+assert.deepEqual(["SCAN", "LOOK"].map(p => M.diskFrames(diskExample, 53, p, -1).at(-1).total), [236, 208]);
+
+console.log(`PASS: ${lockPaths} legal lock schedules (${deadlockPaths} deadlocked); 9500 file bytes; ${diskCases} disk schedules vs track-by-track walk.`);
 console.log(`PASS: 8192 addresses; ${replacementCases} replacement cases; ${schedulingCases} schedules vs unit-time simulation.`);
 console.log("PASS: existing arithmetic, cache, pipeline, metrics and reference checks.");
 console.log(`PASS: ${partitionCases} partition arrays; ${rangeCases} range sums; queens 1..5 vs exhaustive search; 400 heap operations.`);

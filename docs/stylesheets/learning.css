@@ -248,6 +248,36 @@
 .md-typeset [data-concept-viz="scheduling"] .concept-table-scroll .os-table { min-width: 28rem; margin: 0; }
 .md-typeset .os-gantt-scroll:focus-visible { outline: 3px solid var(--md-typeset-a-color); outline-offset: 3px; }
 
+/* 资源、文件索引与机械磁盘：固定位置不随逻辑次序重排。 */
+.md-typeset .lock-owners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin-bottom: .8rem; }
+.md-typeset .lock-owner { padding: .6rem; border: 1px solid var(--sv-line); border-radius: 6px; background: var(--md-default-bg-color); }
+.md-typeset .lock-owner > span { display: block; font-family: var(--md-code-font); font-size: .65rem; }
+.md-typeset .lock-owner > strong { font-size: .85rem; }
+.md-typeset [data-concept-viz="locks"] .concept-panel p { margin: .45rem 0; font-size: .7rem; }
+.md-typeset .lock-blocked { border-style: dashed; border-color: var(--sv-current); }
+.md-typeset .lock-waits { margin-top: .85rem; font-size: .68rem; }
+.md-typeset .lock-waits > strong { font-size: .68rem; }
+.md-typeset .lock-edge { margin: .45rem 0; padding: .4rem .55rem; border-left: 3px solid var(--sv-current); background: var(--md-default-bg-color); font-family: var(--md-code-font); }
+.md-typeset .lock-verdict { padding: .65rem; border: 1px solid var(--sv-complete); border-radius: 6px; background: var(--sv-complete-bg); color: var(--sv-complete); font-size: .7rem; }
+.md-typeset .lock-verdict.is-deadlocked { border: 2px dashed var(--sv-current); background: var(--sv-current-bg); color: var(--sv-current); }
+.md-typeset .file-index-pointer { padding: .55rem; border: 1px solid var(--sv-line); border-radius: 6px; font-family: var(--md-code-font); font-size: .66rem; }
+.md-typeset .file-index-pointer.is-selected { border-color: var(--sv-complete); background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset [data-concept-viz="fileindex"] .concept-field:first-child { flex-grow: 1; }
+.md-typeset [data-concept-viz="disk"] .concept-range { flex-basis: 100%; max-width: none; }
+.md-typeset .disk-rail { position: relative; height: 1.6rem; margin: .8rem .7rem 0; background: linear-gradient(var(--sv-edge), var(--sv-edge)) left center / 100% 1px no-repeat; }
+.md-typeset .disk-travel { position: absolute; top: calc(50% - 3px); height: 6px; background: var(--sv-pending); opacity: .65; }
+.md-typeset .disk-origin { position: absolute; top: calc(50% - 5px); width: 10px; height: 10px; border: 2px solid var(--sv-pending); border-radius: 50%; background: var(--md-default-bg-color); transform: translateX(-50%); }
+.md-typeset .disk-head { position: absolute; top: .1rem; bottom: .1rem; width: 4px; border: 1px solid var(--sv-current); background: var(--sv-current); transform: translateX(-50%); }
+.md-typeset .disk-ticks { position: relative; height: 1.3rem; margin: 0 .7rem .5rem; font-family: var(--md-code-font); font-size: .58rem; }
+.md-typeset .disk-ticks > span { position: absolute; transform: translateX(-50%); }
+.md-typeset .disk-requests { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; margin: .8rem 0; }
+.md-typeset .disk-request { min-width: 0; padding: .4rem .1rem; border: 1px solid var(--sv-line); border-radius: 5px; background: var(--md-default-bg-color); text-align: center; }
+.md-typeset .disk-request small { display: block; font-size: .52rem; }
+.md-typeset .disk-request strong { font-family: var(--md-code-font); font-size: 1rem; }
+.md-typeset .disk-request.is-served { background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset .disk-request.is-current { outline: 2px solid var(--sv-current); outline-offset: -2px; }
+.md-typeset .disk-path { padding: .5rem; border-left: 3px solid var(--sv-pending); background: var(--md-default-bg-color); font-family: var(--md-code-font); font-size: .65rem; overflow-wrap: anywhere; }
+
 /* 实验目录的筛选只在显式标记的目录中生效；无脚本时保留完整目录。 */
 .md-typeset .lab-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .6rem; margin: 1.5rem 0; padding: .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 10px; background: var(--md-accent-fg-color--transparent); }
 .md-typeset .lab-filters { display: flex; flex-wrap: wrap; gap: .4rem; grid-column: 1 / -1; }
@@ -310,9 +340,12 @@
   .md-typeset .concept-field { flex: 1; min-width: 0; }
   .md-typeset [data-concept-viz="prefix"] .concept-field:first-child { flex-basis: 100%; }
   .md-typeset [data-concept-viz="scheduling"] .concept-field:first-child,
+  .md-typeset [data-concept-viz="disk"] .concept-field:first-child,
+  .md-typeset [data-concept-viz="fileindex"] .concept-field,
   .md-typeset [data-concept-viz="paging"] .concept-field,
   .md-typeset [data-concept-viz="replacement"] .concept-field { flex-basis: 100%; }
   .md-typeset [data-concept-viz="scheduling"] .concept-settings > button { flex-basis: 100%; }
+  .md-typeset [data-concept-viz="disk"] .concept-settings > button { flex-basis: 100%; }
   .md-typeset .concept-lab input[type="number"] { width: 100%; }
   .md-typeset .bit-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .2rem; }
   .md-typeset .bit-strip { gap: .1rem; }

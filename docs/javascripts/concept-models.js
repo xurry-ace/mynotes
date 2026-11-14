@@ -278,7 +278,84 @@
     return frames;
   }
 
+  function resourceTrace(events) {
+    const owners = { L1: null, L2: null }, waiting = { A: null, B: null }, queue = [], frames = [];
+    const record = message => {
+      const edges = Object.entries(waiting).filter(([, lock]) => lock !== null).map(([from, lock]) => ({ from, to: owners[lock], lock }));
+      const deadlocked = edges.some(a => edges.some(b => a.from === b.to && a.to === b.from));
+      frames.push({ owners: { ...owners }, waiting: { ...waiting }, edges, deadlocked, message });
+    };
+    record("初始两把锁都空闲。每步执行一次申请或释放；被阻塞的进程不能继续执行自己的指令。");
+    events.forEach(({ process, op, lock }) => {
+      if (!["A", "B"].includes(process) || !["L1", "L2"].includes(lock) || !["acquire", "release"].includes(op)) throw new RangeError("进程、锁或操作不合法");
+      if (waiting[process]) throw new RangeError("阻塞进程不能继续执行");
+      if (op === "acquire") {
+        if (owners[lock] === process) throw new RangeError("本模型不支持重复申请同一把锁");
+        if (owners[lock] === null) { owners[lock] = process; record(`${process} 获得 ${lock}。`); }
+        else {
+          waiting[process] = lock; queue.push(process);
+          record(`${process} 申请 ${lock}，但它被 ${owners[lock]} 持有；${process} 阻塞并保留已持有的锁。`);
+        }
+      } else {
+        if (owners[lock] !== process) throw new RangeError("只能释放自己持有的锁");
+        owners[lock] = null;
+        const index = queue.findIndex(p => waiting[p] === lock);
+        let message = `${process} 释放 ${lock}。`;
+        if (index >= 0) {
+          const [next] = queue.splice(index, 1); waiting[next] = null; owners[lock] = next;
+          message += `唤醒 ${next}，将锁交给它，原先挂起的申请完成。`;
+        }
+        record(message);
+      }
+    });
+    return frames;
+  }
+
+  const fileLayout = Object.freeze({ size: 9500, blockSize: 1024, pointerBytes: 4, directCount: 4, indexBlock: 40,
+    blocks: Object.freeze([12, 7, 25, 9, 31, 18, 44, 21, 52, 16]) });
+  function fileLookup(offset) {
+    const { size, blockSize, directCount, blocks } = fileLayout;
+    if (!Number.isInteger(offset) || offset < 0 || offset > size) throw new RangeError(`本演示接受 0～${size} 的整数文件偏移（单位：B）`);
+    if (offset === size) return { status: "eof", offset, logical: null, within: null, diskBlock: null, deviceOffset: null };
+    const logical = Math.floor(offset / blockSize), within = offset % blockSize, indirect = logical >= directCount, diskBlock = blocks[logical];
+    return { status: "data", offset, logical, within, indirect, entry: indirect ? logical - directCount : logical,
+      diskBlock, deviceOffset: diskBlock * blockSize + within };
+  }
+
+  function diskFrames(requests, head, policy, direction = 1, maxTrack = 199) {
+    if (!Number.isInteger(maxTrack) || maxTrack < 1 || !Number.isInteger(head) || head < 0 || head > maxTrack || requests.length > 20 || !requests.every(t => Number.isInteger(t) && t >= 0 && t <= maxTrack) || !["FCFS", "SSTF", "SCAN", "LOOK"].includes(policy) || ![1, -1].includes(direction)) throw new RangeError("磁道号、请求、方向或调度算法不合法");
+    let position = head, total = 0;
+    const served = [], path = [{ track: head, kind: "start" }], frames = [];
+    const record = (kind, previous, requestId, message) => frames.push({ position, previous, total, kind, requestId, served: [...served], path: path.map(p => ({ ...p })), message });
+    record("start", head, null, `初始磁头位于 ${head}；所有请求已到达。只计算移动磁道数，全部服务后停止。`);
+    const move = (track, requestId = null) => {
+      const previous = position, distance = Math.abs(track - position), kind = requestId === null ? "turn" : "service";
+      position = track; total += distance; path.push({ track, kind, requestId });
+      if (kind === "service") served.push(requestId);
+      record(kind, previous, requestId, `${previous} → ${track}，移动 ${distance} 个磁道；${kind === "turn" ? "到达磁盘端点后折返，本步不算服务请求。" : `服务第 ${requestId + 1} 个请求。`}`);
+    };
+    const pending = requests.map((track, id) => ({ track, id }));
+    if (policy === "FCFS") pending.forEach(r => move(r.track, r.id));
+    else if (policy === "SSTF") {
+      while (pending.length) {
+        pending.sort((a, b) => Math.abs(a.track - position) - Math.abs(b.track - position) || a.track - b.track || a.id - b.id);
+        const r = pending.shift(); move(r.track, r.id);
+      }
+    } else {
+      const current = pending.filter(r => r.track === head);
+      const ahead = pending.filter(r => (r.track - head) * direction > 0).sort((a, b) => (a.track - b.track) * direction || a.id - b.id);
+      const behind = pending.filter(r => (r.track - head) * direction < 0).sort((a, b) => (b.track - a.track) * direction || a.id - b.id);
+      [...current, ...ahead].forEach(r => move(r.track, r.id));
+      if (behind.length) {
+        const boundary = direction > 0 ? maxTrack : 0;
+        if (policy === "SCAN" && position !== boundary) move(boundary);
+        behind.forEach(r => move(r.track, r.id));
+      }
+    }
+    return frames;
+  }
+
   return { signedAdd, cacheFrames, pipeline, classification, references, vector, samples, stages,
     partitionFrames, prefixQuery, queensFrames, heapFrames, pagingTable, teachingTLB, pagingLookup,
-    replacementFrames, scheduleFrames };
+    replacementFrames, scheduleFrames, resourceTrace, fileLayout, fileLookup, diskFrames };
 });

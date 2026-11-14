@@ -504,6 +504,87 @@
     [profile, policy, quantum].forEach(control => control.addEventListener("change", reset));
   }
 
+  function locks(root) {
+    const ui = shell(root, "两把锁 · 谁持有，谁在等待？");
+    const a = (process, lock) => ({ process, lock, op: "acquire" }), r = (process, lock) => ({ process, lock, op: "release" });
+    const traces = [
+      [a("A", "L1"), a("B", "L2"), a("A", "L2"), a("B", "L1")],
+      [a("A", "L1"), a("B", "L1"), a("A", "L2"), r("A", "L2"), r("A", "L1"), a("B", "L2"), r("B", "L2"), r("B", "L1")],
+      [a("A", "L1"), a("A", "L2"), r("A", "L2"), r("A", "L1"), a("B", "L2"), a("B", "L1"), r("B", "L1"), r("B", "L2")]
+    ];
+    const choice = select(ui, "操作轨迹", [["0", "相反顺序，交错申请"], ["1", "统一顺序，等待后唤醒"], ["2", "相反顺序，串行运行"]], "0");
+    let frames = M.resourceTrace(traces[0]);
+    const render = index => {
+      const f = frames[index], owners = e("div", "lock-owners"), processes = e("div", "concept-compare");
+      Object.entries(f.owners).forEach(([lock, owner]) => { const tile = e("div", "lock-owner"); tile.append(e("span", "", lock), e("strong", "", owner ? `${owner} 持有` : "空闲")); owners.append(tile); });
+      ["A", "B"].forEach(p => {
+        const panel = e("section", `concept-panel${f.waiting[p] ? " lock-blocked" : ""}`), held = Object.keys(f.owners).filter(l => f.owners[l] === p);
+        panel.append(e("h4", "", `进程 ${p}`), e("p", "", `持有：${held.join("、") || "无"}`), e("p", "", f.waiting[p] ? `阻塞：等待 ${f.waiting[p]}` : "当前未阻塞")); processes.append(panel);
+      });
+      const waits = e("div", "lock-waits"); waits.append(e("strong", "", "等待图：箭头指向锁的持有者"));
+      f.edges.forEach(edge => waits.append(e("p", "lock-edge", `${edge.from} → ${edge.to}：等待 ${edge.lock}`)));
+      if (!f.edges.length) waits.append(e("p", "concept-caption", "当前没有等待边。"));
+      const verdict = e("p", `lock-verdict${f.deadlocked ? " is-deadlocked" : ""}`, f.deadlocked ? "A → B → A：形成等待环，本模型中已死锁。" : "当前没有等待环。一次阻塞不等于已经死锁。");
+      ui.stage.replaceChildren(owners, processes, waits, verdict);
+      ui.status.textContent = f.message + (f.deadlocked ? " 两个进程都不能继续执行释放指令；本轨迹停在这里。重置按钮只是重放演示。" : "");
+    };
+    const rebuild = steps(ui, frames.length, render);
+    choice.addEventListener("change", () => { frames = M.resourceTrace(traces[Number(choice.value)]); rebuild(frames.length); });
+  }
+
+  function fileindex(root) {
+    const ui = shell(root, "文件索引 · 从正文偏移找到数据块");
+    const preset = select(ui, "选择边界", [["4333", "一级间接索引示例"], ["4095", "最后一个直接索引字节"], ["4096", "第一个间接索引字节"], ["9499", "文件最后一个字节"], ["9500", "文件尾 EOF"], ["custom", "自行输入偏移"]], "4333");
+    const field = e("label", "concept-field"); field.append(e("span", "", "文件偏移（十进制 B）"));
+    const input = e("input"); input.type = "number"; input.min = "0"; input.max = "9500"; input.step = "1"; input.value = "4333"; field.append(input); ui.settings.append(field);
+    const render = () => {
+      let f;
+      try { f = M.fileLookup(input.value === "" ? NaN : Number(input.value)); }
+      catch (error) { ui.stage.replaceChildren(e("p", "concept-error", error.message)); ui.status.textContent = "这是本教学输入的范围限制；不表示真实文件系统禁止把读写位置移到文件尾之后。"; return; }
+      const { blocks, directCount, indexBlock } = M.fileLayout, layout = e("div", "concept-compare"), inode = e("section", "concept-panel"), path = e("section", "concept-panel");
+      inode.append(e("h4", "", "简化 inode：4 个直接指针"), e("p", "concept-caption", "格内大号数字是数据块号，不是文件逻辑块号。"), arrayRow(blocks.slice(0, directCount), i => ({ label: `D[${i}]`, className: f.logical === i ? "is-selected" : "" })));
+      inode.append(e("p", `file-index-pointer${f.indirect ? " is-selected" : ""}`, `一级间接指针 → 索引块 ${indexBlock}`), e("p", "concept-caption", "索引块存放块号；I[j] 对应逻辑块 j+4。这里只画出已用的 6 项。"));
+      for (let start = directCount; start < blocks.length; start += 3) inode.append(arrayRow(blocks.slice(start, start + 3), i => ({ label: `I[${start + i - directCount}]`, className: f.logical === start + i ? "is-selected" : "" })));
+      path.append(e("h4", "", "本次读取路径")); const route = e("ol", "address-route");
+      const labels = f.status === "eof" ? ["偏移 9500 等于文件长度，当前位置是 EOF", "没有可读的正文数据，停止本次读取，不再查询数据块"] : [`${f.offset} = ${f.logical} × 1024 + ${f.within}`, ...(f.indirect ? [`逻辑块 ${f.logical} ≥ 4，先到索引块 ${indexBlock}`, `间接项 ${f.logical} − 4 = ${f.entry}，I[${f.entry}] = ${f.diskBlock}`] : [`逻辑块 ${f.logical} < 4，D[${f.entry}] = ${f.diskBlock}`]), `教学磁盘字节位置 = ${f.diskBlock} × 1024 + ${f.within} = ${f.deviceOffset} B`];
+      labels.forEach((text, i) => route.append(e("li", i === labels.length - 1 ? "is-result" : "", text))); path.append(route); layout.append(inode, path);
+      ui.stage.replaceChildren(e("p", "concept-caption", "固定快照：文件长度 9500 B；块大小 1024 B；所有正文块已分配，不模拟空洞文件。"), layout, stats([["文件逻辑块（从 0 开始）", f.logical === null ? "EOF" : String(f.logical)], ["正文所在数据块", f.diskBlock === null ? "无" : String(f.diskBlock)]]));
+      ui.status.textContent = f.status === "eof" ? "文件尾是正文之后的位置，不是最后一个可读字节；本例最后一个字节的偏移为 9499。" : `块内偏移仍为 ${f.within} B。索引块 40 是元数据块，不是正文数据块；本图展示查找关系，不把路径层数直接当作真实磁盘 I/O 次数。`;
+    };
+    input.addEventListener("input", () => { preset.value = "custom"; render(); });
+    preset.addEventListener("change", () => { if (preset.value !== "custom") input.value = preset.value; render(); }); render();
+  }
+
+  function disk(root) {
+    const ui = shell(root, "磁盘调度 · 请求顺序与移动距离分开看");
+    const examples = [[98, 183, 37, 122, 14, 124, 65, 67], [53, 43, 63, 43], [10, 20, 30]];
+    const example = select(ui, "请求序列", [["0", "经典 8 请求序列"], ["1", "起点请求、等距与重复"], ["2", "请求都在较小磁道"]], "0");
+    const policy = select(ui, "算法", ["FCFS", "SSTF", "SCAN", "LOOK"].map(x => [x, x]), "SCAN");
+    const direction = select(ui, "初始方向", [["1", "向较大磁道"], ["-1", "向较小磁道"]], "1");
+    const field = e("label", "concept-range"), label = e("span", "", "初始磁头：53（磁道范围 0～199）"), input = e("input");
+    input.type = "range"; input.min = "0"; input.max = "199"; input.step = "1"; input.value = "53"; input.setAttribute("aria-label", "初始磁头位置"); field.append(label, input); ui.settings.append(field);
+    const finish = e("button", "", "查看完整路径"); finish.type = "button"; ui.settings.append(finish);
+    let requests = examples[0], frames = M.diskFrames(requests, 53, "SCAN");
+    const render = index => {
+      const f = frames[index], rail = e("div", "disk-rail"), travel = e("span", "disk-travel"), origin = e("span", "disk-origin"), head = e("span", "disk-head"), ticks = e("div", "disk-ticks");
+      travel.style.left = `${Math.min(f.previous, f.position) / 199 * 100}%`; travel.style.width = `${Math.abs(f.previous - f.position) / 199 * 100}%`;
+      origin.style.left = `${f.previous / 199 * 100}%`; head.style.left = `${f.position / 199 * 100}%`; rail.append(travel, origin, head); rail.setAttribute("aria-hidden", "true");
+      [0, 50, 100, 150, 199].forEach(n => { const tick = e("span", "", String(n)); tick.style.left = `${n / 199 * 100}%`; ticks.append(tick); });
+      const tokens = e("div", "disk-requests"); requests.forEach((track, id) => {
+        const served = f.served.includes(id), token = e("div", `disk-request${served ? " is-served" : ""}${f.requestId === id ? " is-current" : ""}`);
+        token.append(e("small", "", `请求 ${id + 1}`), e("strong", "", String(track)), e("small", "", served ? "已服务" : "待服务")); tokens.append(token);
+      });
+      const path = f.path.map(p => `${p.track}${p.kind === "turn" ? "（端点）" : ""}`).join(" → ");
+      ui.stage.replaceChildren(e("p", "concept-caption", "位置尺：圆点为上一步位置，竖线为当前位置，着色段为本步移动。"), rail, ticks, stats([["当前磁头", String(f.position)], ["累计移动磁道数", String(f.total)]]), tokens, e("p", "disk-path", `已走路径：${path}`), e("p", "concept-caption", `已服务 ${f.served.length} / ${requests.length} 个请求。到端点折返不额外算一个请求。`));
+      if (index === frames.length - 1) ui.stage.append(osTable(["同一输入与初始方向", "总移动磁道数"], ["FCFS", "SSTF", "SCAN", "LOOK"].map(p => [p, M.diskFrames(requests, Number(input.value), p, Number(direction.value)).at(-1).total])));
+      ui.status.textContent = f.message; finish.disabled = index === frames.length - 1;
+    };
+    const navigator = steps(ui, frames.length, render);
+    const reset = () => { requests = examples[Number(example.value)]; label.textContent = `初始磁头：${input.value}（磁道范围 0～199）`; direction.disabled = ["FCFS", "SSTF"].includes(policy.value); frames = M.diskFrames(requests, Number(input.value), policy.value, Number(direction.value)); navigator(frames.length); };
+    [example, policy, direction].forEach(x => x.addEventListener("change", reset)); input.addEventListener("input", reset);
+    finish.addEventListener("click", () => navigator.jumpTo(frames.length - 1));
+  }
+
   function directory(root) {
     if (root.dataset.labReady) return;
     const sections = [...root.querySelectorAll(".lab-section")];
@@ -539,7 +620,7 @@
     input.addEventListener("input", render); render(); root.dataset.labReady = "true";
   }
 
-  const renderers = { cache, pipeline, references, vector, signed, metrics, partition, prefix, queens, heap, paging, replacement, scheduling };
+  const renderers = { cache, pipeline, references, vector, signed, metrics, partition, prefix, queens, heap, paging, replacement, scheduling, locks, fileindex, disk };
   const mount = () => {
     document.querySelectorAll("[data-concept-viz]").forEach(root => {
       if (root.dataset.ready || !renderers[root.dataset.conceptViz]) return;
