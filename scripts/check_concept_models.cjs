@@ -131,5 +131,89 @@ for (let t = 0; t < 200; t++) {
     assert.deepEqual(frames[0].values, input);
   }
 }
+// 地址空间逐字节遍历；用位运算和独立映射核对商余数转换。
+const expectedFrames = [5, 2, null, null, 1, 6, 0, 3];
+for (let address = 0; address < 8192; address++) {
+  const r = M.pagingLookup(address), page = address >> 10, offset = address & 1023;
+  assert.equal(r.page, page); assert.equal(r.offset, offset);
+  assert.equal(r.status, page === 2 ? "fault" : page === 3 ? "invalid" : [0, 4].includes(page) ? "tlb-hit" : "table-hit");
+  assert.equal(r.physical, expectedFrames[page] === null ? null : (expectedFrames[page] << 10) | offset);
+  if (r.physical !== null) assert.equal(r.physical & 1023, offset);
+  assert.equal(parseInt(r.bits, 2), address);
+}
+for (const invalid of [-1, 8192, .5, NaN, Infinity]) assert.throws(() => M.pagingLookup(invalid), RangeError);
+
+// 参考实现不维护页框位置：FIFO 记装入时间；LRU 回查原始序列的最后使用位置。
+function referenceFaults(trace, capacity, policy) {
+  const resident = new Set(), loaded = new Map(); let faults = 0;
+  trace.forEach((page, index) => {
+    if (resident.has(page)) return;
+    faults++;
+    if (resident.size === capacity) {
+      const rank = p => policy === "FIFO" ? loaded.get(p) : trace.slice(0, index).lastIndexOf(p);
+      const victim = [...resident].sort((a, b) => rank(a) - rank(b))[0];
+      resident.delete(victim);
+    }
+    resident.add(page); loaded.set(page, index);
+  });
+  return faults;
+}
+let replacementCases = 0;
+for (let n = 1; n <= 7; n++) allArrays(n, values => {
+  const trace = values.map(v => v + 1); let lastLRU = Infinity;
+  for (let capacity = 1; capacity <= 4; capacity++) for (const policy of ["FIFO", "LRU"]) {
+    const frames = M.replacementFrames(trace, capacity, policy), final = frames.at(-1);
+    assert.equal(final.faults, referenceFaults(trace, capacity, policy));
+    assert.equal(final.replacements, Math.max(0, final.faults - capacity));
+    for (const [i, f] of frames.entries()) {
+      const occupied = f.slots.filter(p => p !== null);
+      assert.equal(new Set(occupied).size, occupied.length);
+      assert.deepEqual([...f.order].sort(), [...occupied].sort());
+      if (i) assert.ok(occupied.includes(trace[i - 1]));
+    }
+    if (policy === "LRU") { assert.ok(final.faults <= lastLRU); lastLRU = final.faults; }
+    replacementCases++;
+  }
+});
+const anomaly = [1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5];
+assert.deepEqual([3, 4].map(c => M.replacementFrames(anomaly, c, "FIFO").at(-1).faults), [9, 10]);
+assert.deepEqual([3, 4].map(c => M.replacementFrames(anomaly, c, "LRU").at(-1).faults), [10, 8]);
+
+// 独立按单位时间模拟 CPU；被测模型按事件跳时，分别比较每个时间单位与最终指标。
+function tickSchedule(input, policy, quantum) {
+  const jobs = input.map(j => ({ ...j, remaining: j.burst, first: null, finish: null }));
+  const ready = [], ticks = []; let current = null, slice = 0, done = 0;
+  for (let t = 0; ; t++) {
+    jobs.forEach(j => { if (j.arrival === t) ready.push(j); });
+    if (current && current.remaining === 0) { current.finish = t; current = null; done++; }
+    else if (current && policy === "RR" && slice === quantum) { ready.push(current); current = null; }
+    if (done === jobs.length) break;
+    if (!current && ready.length) { current = ready.shift(); slice = 0; if (current.first === null) current.first = t; }
+    ticks.push(current ? current.id : null);
+    if (current) { current.remaining--; slice++; }
+    assert.ok(t < 100, "reference simulation should finish");
+  }
+  return { ticks, jobs: jobs.map(j => ({ ...j, response: j.first - j.arrival, turnaround: j.finish - j.arrival, waiting: j.finish - j.arrival - j.burst })) };
+}
+let schedulingCases = 0;
+for (let encoded = 0; encoded < 1728; encoded++) {
+  let code = encoded;
+  const input = ["A", "B", "C"].map(id => { const arrival = code % 4; code = Math.floor(code / 4); const burst = code % 3 + 1; code = Math.floor(code / 3); return { id, arrival, burst }; });
+  for (const [policy, quantum] of [["FCFS", 2], ["RR", 1], ["RR", 2], ["RR", 3]]) {
+    const frames = M.scheduleFrames(input, policy, quantum), final = frames.at(-1), oracle = tickSchedule(input, policy, quantum);
+    assert.deepEqual(final.jobs, oracle.jobs);
+    assert.deepEqual(final.segments.flatMap(s => Array(s.end - s.start).fill(s.id)), oracle.ticks);
+    assert.ok(final.jobs.every(j => j.first >= j.arrival && j.waiting >= 0));
+    assert.equal(final.completed, input.length);
+    assert.ok(frames.every(f => new Set(f.ready).size === f.ready.length));
+    assert.deepEqual(frames[0].segments, []);
+    schedulingCases++;
+  }
+}
+const boundary = M.scheduleFrames([{ id: "A", arrival: 0, burst: 5 }, { id: "B", arrival: 1, burst: 3 }, { id: "C", arrival: 4, burst: 1 }], "RR", 2);
+assert.deepEqual(boundary.find(f => f.clock === 4).ready, ["A", "C", "B"]);
+assert.throws(() => M.scheduleFrames([{ id: "A", arrival: 0, burst: 0 }], "RR"), RangeError);
+
+console.log(`PASS: 8192 addresses; ${replacementCases} replacement cases; ${schedulingCases} schedules vs unit-time simulation.`);
 console.log("PASS: existing arithmetic, cache, pipeline, metrics and reference checks.");
 console.log(`PASS: ${partitionCases} partition arrays; ${rangeCases} range sums; queens 1..5 vs exhaustive search; 400 heap operations.`);

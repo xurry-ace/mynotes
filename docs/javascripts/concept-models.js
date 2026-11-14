@@ -205,6 +205,80 @@
     return frames;
   }
 
+  // 页表与 TLB 是固定的教学快照；一次查询不会改变下一次查询的初始状态。
+  const pagingTable = Object.freeze([
+    { frame: 5 }, { frame: 2 }, { absent: true }, { unmapped: true },
+    { frame: 1 }, { frame: 6 }, { frame: 0 }, { frame: 3 }
+  ].map(Object.freeze));
+  const teachingTLB = Object.freeze([0, 4]);
+  function pagingLookup(address) {
+    if (!Number.isInteger(address) || address < 0 || address >= 8192) throw new RangeError("请输入 0～8191 的整数地址（单位：B）");
+    const pageSize = 1024, page = Math.floor(address / pageSize), offset = address % pageSize;
+    const entry = pagingTable[page], tlbHit = teachingTLB.includes(page);
+    const status = entry.unmapped ? "invalid" : entry.absent ? "fault" : tlbHit ? "tlb-hit" : "table-hit";
+    return { address, pageSize, page, offset, tlbHit, status, frame: entry.frame ?? null,
+      physical: entry.frame === undefined ? null : entry.frame * pageSize + offset,
+      bits: address.toString(2).padStart(13, "0") };
+  }
+
+  function replacementFrames(trace, capacity, policy) {
+    if (!trace.every(p => Number.isInteger(p) && p >= 0) || !Number.isInteger(capacity) || capacity < 1 || capacity > 8 || !["FIFO", "LRU"].includes(policy)) throw new RangeError("页面序列、页框数或置换策略不合法");
+    const slots = Array(capacity).fill(null), order = [], frames = [];
+    let faults = 0, replacements = 0;
+    const record = (page, hit, slot, evicted) => frames.push({ slots: [...slots], order: [...order], faults, replacements, page, hit, slot, evicted });
+    record(null, null, -1, null);
+    trace.forEach(page => {
+      let slot = slots.indexOf(page), evicted = null;
+      const hit = slot >= 0;
+      if (!hit) {
+        faults++;
+        slot = slots.indexOf(null);
+        if (slot < 0) {
+          evicted = order.shift(); slot = slots.indexOf(evicted); replacements++;
+        }
+        slots[slot] = page; order.push(page);
+      } else if (policy === "LRU") {
+        order.splice(order.indexOf(page), 1); order.push(page);
+      }
+      record(page, hit, slot, evicted);
+    });
+    return frames;
+  }
+
+  function scheduleFrames(input, policy, quantum = 2) {
+    if (!input.length || input.length > 8 || new Set(input.map(j => j.id)).size !== input.length || input.some(j => typeof j.id !== "string" || !j.id || !Number.isInteger(j.arrival) || j.arrival < 0 || !Number.isInteger(j.burst) || j.burst < 1 || j.burst > 20) || !["FCFS", "RR"].includes(policy) || !Number.isInteger(quantum) || quantum < 1) throw new RangeError("进程参数、调度算法或时间片不合法");
+    const jobs = input.map((j, index) => ({ ...j, index, remaining: j.burst, first: null, finish: null }));
+    const arrivals = [...jobs].sort((a, b) => a.arrival - b.arrival || a.index - b.index);
+    const ready = [], segments = [], frames = [];
+    let clock = 0, cursor = 0, completed = 0;
+    const admit = () => { while (cursor < arrivals.length && arrivals[cursor].arrival <= clock) ready.push(arrivals[cursor++]); };
+    const record = message => frames.push({ clock, ready: ready.map(j => j.id), segments: segments.map(s => ({ ...s })), completed,
+      jobs: jobs.map(j => ({ id: j.id, arrival: j.arrival, burst: j.burst, remaining: j.remaining, first: j.first, finish: j.finish,
+        response: j.first === null ? null : j.first - j.arrival,
+        turnaround: j.finish === null ? null : j.finish - j.arrival,
+        waiting: j.finish === null ? null : j.finish - j.arrival - j.burst })), message });
+    admit(); record("从 t=0 开始。每次前进一步，展示一个执行区间结束后的就绪队列与累计指标。");
+    while (completed < jobs.length) {
+      if (!ready.length) {
+        const start = clock; clock = arrivals[cursor].arrival;
+        segments.push({ id: null, start, end: clock }); admit();
+        record(`t=${start}～${clock}：没有就绪进程，CPU 空闲；到达的新进程进入队列。`);
+        continue;
+      }
+      const job = ready.shift(), start = clock;
+      if (job.first === null) job.first = clock;
+      clock += policy === "FCFS" ? job.remaining : Math.min(quantum, job.remaining);
+      job.remaining -= clock - start; segments.push({ id: job.id, start, end: clock });
+      // 到达事件（包括时间片结束这一刻）先入队，未完成的当前进程随后回到队尾。
+      admit();
+      if (!job.remaining) { job.finish = clock; completed++; }
+      else ready.push(job);
+      record(`t=${start}～${clock}：${job.id} 运行 ${clock - start} 个时间单位，${job.remaining ? `还剩 ${job.remaining}，回到队尾。` : "已完成。"}${policy === "RR" ? "到达的新进程先入队，再将未完成的当前进程放到队尾。" : "FCFS 不因新进程到达而抢占。"}`);
+    }
+    return frames;
+  }
+
   return { signedAdd, cacheFrames, pipeline, classification, references, vector, samples, stages,
-    partitionFrames, prefixQuery, queensFrames, heapFrames };
+    partitionFrames, prefixQuery, queensFrames, heapFrames, pagingTable, teachingTLB, pagingLookup,
+    replacementFrames, scheduleFrames };
 });

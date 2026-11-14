@@ -388,6 +388,122 @@
     choice.addEventListener("change", () => { frames = M.heapFrames([9, 7, 8, 2, 5, 1, 4], choice.value === "pop" ? "pop" : "push", choice.value === "small" ? 1 : 10); rebuild(frames.length); });
   }
 
+  function osTable(headers, rows, caption) {
+    const table = e("table", "os-table"), head = e("tr"), body = e("tbody");
+    if (caption) table.append(e("caption", "", caption));
+    headers.forEach(title => { const th = e("th", "", title); th.scope = "col"; head.append(th); });
+    const thead = e("thead"); thead.append(head); table.append(thead);
+    rows.forEach(row => {
+      const tr = e("tr");
+      row.forEach((value, i) => { const cell = e(i ? "td" : "th", "", String(value)); if (!i) cell.scope = "row"; tr.append(cell); });
+      body.append(tr);
+    });
+    table.append(body); return table;
+  }
+
+  function paging(root) {
+    const ui = shell(root, "分页地址转换 · 页号换了，偏移不变");
+    const preset = select(ui, "预设场景", [["1300", "TLB 未命中，页已在内存"], ["276", "TLB 命中"], ["2300", "合法页不在内存"], ["3300", "访问未映射页"], ["8191", "最后一个合法地址"], ["custom", "自行输入地址"]], "1300");
+    const field = e("label", "concept-field"); field.append(e("span", "", "虚拟地址（十进制 B）"));
+    const input = e("input"); input.type = "number"; input.min = "0"; input.max = "8191"; input.step = "1"; input.value = "1300"; field.append(input); ui.settings.append(field);
+    const render = () => {
+      let r;
+      try { r = M.pagingLookup(input.value === "" ? NaN : Number(input.value)); }
+      catch (error) { ui.stage.replaceChildren(e("p", "concept-error", error.message)); ui.status.textContent = "13 位虚拟地址的范围为 0～8191 B，不能把越界值当作有效页号。"; return; }
+      const split = e("div", "address-split");
+      [["高 3 位 · 页号", r.bits.slice(0, 3), `VPN = ${r.page}`], ["低 10 位 · 页内偏移", r.bits.slice(3), `${r.offset} B`]].forEach(([label, bits, value]) => {
+        const group = e("div", "address-part"); group.append(e("span", "", label), e("strong", "", bits), e("span", "", value)); split.append(group);
+      });
+      const layout = e("div", "concept-compare"), path = e("section", "concept-panel"), mapping = e("section", "concept-panel");
+      path.append(e("h4", "", "本次访问路径"), e("p", "concept-caption", "固定 TLB 快照：页 0 → 框 5；页 4 → 框 1。每次查询独立，不累计缓存。"));
+      const route = e("ol", "address-route");
+      const labels = [`拆分：${r.address} = ${r.page} × 1024 + ${r.offset}`, r.tlbHit ? "TLB 命中，取得页框号" : "TLB 未命中，查询页表"];
+      if (r.status === "fault") labels.push("合法页当前不在内存：产生缺页异常", "本次演示停在异常处，不生成物理地址");
+      else if (r.status === "invalid") labels.push("页未映射：本次访问不合法", "不能按普通调页继续完成这次访问");
+      else labels.push(r.tlbHit ? "用缓存的映射继续转换" : `页表表明该页驻留于页框 ${r.frame}`, `PA = ${r.frame} × 1024 + ${r.offset} = ${r.physical} B`);
+      labels.forEach((text, i) => route.append(e("li", i === labels.length - 1 ? "is-result" : "", text))); path.append(route);
+      mapping.append(e("h4", "", "固定页表快照"));
+      const table = osTable(["页号", "状态", "页框"], M.pagingTable.map((entry, i) => [i, entry.unmapped ? "未映射" : entry.absent ? "不在内存" : "驻留", entry.frame ?? "—"]));
+      table.querySelectorAll("tbody tr")[r.page].classList.add("is-selected"); mapping.append(table);
+      layout.append(path, mapping);
+      ui.stage.replaceChildren(split, layout, stats([["页内偏移（保持不变）", `${r.offset} B`], ["物理地址", r.physical === null ? "未生成" : `${r.physical} B`]]));
+      ui.status.textContent = r.status === "fault" ? "缺页与置换是两件事：若有空闲页框，可直接调入；没有可用空闲页框时才需要选择被换出的页。" : r.status === "invalid" ? "本快照将第 3 页明确标为未映射，用它区分非法访问与合法页暂不驻留。这里不模拟真实操作系统的按需分配等其他情况。" : `${r.tlbHit ? "TLB 命中" : "TLB 未命中，页表给出驻留映射"}，取得页框 ${r.frame}。TLB 未命中本身不等于缺页。图中省略权限检查、多级页表与数据 Cache。`;
+    };
+    input.addEventListener("input", () => { preset.value = "custom"; render(); });
+    preset.addEventListener("change", () => { if (preset.value !== "custom") input.value = preset.value; render(); }); render();
+  }
+
+  function replacement(root) {
+    const ui = shell(root, "页面置换 · 同一序列，对照 FIFO 与 LRU");
+    const traces = [[1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5], [1, 2, 3, 1, 4, 1, 2, 5, 1, 2, 3, 4], [1, 1, 1, 1]];
+    const choice = select(ui, "页面引用序列", [["0", "Belady 反例"], ["1", "重复访问与局部性"], ["2", "反复访问同一页"]], "0");
+    const size = select(ui, "分配的页框数", [["3", "3 个页框"], ["4", "4 个页框"]], "3");
+    let trace = traces[0], frames;
+    const calculate = () => { frames = ["FIFO", "LRU"].map(policy => M.replacementFrames(trace, Number(size.value), policy)); };
+    calculate();
+    const render = index => {
+      const sequence = e("div", "os-reference-trace");
+      trace.forEach((page, i) => { const cell = e("span", i === index - 1 ? "is-active" : ""); cell.append(e("small", "", `第 ${i + 1} 次`), e("strong", "", String(page))); sequence.append(cell); });
+      const panels = e("div", "concept-compare");
+      frames.forEach((history, p) => {
+        const f = history[index], panel = e("section", "concept-panel"), memory = e("div", "os-page-frames");
+        panel.append(e("h4", "", p ? "LRU · 最近最久未使用" : "FIFO · 最早装入先换出"));
+        memory.style.gridTemplateColumns = `repeat(${f.slots.length}, minmax(0, 1fr))`;
+        f.slots.forEach((page, i) => { const cell = e("div", `os-page-frame${i === f.slot ? f.hit ? " is-hit" : " is-fault" : ""}`); cell.append(e("small", "", `框 ${i}`), e("strong", "", page === null ? "空" : String(page))); memory.append(cell); });
+        panel.append(memory, e("p", "os-policy-order", `候选顺序（${p ? "最久未用 → 最近使用" : "最早装入 → 最晚装入"}）：${f.order.length ? f.order.join(" → ") : "空"}`), stats([["累计缺页", String(f.faults)], ["其中发生置换", String(f.replacements)]]));
+        panel.append(e("p", `concept-result${f.hit ? " is-hit" : ""}`, !index ? "初始：页框全空。" : f.hit ? `页 ${f.page} 命中。${p ? "更新最近使用次序。" : "装入次序不变。"}` : `页 ${f.page} 缺页；${f.evicted === null ? "装入空闲页框，无需换出。" : `换出页 ${f.evicted}。`}`));
+        panels.append(panel);
+      });
+      ui.stage.replaceChildren(e("p", "concept-caption", "按页面号引用；不是字节地址。每一步是一次引用，页框保持固定位置。"), sequence, panels);
+      ui.status.textContent = !index ? "先预测下一次引用是否命中。缺页包括首次装入空闲页框的情况，不能只数换出次数。" : index === trace.length ? "本序列已处理完。切换 3 / 4 个页框可重新比较；FIFO 可能出现页框更多、缺页反而更多的 Belady 异常。" : `已处理 ${index} / ${trace.length} 次引用。两种算法仅在淘汰规则与命中后的次序更新上不同。`;
+    };
+    const rebuild = steps(ui, trace.length + 1, render);
+    const reset = () => { trace = traces[Number(choice.value)]; calculate(); rebuild(trace.length + 1); };
+    choice.addEventListener("change", reset); size.addEventListener("change", reset);
+  }
+
+  function scheduling(root) {
+    const ui = shell(root, "CPU 调度 · 先画时间轴，再算指标");
+    const profiles = [
+      [{ id: "A", arrival: 0, burst: 5 }, { id: "B", arrival: 0, burst: 3 }, { id: "C", arrival: 0, burst: 1 }],
+      [{ id: "A", arrival: 0, burst: 5 }, { id: "B", arrival: 1, burst: 3 }, { id: "C", arrival: 4, burst: 1 }],
+      [{ id: "A", arrival: 2, burst: 2 }, { id: "B", arrival: 6, burst: 1 }, { id: "C", arrival: 6, burst: 2 }]
+    ];
+    const profile = select(ui, "自拟进程组（详见下表）", [["0", "同时到达，服务时间不同"], ["1", "先后到达，含边界到达"], ["2", "存在 CPU 空闲区间"]], "0");
+    const policy = select(ui, "调度算法", [["RR", "RR · 轮转"], ["FCFS", "FCFS"]], "RR");
+    const quantum = select(ui, "RR 时间片", [["1", "q = 1"], ["2", "q = 2"], ["3", "q = 3"]], "2");
+    const finish = e("button", "", "查看完整结果"); finish.type = "button"; ui.settings.append(finish);
+    let frames = M.scheduleFrames(profiles[0], "RR", 2);
+    const dash = x => x === null ? "—" : String(x), mean = (jobs, key) => fmt(jobs.reduce((sum, j) => sum + j[key], 0) / jobs.length);
+    const render = index => {
+      const f = frames[index], timeline = e("div", "os-gantt-scroll"); timeline.tabIndex = 0; timeline.setAttribute("aria-label", "已执行的 CPU 时间轴，窄屏可横向滚动");
+      const track = e("div", "os-gantt");
+      f.segments.forEach((segment, i) => {
+        const block = e("div", `os-gantt-block os-process-${segment.id || "idle"}${i === f.segments.length - 1 ? " is-current" : ""}`);
+        block.style.width = `${(segment.end - segment.start) * 2.8}rem`;
+        block.append(e("strong", "", segment.id || "空闲"), e("small", "", `${segment.start}–${segment.end}`)); track.append(block);
+      });
+      if (!f.segments.length) track.append(e("p", "concept-caption", "尚未执行；点击“下一步”观察第一个区间。"));
+      timeline.append(track);
+      const queue = e("div", "os-ready-queue"); queue.append(e("strong", "", `t=${f.clock} 的就绪队列（队首 → 队尾）`));
+      f.ready.forEach(id => queue.append(e("span", `os-process-${id}`, `${id} · 剩余 ${f.jobs.find(j => j.id === id).remaining}`)));
+      if (!f.ready.length) queue.append(e("span", "", f.completed === f.jobs.length ? "全部完成" : "空"));
+      const data = e("div", "concept-table-scroll"); data.tabIndex = 0; data.setAttribute("aria-label", "进程计算表，窄屏可横向滚动");
+      data.append(osTable(["进程", "到达", "服务", "首次执行", "完成", "响应", "周转", "等待"], f.jobs.map(j => [j.id, j.arrival, j.burst, dash(j.first), dash(j.finish), dash(j.response), dash(j.turnaround), dash(j.waiting)]), "时间均以同一抽象单位计；未产生的指标用 — 表示。窄屏可横向滚动。"));
+      ui.stage.replaceChildren(e("p", "concept-caption", "区间为左闭右开；每个时间单位等宽。时间轴较长时可横向滚动。"), timeline, queue, data);
+      if (f.completed === f.jobs.length) {
+        const finals = ["FCFS", "RR"].map(p => M.scheduleFrames(profiles[Number(profile.value)], p, Number(quantum.value)).at(-1).jobs);
+        ui.stage.append(osTable(["同一输入的最终对照", "平均响应", "平均周转", "平均等待"], finals.map((jobs, i) => [i ? `RR（q=${quantum.value}）` : "FCFS", mean(jobs, "response"), mean(jobs, "turnaround"), mean(jobs, "waiting")])));
+      }
+      ui.status.textContent = f.message;
+      finish.disabled = index === frames.length - 1;
+    };
+    const navigator = steps(ui, frames.length, render);
+    finish.addEventListener("click", () => navigator.jumpTo(frames.length - 1));
+    const reset = () => { quantum.disabled = policy.value === "FCFS"; frames = M.scheduleFrames(profiles[Number(profile.value)], policy.value, Number(quantum.value)); navigator(frames.length); };
+    [profile, policy, quantum].forEach(control => control.addEventListener("change", reset));
+  }
+
   function directory(root) {
     if (root.dataset.labReady) return;
     const sections = [...root.querySelectorAll(".lab-section")];
@@ -423,7 +539,7 @@
     input.addEventListener("input", render); render(); root.dataset.labReady = "true";
   }
 
-  const renderers = { cache, pipeline, references, vector, signed, metrics, partition, prefix, queens, heap };
+  const renderers = { cache, pipeline, references, vector, signed, metrics, partition, prefix, queens, heap, paging, replacement, scheduling };
   const mount = () => {
     document.querySelectorAll("[data-concept-viz]").forEach(root => {
       if (root.dataset.ready || !renderers[root.dataset.conceptViz]) return;

@@ -205,6 +205,49 @@
 .md-typeset .heap-value { fill: var(--md-default-fg-color); font-family: var(--md-code-font); font-size: 30px; font-weight: 700; }
 .md-typeset .heap-index { fill: var(--md-default-fg-color); font-family: var(--md-code-font); font-size: 20px; paint-order: stroke; stroke: var(--sv-surface); stroke-width: 4px; }
 
+/* 操作系统实验：快照、时间与页框位置都用文字标注，避免只靠颜色判断。 */
+.md-typeset .os-table { width: 100%; margin: .6rem 0; border-collapse: collapse; font-size: .63rem; }
+.md-typeset .os-table caption { margin: .4rem 0; color: var(--md-default-fg-color--light); font-size: .6rem; text-align: left; }
+.md-typeset .os-table th,
+.md-typeset .os-table td { padding: .45rem .35rem; border-bottom: 1px solid var(--sv-line); text-align: left; }
+.md-typeset .os-table thead th { background: var(--md-default-bg-color); }
+.md-typeset .os-table .is-selected { background: var(--sv-complete-bg); color: var(--sv-complete); outline: 2px solid var(--sv-complete); outline-offset: -2px; }
+.md-typeset .address-split { display: flex; flex-wrap: wrap; gap: .5rem; margin: .4rem 0 1rem; }
+.md-typeset [data-concept-viz="paging"] .concept-field:first-child { flex-grow: 1; }
+.md-typeset .address-part { display: flex; flex: 1; flex-direction: column; gap: .3rem; padding: .6rem; border: 1px solid var(--sv-line); border-top: 3px solid var(--sv-pending); border-radius: 6px; background: var(--md-default-bg-color); }
+.md-typeset .address-part:last-child { flex-grow: 2; border-top-color: var(--sv-complete); }
+.md-typeset .address-part > span { font-size: .63rem; }
+.md-typeset .address-part > strong { font-family: var(--md-code-font); font-size: .95rem; letter-spacing: .04em; }
+.md-typeset .address-route { margin: .7rem 0 .3rem 1.15rem; font-size: .68rem; }
+.md-typeset .address-route li { padding: .35rem 0 .6rem .2rem; border-bottom: 1px dashed var(--sv-line); }
+.md-typeset .address-route li.is-result { color: var(--sv-complete); font-weight: 700; }
+.md-typeset .os-reference-trace { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .3rem; margin: .65rem 0 1rem; }
+.md-typeset .os-reference-trace > span { min-width: 0; padding: .35rem .1rem; border: 1px solid var(--sv-line); border-radius: 5px; background: var(--md-default-bg-color); text-align: center; }
+.md-typeset .os-reference-trace small { display: block; font-size: .5rem; }
+.md-typeset .os-reference-trace .is-active { outline: 2px solid var(--sv-current); outline-offset: -2px; background: var(--sv-current-bg); color: var(--sv-current); }
+.md-typeset .os-page-frames { display: grid; gap: .3rem; margin: .6rem 0; }
+.md-typeset .os-page-frame { min-width: 0; padding: .5rem .1rem; border: 1px solid var(--sv-line); border-radius: 5px; background: var(--md-default-bg-color); text-align: center; }
+.md-typeset .os-page-frame small { display: block; font-size: .55rem; }
+.md-typeset .os-page-frame strong { font-family: var(--md-code-font); font-size: 1.1rem; }
+.md-typeset .os-page-frame.is-hit { border: 2px solid var(--sv-complete); background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset .os-page-frame.is-fault { border: 2px dashed var(--sv-current); background: var(--sv-current-bg); color: var(--sv-current); }
+.md-typeset .os-policy-order { min-height: 3em; font-size: .6rem; overflow-wrap: anywhere; }
+.md-typeset .os-gantt-scroll { max-width: 100%; overflow-x: auto; margin: .6rem 0 .9rem; padding: .15rem; border: 1px solid var(--sv-line); border-radius: 6px; }
+.md-typeset .os-gantt { display: flex; width: max-content; }
+.md-typeset .os-gantt-block { display: flex; flex: 0 0 auto; flex-direction: column; justify-content: center; min-height: 3rem; border-right: 1px solid var(--sv-line); text-align: center; font-family: var(--md-code-font); font-size: .72rem; }
+.md-typeset .os-gantt-block small { font-size: .6rem; }
+.md-typeset .os-gantt-block.is-current { outline: 2px solid var(--sv-current); outline-offset: -2px; }
+.md-typeset .os-process-A { background: var(--sv-complete-bg); color: var(--sv-complete); }
+.md-typeset .os-process-B { background: var(--sv-pending-bg); color: var(--sv-pending); }
+.md-typeset .os-process-C { background: var(--sv-current-bg); color: var(--sv-current); }
+.md-typeset .os-process-idle { background: var(--md-default-bg-color); color: var(--md-default-fg-color--light); }
+.md-typeset .os-ready-queue { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 .8rem; font-size: .65rem; }
+.md-typeset .os-ready-queue > strong { flex-basis: 100%; font-size: .65rem; }
+.md-typeset .os-ready-queue > span { padding: .3rem .5rem; border: 1px solid var(--sv-line); border-radius: 5px; }
+.md-typeset [data-concept-viz="scheduling"] .concept-table-scroll { margin-bottom: 1rem; }
+.md-typeset [data-concept-viz="scheduling"] .concept-table-scroll .os-table { min-width: 28rem; margin: 0; }
+.md-typeset .os-gantt-scroll:focus-visible { outline: 3px solid var(--md-typeset-a-color); outline-offset: 3px; }
+
 /* 实验目录的筛选只在显式标记的目录中生效；无脚本时保留完整目录。 */
 .md-typeset .lab-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .6rem; margin: 1.5rem 0; padding: .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-radius: 10px; background: var(--md-accent-fg-color--transparent); }
 .md-typeset .lab-filters { display: flex; flex-wrap: wrap; gap: .4rem; grid-column: 1 / -1; }
@@ -266,6 +309,10 @@
   .md-typeset .concept-settings { align-items: stretch; }
   .md-typeset .concept-field { flex: 1; min-width: 0; }
   .md-typeset [data-concept-viz="prefix"] .concept-field:first-child { flex-basis: 100%; }
+  .md-typeset [data-concept-viz="scheduling"] .concept-field:first-child,
+  .md-typeset [data-concept-viz="paging"] .concept-field,
+  .md-typeset [data-concept-viz="replacement"] .concept-field { flex-basis: 100%; }
+  .md-typeset [data-concept-viz="scheduling"] .concept-settings > button { flex-basis: 100%; }
   .md-typeset .concept-lab input[type="number"] { width: 100%; }
   .md-typeset .bit-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: .2rem; }
   .md-typeset .bit-strip { gap: .1rem; }

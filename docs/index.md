@@ -26,7 +26,7 @@ hide:
 
 </div>
 
-<span class="home-hero__note">13 个交互主题 · 从原笔记出发 · 一步步观察机制</span>
+<span class="home-hero__note">16 个交互主题 · 从原笔记出发 · 一步步观察机制</span>
 
 </div>
 
@@ -76,6 +76,22 @@ hide:
 
     [对照 BFS / DFS →](洛谷题目/8_1/bfs.md#search-demo)
 
+- <span class="lab-tag">操作系统 · 可交互</span>
+
+    **TLB 未命中，页面就一定不在内存吗？**
+
+    输入虚拟地址，沿页号、偏移与页表找到访问结果。
+
+    [追踪地址转换 →](操作系统/03-内存管理/内存管理基础.md#paging-lab)
+
+- <span class="lab-tag">操作系统 · 可交互</span>
+
+    **先得到 CPU，是否就能更早完成？**
+
+    逐段推进时间轴，比较响应、周转与等待的计算起点。
+
+    [观察调度时间轴 →](操作系统/02-进程与线程/进程线程与调度.md#scheduling-lab)
+
 </div>
 
 ## 按知识地图阅读 { #knowledge-map }
@@ -120,7 +136,7 @@ hide:
 
 硬件执行指令，操作系统管理资源。
 
-[计算机组成原理](计算机组成原理/引言.md) · [操作系统](操作系统/index.md)
+[计算机组成原理](计算机组成原理/引言.md) · [操作系统学习地图](操作系统/index.md#os-map)
 
 <span class="knowledge-lane__bridge">↔ 把软件行为与硬件机制接起来</span>
 
