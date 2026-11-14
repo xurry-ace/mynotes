@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 495" width="940" height="495" role="img" aria-label="经典五级指令流水线与数据旁路转发（Forwarding）结构图">
+  <defs>
+    <marker id="arr-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#0b6f66"/>
+    </marker>
+    <marker id="arr-amber" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-indigo" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#4338ca"/>
+    </marker>
+    <marker id="arr-slate" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arr-rose" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#be123c"/>
+    </marker>
+  </defs>
+  <rect x="4" y="4" width="932" height="487" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="470" y="28" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="17" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">经典五级流水线结构（图 5-4）与旁路转发路径（图 5-7 / 5-8）</text>
+  <rect x="36" y="92" width="132" height="86" rx="9" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.0"/>
+  <text x="102" y="122" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">IF 取指</text>
+  <text x="102" y="149" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">PC + 指令存储器</text>
+  <rect x="216" y="92" width="132" height="86" rx="9" fill="#f0fdfa" stroke="#0b6f66" stroke-width="2.0"/>
+  <text x="282" y="122" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">ID 译码</text>
+  <text x="282" y="149" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">寄存器堆读 + 扩展</text>
+  <rect x="396" y="92" width="132" height="86" rx="9" fill="#fef3c7" stroke="#d97706" stroke-width="2.0"/>
+  <text x="462" y="122" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">EX 执行</text>
+  <text x="462" y="149" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">ALU 运算 / 算地址</text>
+  <rect x="576" y="92" width="132" height="86" rx="9" fill="#ede9fe" stroke="#6d28d9" stroke-width="2.0"/>
+  <text x="642" y="122" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">MEM 访存</text>
+  <text x="642" y="149" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">数据存储器读/写</text>
+  <rect x="756" y="92" width="132" height="86" rx="9" fill="#ffe4e6" stroke="#e11d48" stroke-width="2.0"/>
+  <text x="822" y="122" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="15" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">WB 写回</text>
+  <text x="822" y="149" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="500" fill="#334155" text-anchor="middle" dominant-baseline="central">结果写回寄存器堆</text>
+  <rect x="178" y="84" width="28" height="104" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+  <text x="192" y="72" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">IF/ID</text>
+  <text x="192" y="136" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="10" font-weight="500" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">锁存</text>
+  <rect x="358" y="84" width="28" height="104" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+  <text x="372" y="72" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">ID/EX</text>
+  <text x="372" y="136" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="10" font-weight="500" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">锁存</text>
+  <rect x="538" y="84" width="28" height="104" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+  <text x="552" y="72" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">EX/MEM</text>
+  <text x="552" y="136" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="10" font-weight="500" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">锁存</text>
+  <rect x="718" y="84" width="28" height="104" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.2"/>
+  <text x="732" y="72" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle" dominant-baseline="central">MEM/WB</text>
+  <text x="732" y="136" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="10" font-weight="500" fill="#f8fafc" text-anchor="middle" dominant-baseline="central">锁存</text>
+  <line x1="168" y1="135" x2="176" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="206" y1="135" x2="214" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="348" y1="135" x2="356" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="386" y1="135" x2="394" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="528" y1="135" x2="536" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="566" y1="135" x2="574" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="708" y1="135" x2="716" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <line x1="746" y1="135" x2="754" y2="135" stroke="#475569" stroke-width="2.0" stroke-linecap="round" marker-end="url(#arr-slate)"/>
+  <polyline points="822,92 822,56 282,56 282,90" fill="none" stroke="#e11d48" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#arr-rose)"/>
+  <rect x="356" y="44" width="392" height="20" rx="4" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+  <text x="552" y="54" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="600" fill="#be123c" text-anchor="middle" dominant-baseline="central">WB 正常写回通路（无转发时需等第 5 周期写回）</text>
+  <polyline points="552,188 552,220 432,220 432,180" fill="none" stroke="#0b6f66" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-teal)"/>
+  <rect x="444" y="208" width="102" height="22" rx="4" fill="#ccfbf1" stroke="#0b6f66" stroke-width="1"/>
+  <text x="495" y="219" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#064e48" text-anchor="middle" dominant-baseline="central">EX→EX 旁路转发</text>
+  <polyline points="732,188 732,250 412,250 412,180" fill="none" stroke="#d97706" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arr-amber)"/>
+  <rect x="520" y="238" width="128" height="22" rx="4" fill="#fef3c7" stroke="#d97706" stroke-width="1"/>
+  <text x="584" y="249" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="11" font-weight="700" fill="#92400e" text-anchor="middle" dominant-baseline="central">MEM→EX 旁路转发</text>
+  <rect x="36" y="276" width="868" height="198" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.3"/>
+  <text x="56" y="298" font-family="&quot;PingFang SC&quot;, &quot;Hiragino Sans GB&quot;, &quot;Microsoft YaHei&quot;, &quot;Noto Sans CJK SC&quot;, system-ui, sans-serif" font-size="13" font-weight="700" fill="#0f172a" text-anchor="start" dominant-baseline="central">五级流水线时空图与 RAW 数据相关转发时序（图 5-3 / 图 5-7）：消除算术指令停顿气泡</text>
+  <text x="309.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC1</text>
+  <text x="395.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC2</text>
+  <text x="481.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC3</text>
+  <text x="567.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC4</text>
+  <text x="653.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC5</text>
+  <text x="739.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC6</text>
+  <text x="825.0" y="322" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#475569" text-anchor="middle" dominant-baseline="central">CC7</text>
+  <text x="56" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#1e293b" text-anchor="start" dominant-baseline="central">I1: ADD R1, R2, R3</text>
+  <rect x="272" y="334" width="74" height="28" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/>
+  <text x="309.0" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">IF</text>
+  <rect x="358" y="334" width="74" height="28" rx="5" fill="#f0fdfa" stroke="#0b6f66" stroke-width="1.4"/>
+  <text x="395.0" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">ID</text>
+  <rect x="444" y="334" width="74" height="28" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+  <text x="481.0" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">EX</text>
+  <rect x="530" y="334" width="74" height="28" rx="5" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="567.0" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">MEM</text>
+  <rect x="616" y="334" width="74" height="28" rx="5" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.4"/>
+  <text x="653.0" y="348" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">WB</text>
+  <text x="56" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#1e293b" text-anchor="start" dominant-baseline="central">I2: SUB R4, R1, R5</text>
+  <rect x="358" y="376" width="74" height="28" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/>
+  <text x="395.0" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">IF</text>
+  <rect x="444" y="376" width="74" height="28" rx="5" fill="#f0fdfa" stroke="#0b6f66" stroke-width="1.4"/>
+  <text x="481.0" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">ID</text>
+  <rect x="530" y="376" width="74" height="28" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+  <text x="567.0" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">EX</text>
+  <rect x="616" y="376" width="74" height="28" rx="5" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="653.0" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">MEM</text>
+  <rect x="702" y="376" width="74" height="28" rx="5" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.4"/>
+  <text x="739.0" y="390" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">WB</text>
+  <text x="56" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#1e293b" text-anchor="start" dominant-baseline="central">I3: AND R6, R1, R7</text>
+  <rect x="444" y="418" width="74" height="28" rx="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.4"/>
+  <text x="481.0" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">IF</text>
+  <rect x="530" y="418" width="74" height="28" rx="5" fill="#f0fdfa" stroke="#0b6f66" stroke-width="1.4"/>
+  <text x="567.0" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">ID</text>
+  <rect x="616" y="418" width="74" height="28" rx="5" fill="#fef3c7" stroke="#d97706" stroke-width="1.4"/>
+  <text x="653.0" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">EX</text>
+  <rect x="702" y="418" width="74" height="28" rx="5" fill="#ede9fe" stroke="#6d28d9" stroke-width="1.4"/>
+  <text x="739.0" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">MEM</text>
+  <rect x="788" y="418" width="74" height="28" rx="5" fill="#ffe4e6" stroke="#e11d48" stroke-width="1.4"/>
+  <text x="825.0" y="432" font-family="&quot;Fira Code&quot;, &quot;SFMono-Regular&quot;, Consolas, monospace" font-size="12" font-weight="700" fill="#0f172a" text-anchor="middle" dominant-baseline="central">WB</text>
+  <line x1="512" y1="360" x2="538" y2="376" stroke="#0b6f66" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arr-teal)"/>
+  <line x1="598" y1="360" x2="624" y2="418" stroke="#d97706" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arr-amber)"/>
+</svg>

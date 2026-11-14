@@ -1,0 +1,7938 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="xurry 的个人编程与计算机学习笔记：C++、Python、算法题解、计算机组成原理、操作系统、模式识别与人生思考。">
+      
+      
+        <meta name="author" content="xurry">
+      
+      
+        <link rel="canonical" href="https://www.xurry.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E7%AC%AC3%E7%AB%A0%EF%BC%9A%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/">
+      
+      
+        <link rel="prev" href="../%E7%AC%AC2%E7%AB%A0%EF%BC%9A%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/">
+      
+      
+        <link rel="next" href="../%E7%AC%AC4%E7%AB%A0%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/dog.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>第3章：存储系统 - xurry的代码空间</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/learning.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  
+  
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="xurry的代码空间">
+  <meta property="og:title" content="第3章：存储系统">
+  <meta property="og:description" content="xurry 的个人编程与计算机学习笔记：C++、Python、算法题解、计算机组成原理、操作系统、模式识别与人生思考。">
+  <meta property="og:url" content="https://www.xurry.xyz/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E7%AC%AC3%E7%AB%A0%EF%BC%9A%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/">
+  <meta property="og:image" content="https://www.xurry.xyz/assets/logo.png">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="第3章：存储系统">
+  <meta name="twitter:description" content="xurry 的个人编程与计算机学习笔记：C++、Python、算法题解、计算机组成原理、操作系统、模式识别与人生思考。">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="light-green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="xurry的代码空间" class="md-header__button md-logo" aria-label="xurry的代码空间" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            xurry的代码空间
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第3章：存储系统
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="light-green"  aria-label="切换到深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="light-green"  aria-label="切换到浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/xurry-ace/mynotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xurry-ace/mynotes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  🏠首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../%E5%9B%BE%E8%A7%A3%E5%AE%9E%E9%AA%8C%E5%AE%A4/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  🧭图解实验室
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🧩C++ 基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../python%E5%9F%BA%E7%A1%80/%E5%BC%95%E8%A8%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🐍Python 基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E5%BC%95%E8%A8%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💻计算机组成原理
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🖥️操作系统
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/%E5%BC%95%E8%A8%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🧠算法课洛谷习题
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E5%BC%95%E8%A8%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  💡人生思考
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/%E5%BC%95%E8%A8%80/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  🔍模式识别
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="xurry的代码空间" class="md-nav__button md-logo" aria-label="xurry的代码空间" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    xurry的代码空间
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/xurry-ace/mynotes" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    xurry-ace/mynotes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9B%BE%E8%A7%A3%E5%AE%9E%E9%AA%8C%E5%AE%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧭图解实验室
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧩C++ 基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧩C++ 基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/vector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    vector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    stack
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/queue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    queue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/set/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    set
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/string/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    string
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    map
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/priority_queue%28%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    priority_queue(优先队列)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/algorithm%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    algorithm常用函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/cmath%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    cmath常用函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c%2B%2B%E5%9F%BA%E7%A1%80/%E8%AF%AD%E6%B3%95%E6%98%93%E9%94%99%E7%82%B9%EF%BC%88%E4%B8%AA%E4%BA%BA%E5%90%91%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语法细节
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🐍Python 基础
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🐍Python 基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E5%BC%95%E8%A8%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC1%E7%AB%A0%EF%BC%9A%E6%8E%A5%E8%A7%A6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E3%80%81%E5%8F%98%E9%87%8F%E3%80%81%E7%AE%80%E5%8D%95%E7%A8%8B%E5%BA%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章：接触输入输出、变量、简单程序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC2%E7%AB%A0%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%88%97%E8%A1%A8%E3%80%81%E5%AD%97%E5%85%B8%E3%80%81%E5%85%83%E7%BB%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章：字符串、列表、字典、元组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC3%E7%AB%A0%EF%BC%9A%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84%E3%80%81%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84%E3%80%81%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章：顺序结构、选择结构、循环结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC4%E7%AB%A0%EF%BC%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A8%A1%E5%9D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章：函数与模块
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC5%E7%AB%A0%EF%BC%9A%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章：面向对象基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC6%E7%AB%A0%EF%BC%9A%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E5%A4%B9%E6%93%8D%E4%BD%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章：文件与文件夹操作
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E7%AC%AC7%E7%AB%A0%EF%BC%9A%E9%87%8D%E7%82%B9%E7%AA%81%E7%A0%B4--Numpy%E5%BA%93/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第七章：Numpy库
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../python%E5%9F%BA%E7%A1%80/%E5%A4%87%E8%80%83%E9%A2%98%E7%9B%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    备考题目
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💻计算机组成原理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💻计算机组成原理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BC%95%E8%A8%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%95%AA%E5%A4%96-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    番外
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    名词解释
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC1%E7%AB%A0%EF%BC%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章：计算机系统概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC2%E7%AB%A0%EF%BC%9A%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章：运算方法和运算器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章：存储系统
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章：存储系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心知识点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 核心基础：主存技术指标与数据组织
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sram-dram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 必考对比：SRAM 与 DRAM（高频选择/填空）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 常考对比：ROM 的分类与特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 必考设计题：存储器容量的扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 性能优化：多模块交叉存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 绝对核心压轴大题：Cache（高速缓冲存储器）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 拓展：虚拟存储器与 TLB 快表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 其他补充（从其他教材整理的笔记）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        课堂与课后习题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课堂与课后习题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1pptc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习 1（PPT）：C 结构体边界对齐与小端存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ppt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习 2（PPT）：存储芯片引脚数与按半字寻址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-1：存储器容量与芯片扩展计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-316k8-64k32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-3：16K×8 位芯片扩展为 64K×32 位存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-8：顺序存储器与交叉存储器带宽计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-9cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-9：Cache 平均访问时间与系统效率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-10-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-10：由平均访问时间反推 Cache 命中率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-13-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-13：组相联 Cache 内存地址格式划分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-14：直接映射冲突地址构造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-15：按字编址下的直接映射参数与地址格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-21-tlb-eat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-21：页式虚拟存储与 TLB 有效访问时间（EAT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 1：Cache 地址划分与总容量计算（含有效位/脏位）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-vs-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 2：同时访问 vs 先查 Cache 再访存的平均访问时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3lru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 3：LRU 替换算法命中率计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 4：4 体低位交叉存储器连续读耗时与带宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5dram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 5：DRAM 三种刷新方式的死时间对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC4%E7%AB%A0%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章：指令系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC5%E7%AB%A0%EF%BC%9A%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章：中央处理器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC6%E7%AB%A0%EF%BC%9A%E6%80%BB%E7%BA%BF%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章：总线系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC7%E7%AB%A0%EF%BC%9A%E5%A4%96%E5%9B%B4%E8%AE%BE%E5%A4%87/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章：外围设备
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AC%AC8%E7%AB%A0%EF%BC%9A%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章：输入输出系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🖥️操作系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🖥️操作系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章：操作系统概述
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第1章：操作系统概述
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    知识点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E7%8E%8B%E9%81%93%E4%B9%A0%E9%A2%98%E4%B8%8E%E9%94%99%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    王道习题与错题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E8%A7%86%E9%A2%91%E9%A2%98-%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E4%B8%8E%E6%8E%A5%E5%8F%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频题：系统调用与接口
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E8%A7%86%E9%A2%91%E9%A2%98-%E7%B3%BB%E7%BB%9F%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%A4%9A%E9%81%93%E7%A8%8B%E5%BA%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频题：系统类型与多道程序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E8%A7%86%E9%A2%91%E9%A2%98-%E5%88%86%E6%97%B6%E4%B8%8E%E5%93%8D%E5%BA%94%E6%97%B6%E9%97%B4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频题：分时与响应时间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/01-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/%E8%A7%86%E9%A2%91%E9%A2%98-%E5%86%85%E6%A0%B8%E6%80%81%E4%B8%8E%E4%B8%AD%E6%96%AD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    视频题：内核态与中断
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/02-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章：进程与线程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第2章：进程与线程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/02-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E4%B8%8E%E8%B0%83%E5%BA%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进程、线程与调度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/02-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5%E4%B8%8E%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    同步、互斥与死锁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/02-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/%E7%8E%8B%E9%81%93%E4%B9%A0%E9%A2%98%E4%B8%8E%E9%94%99%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    王道习题与错题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/03-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章：内存管理
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_4" id="__nav_6_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第3章：内存管理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/03-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存管理基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/03-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E4%B8%8E%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    虚拟内存与页面置换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/03-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/%E7%8E%8B%E9%81%93%E4%B9%A0%E9%A2%98%E4%B8%8E%E9%94%99%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    王道习题与错题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/04-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章：文件管理
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_5" id="__nav_6_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第4章：文件管理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/04-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件与目录
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/04-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    文件系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/04-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/%E7%8E%8B%E9%81%93%E4%B9%A0%E9%A2%98%E4%B8%8E%E9%94%99%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    王道习题与错题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/05-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章：输入输出管理
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6_6" id="__nav_6_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第5章：输入输出管理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/05-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86/IO%E4%B8%8E%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I/O 与设备管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/05-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86/%E7%BC%93%E5%86%B2%E4%B8%8E%E7%A3%81%E7%9B%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    缓冲与磁盘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/05-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E7%AE%A1%E7%90%86/%E7%8E%8B%E9%81%93%E4%B9%A0%E9%A2%98%E4%B8%8E%E9%94%99%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    王道习题与错题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_7" id="__nav_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    综合复盘
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    综合复盘
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BB%BC%E5%90%88%E5%A4%8D%E7%9B%98/%E6%98%93%E6%B7%B7%E6%A6%82%E5%BF%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    易混概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BB%BC%E5%90%88%E5%A4%8D%E7%9B%98/%E8%AE%A1%E7%AE%97%E9%A2%98%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算题与常见陷阱
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧠算法课洛谷习题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧠算法课洛谷习题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/%E5%BC%95%E8%A8%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    备考指南
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    备考指南
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/%E5%A4%87%E8%80%83%E6%8C%87%E5%8D%97/%E5%A4%8D%E4%B9%A0%E5%BB%BA%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    复习建议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1_1(二分)查找
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    1_1(二分)查找
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二分查找概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E9%A2%981%E6%9F%A5%E6%89%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_查找
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E9%A2%982%E4%B8%80%E5%85%83%E4%B8%89%E6%AC%A1%E6%96%B9%E7%A8%8B%E6%B1%82%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_一元三次方程求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E9%A2%983EKO%E7%A0%8D%E6%A0%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_EKO砍树
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/1_1/%E9%A2%984A-B%E6%95%B0%E5%AF%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题4_A-B数对
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_1/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3_1 快速排序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_5" id="__nav_7_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3_2 快排的应用题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    3_2 快排的应用题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_2/%E6%B1%82%E7%AC%ACk%E5%B0%8F%E7%9A%84%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1求第k小的数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_2/%E9%80%89%E4%B8%BE%E5%AD%A6%E7%94%9F%E4%BC%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_选举学生会
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_2/%E6%AC%A2%E4%B9%90%E7%9A%84%E8%B7%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_欢乐的跳
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_2/%E5%A5%96%E5%AD%A6%E9%87%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题4_奖学金
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/3_2/%E6%98%8E%E6%98%8E%E7%9A%84%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题5_明明的随机数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_6" id="__nav_7_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4_1 递推
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4_1 递推
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_1/%E9%80%92%E6%8E%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    递推
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_1/%E6%95%B0%E6%A5%BC%E6%A2%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_数楼梯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_1/%E8%BF%87%E6%B2%B3%E5%8D%92/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_过河卒
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_1/%E6%A0%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_栈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_7" id="__nav_7_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4_2 大数计算
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4_2 大数计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_2/%E5%A4%A7%E6%95%B0%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    大数计算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_2/%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%8A%A0%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_高精度加法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_2/A%E4%B9%98B%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_A乘B计算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_8" id="__nav_7_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4_3 前缀和思想
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    4_3 前缀和思想
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_3/%E5%89%8D%E7%BC%80%E5%92%8C%E6%95%B0%E7%BB%84%E4%B8%8E%E8%AE%B0%E5%BF%86%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    前缀和与记忆化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_3/%E6%95%B0%E7%9A%84%E8%AE%A1%E7%AE%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_数的计算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/4_3/Function/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_Function
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_9" id="__nav_7_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5_1 暴力搜索
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5_1 暴力搜索
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_1/%E6%9A%B4%E5%8A%9B%E6%90%9C%E7%B4%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    暴力搜索
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_1/%E7%83%A4%E9%B8%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_烤鸡
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_1/%E4%B8%89%E8%BF%9E%E5%87%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_三连击
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_10" id="__nav_7_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5_2 回溯
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    5_2 回溯
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_2/%E5%9B%9E%E6%BA%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回溯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_2/%E5%85%AB%E7%9A%87%E5%90%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_八皇后
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_2/%E8%80%83%E5%89%8D%E4%B8%B4%E6%97%B6%E6%8A%B1%E4%BD%9B%E8%84%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_考前临时抱佛脚
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/5_2/%E7%AE%9724%E7%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_算24点
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_11" id="__nav_7_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6_1 泛洪算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    6_1 泛洪算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/6_1/%E6%B3%9B%E6%B4%AA%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泛洪算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/6_1/%E6%B1%82%E7%BB%86%E8%83%9E%E6%95%B0%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_求细胞数量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/6_1/%E5%A1%AB%E5%9F%8B%E9%A2%9C%E8%89%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_填埋颜色
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/6_1/%E5%B0%8F%E5%9F%8B%E4%B8%8E%E6%89%AB%E9%9B%B7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_小埋与埋雷
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_12" id="__nav_7_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7_1 简单的STL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    7_1 简单的STL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/7_1/%E7%AE%80%E5%8D%95%E7%9A%84STL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简单的STL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/7_1/%E8%AF%A2%E9%97%AE%E5%AD%A6%E5%8F%B7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_询问学号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/7_1/%E7%BA%A6%E7%91%9F%E5%A4%AB%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_约瑟夫问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/7_1/%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_括号匹配
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/7_1/%E5%AD%A6%E7%B1%8D%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题4_学籍管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_13" id="__nav_7_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8_1 BFS/DFS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    8_1 BFS/DFS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/bfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BFS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/dfs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/%E8%BF%B7%E5%AE%AB%E5%AF%BB%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_迷宫寻路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/%E8%BF%B7%E5%AE%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_迷宫
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/%E5%85%AB%E7%9A%87%E5%90%8E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_八皇后
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/8_1/%E6%B1%82%E7%BB%86%E8%83%9E%E6%95%B0%E9%87%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题4_求细胞数量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_14" id="__nav_7_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9_1 图的BFS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    9_1 图的BFS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/9_1/%E6%9F%A5%E6%89%BE%E6%96%87%E7%8C%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_查找文献
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/9_1/%E9%A9%AC%E7%9A%84%E9%81%8D%E5%8E%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_马的遍历
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/9_1/%E5%A5%87%E6%80%AA%E7%9A%84%E7%94%B5%E6%A2%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_奇怪的电梯
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/9_1/%E6%95%B0%E7%8B%AC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题4_数独
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_15" id="__nav_7_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10_1 Dijkstra算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10_1 Dijkstra算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_1/dijkstra%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dijkstra算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_1/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_单源路径最短
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_1/%E9%82%AE%E9%80%92%E5%91%98%E9%80%81%E4%BF%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_邮递员送信
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_16" id="__nav_7_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10_2 A*算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10_2 A*算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_2/A%E6%98%9F%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    A*
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_2/%E6%9C%BA%E5%85%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_机关
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/10_2/%E9%AD%94%E6%B3%95%E7%8C%AA%E5%AD%A6%E9%99%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_魔法猪学院
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_17" id="__nav_7_17_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11_1 状态空间
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_17">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    11_1 状态空间
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/11_1/%E7%8A%B6%E6%80%81%E7%A9%BA%E9%97%B4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/11_1/%E5%85%AB%E6%95%B0%E7%A0%81%E9%9A%BE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题1_八数码难题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/11_1/%E5%9F%83%E5%8F%8A%E5%88%86%E6%95%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题2_埃及分数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/11_1/%E9%AA%91%E5%A3%AB%E7%B2%BE%E7%A5%9E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    题3_骑士精神
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B4%9B%E8%B0%B7%E9%A2%98%E7%9B%AE/11_1/%E6%B0%B4%E5%A3%B6%E6%B3%A8%E6%B0%B4%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ppt上的水壶注水问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    💡人生思考
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    💡人生思考
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E5%BC%95%E8%A8%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E3%80%8A%E5%80%A6%E6%80%A0%E7%A4%BE%E4%BC%9A%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    《倦怠社会》
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E8%8A%B1%E6%9D%9F--%E6%B0%B4%E4%BB%99%E8%8A%B1%E5%92%8C%E9%9D%A2%E5%8C%85%E7%9A%84%E9%80%89%E6%8B%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    《花束般的恋爱》
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BA%BA%E7%94%9F%E6%80%9D%E8%80%83/%E4%B9%94%E5%B8%83%E6%96%AF%E7%9A%84%E6%BC%94%E8%AE%B2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    乔布斯的演讲
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔍模式识别
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔍模式识别
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/%E5%BC%95%E8%A8%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    引言
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/%E8%80%83%E8%AF%95%E9%A2%98%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试题型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%A8%A1%E5%BC%8F%E8%AF%86%E5%88%AB/%E8%80%83%E8%AF%95%E5%A4%8D%E4%B9%A0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    考试复习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心知识点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="核心知识点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 核心基础：主存技术指标与数据组织
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-sram-dram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 必考对比：SRAM 与 DRAM（高频选择/填空）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-rom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 常考对比：ROM 的分类与特点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 必考设计题：存储器容量的扩展
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 性能优化：多模块交叉存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 绝对核心压轴大题：Cache（高速缓冲存储器）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-tlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 拓展：虚拟存储器与 TLB 快表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 其他补充（从其他教材整理的笔记）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        课堂与课后习题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="课堂与课后习题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1pptc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习 1（PPT）：C 结构体边界对齐与小端存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2ppt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        练习 2（PPT）：存储芯片引脚数与按半字寻址
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-1：存储器容量与芯片扩展计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-316k8-64k32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-3：16K×8 位芯片扩展为 64K×32 位存储器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-8：顺序存储器与交叉存储器带宽计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p122-9cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P122-9：Cache 平均访问时间与系统效率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-10-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-10：由平均访问时间反推 Cache 命中率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-13-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-13：组相联 Cache 内存地址格式划分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-14：直接映射冲突地址构造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-15：按字编址下的直接映射参数与地址格式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p123-21-tlb-eat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        作业 P123-21：页式虚拟存储与 TLB 有效访问时间（EAT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="补充典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 1：Cache 地址划分与总容量计算（含有效位/脏位）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-vs-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 2：同时访问 vs 先查 Cache 再访存的平均访问时间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3lru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 3：LRU 替换算法命中率计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 4：4 体低位交叉存储器连续读耗时与带宽
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5dram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        补充题 5：DRAM 三种刷新方式的死时间对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/xurry-ace/mynotes/edit/main/docs/计算机组成原理/第3章：存储系统.md" title="编辑此页" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="3">第3章：存储系统</h1>
+<p>第三章“存储系统”是《计算机组成原理》中<strong>承上启下、也是期末考试必考大题的绝对核心</strong>。如果说前两章是在研究 CPU 如何“算”，那么这一章就是研究数据如何“存”。</p>
+<p>存储系统设计的核心矛盾是：<mark>容量大、速度快、成本低三者不可兼得</mark>。为了解决这个矛盾，现代计算机采用了<strong>多级存储体系</strong>（寄存器 <span class="arithmatex">\(\rightarrow\)</span> Cache <span class="arithmatex">\(\rightarrow\)</span> 主存 <span class="arithmatex">\(\rightarrow\)</span> 辅存）：</p>
+<p><img loading="lazy" decoding="async" alt="计算机多级存储体系金字塔" src="../../assets/diagrams/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/memory-hierarchy.svg" width="920" height="440" /></p>
+<hr />
+<h2 id="_1">核心知识点</h2>
+<h3 id="1">1. 核心基础：主存技术指标与数据组织</h3>
+<div class="grid cards">
+<ul>
+<li>
+<p><strong>📐 存储芯片容量与引脚数计算</strong></p>
+<hr />
+<div class="arithmatex">\[\text{芯片存储容量} = 2^M \times N\text{ 位}\]</div>
+<ul>
+<li><span class="arithmatex">\(M\)</span>：<strong>地址线</strong>根数（决定寻址单元总数 <span class="arithmatex">\(2^M\)</span>）</li>
+<li><span class="arithmatex">\(N\)</span>：<strong>数据线</strong>根数（决定每个存储单元位宽）</li>
+<li>例：<span class="arithmatex">\(64\text{K} \times 8\)</span> 位芯片（<span class="arithmatex">\(64\text{K} = 2^{16}\)</span>）需 <strong>16 根地址线 + 8 根数据线</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>🧭 大端模式 vs 小端模式（高频选择）</strong></p>
+<hr />
+<p>按字节编址时，32 位机器数 <code>0x12345678</code>（最高字节 MSB 为 <code>12H</code>，最低字节 LSB 为 <code>78H</code>）从地址 <code>0x1000</code> 起存放如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">字节地址</th>
+<th style="text-align: center;"><code>0x1000</code>（低）</th>
+<th style="text-align: center;"><code>0x1001</code></th>
+<th style="text-align: center;"><code>0x1002</code></th>
+<th style="text-align: center;"><code>0x1003</code>（高）</th>
+<th style="text-align: left;">记忆口诀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>大端模式</strong></td>
+<td style="text-align: center;"><strong><code>12H</code></strong></td>
+<td style="text-align: center;"><code>34H</code></td>
+<td style="text-align: center;"><code>56H</code></td>
+<td style="text-align: center;"><code>78H</code></td>
+<td style="text-align: left;">高位字节放低地址（符合人类阅读顺序）</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>小端模式</strong></td>
+<td style="text-align: center;"><strong><code>78H</code></strong></td>
+<td style="text-align: center;"><code>56H</code></td>
+<td style="text-align: center;"><code>34H</code></td>
+<td style="text-align: center;"><code>12H</code></td>
+<td style="text-align: left;"><mark>低对低，高对高</mark>（常结合 C 结构体对齐考）</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<hr />
+<h3 id="2-sram-dram">2. 必考对比：SRAM 与 DRAM（高频选择/填空）</h3>
+<p>半导体随机存取存储器（RAM）均为<strong>易失性存储器</strong>（断电丢失信息），但底层存储元截然不同：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对比维度</th>
+<th style="text-align: left;">SRAM（静态 RAM）</th>
+<th style="text-align: left;">DRAM（动态 RAM）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>存储元器件</strong></td>
+<td style="text-align: left;"><strong>双稳态触发器</strong>（6 管锁存器）</td>
+<td style="text-align: left;"><strong>栅极电容</strong>上的电荷</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>读出性质</strong></td>
+<td style="text-align: left;"><strong>非破坏性读出</strong>（读后无需重写）</td>
+<td style="text-align: left;"><strong>破坏性读出</strong>（读出后必须重写再生）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>是否需要刷新</strong></td>
+<td style="text-align: left;"><strong>不需要</strong>（只要不断电即可保持）</td>
+<td style="text-align: left;"><strong>必须定时刷新</strong>（电容漏电，通常 <span class="arithmatex">\(2\text{ms}\)</span> 内）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>送行列地址方式</strong></td>
+<td style="text-align: left;">行、列地址<strong>同时送入</strong>（地址线不复用）</td>
+<td style="text-align: left;">行、列地址<strong>分两次复用同一组引脚送入</strong>（地址线减半）</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>存取速度</strong></td>
+<td style="text-align: left;"><strong>快</strong></td>
+<td style="text-align: left;">较慢</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>集成度与成本</strong></td>
+<td style="text-align: left;">集成度低、功耗大、价格<strong>昂贵</strong></td>
+<td style="text-align: left;">集成度高、功耗低、价格<strong>便宜</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>典型应用</strong></td>
+<td style="text-align: left;"><mark>高速缓冲存储器（Cache）</mark></td>
+<td style="text-align: left;"><mark>计算机主存（内存条）</mark></td>
+</tr>
+</tbody>
+</table>
+<h4 id="dram">DRAM 的“按行刷新”机制与三种刷新策略（必考计算）</h4>
+<p>DRAM 刷新由硬件独立按<strong>行</strong>进行（刷新一行耗时约等于 1 个存取周期 <span class="arithmatex">\(T\)</span>）。设芯片矩阵共有 <span class="arithmatex">\(L\)</span> 行，最大刷新周期为 <span class="arithmatex">\(T_{\text{ref}}\)</span>（常为 <span class="arithmatex">\(2\text{ms}\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">刷新策略</th>
+<th style="text-align: left;">时间安排方式</th>
+<th style="text-align: left;">刷新总开销 / 间隔</th>
+<th style="text-align: left;">死时间（死区）与优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>1. 集中刷新</strong></td>
+<td style="text-align: left;">在 <span class="arithmatex">\(T_{\text{ref}}\)</span> 末尾集中连续刷新全部 <span class="arithmatex">\(L\)</span> 行</td>
+<td style="text-align: left;">连续占用 <span class="arithmatex">\(L \times T\)</span></td>
+<td style="text-align: left;"><strong>死区时间 <span class="arithmatex">\(= L \times T\)</span></strong>（死时间率 <span class="arithmatex">\(\dfrac{L \cdot T}{T_{\text{ref}}}\)</span>）；正常读写快，但死区内 CPU 无法访存</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>2. 分散刷新</strong></td>
+<td style="text-align: left;">把每个存储周期一分为二：前 <span class="arithmatex">\(T\)</span> 读写，后 <span class="arithmatex">\(T\)</span> 刷 1 行</td>
+<td style="text-align: left;">等效周期拉长为 <span class="arithmatex">\(2T\)</span></td>
+<td style="text-align: left;"><strong>无死区</strong>；但每隔 <span class="arithmatex">\(2L \cdot T\)</span> 就刷完一遍，过度刷新使系统整体速度降低一半</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>3. 异步刷新</strong></td>
+<td style="text-align: left;">将 <span class="arithmatex">\(L\)</span> 行均匀分散到 <span class="arithmatex">\(T_{\text{ref}}\)</span> 内刷新</td>
+<td style="text-align: left;">相邻刷新间隔 <span class="arithmatex">\(\Delta t = \dfrac{T_{\text{ref}}}{L}\)</span></td>
+<td style="text-align: left;">单次仅暂停 1 个周期 <span class="arithmatex">\(T\)</span>（死区缩短为 <span class="arithmatex">\(T\)</span>），常安排在指令译码阶段刷新，<strong>效率最高</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="co-question">
+<p class="co-question-title">【例 4-1-49】16K×16 位存储器的芯片数与刷新计算</p>
+<p><strong>题目：</strong><br />
+有一个 <span class="arithmatex">\(16\text{K} \times 16\)</span> 位的存储器，由多个 <span class="arithmatex">\(1\text{K} \times 4\)</span> 位的 DRAM 芯片构成（芯片内是 <span class="arithmatex">\(64 \times 64\)</span> 结构），回答以下问题：<br />
+(1) 总共需要多少片 RAM？<br />
+(2) 若采用异步刷新方式，如果单元刷新间隔不超过 <span class="arithmatex">\(2\text{ms}\)</span>，则刷新周期（相邻两次刷新间隔）是多少？<br />
+(3) 若采用集中刷新方式，存储器刷新一遍最少需要多少个刷新周期？设存储器的读写周期为 <span class="arithmatex">\(0.5\mu\text{s}\)</span>，死区占多少时间？死时间率为多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+<strong>(1)</strong> 所需 DRAM 芯片数 <span class="arithmatex">\(= \dfrac{16\text{K} \times 16}{1\text{K} \times 4} = 16 \times 4 = 64\text{ 片}\)</span>。<br />
+<strong>(2)</strong> 采用异步刷新方式，需在 <span class="arithmatex">\(2\text{ms}\)</span> 内分散把芯片的 <span class="arithmatex">\(64\)</span> 行刷新一遍，故刷新时间间隔 <span class="arithmatex">\(= \dfrac{2\text{ms}}{64} = 31.25\mu\text{s}\)</span>（约 <span class="arithmatex">\(31\mu\text{s}\)</span>）。<br />
+<strong>(3)</strong> 采用集中刷新方式，刷新一遍最少需要 <span class="arithmatex">\(64\)</span> 个刷新周期（每个周期 <span class="arithmatex">\(T = 0.5\mu\text{s}\)</span>）：</p>
+<div class="arithmatex">\[\text{死区时间} = 64 \times 0.5\mu\text{s} = 32\mu\text{s}, \qquad \text{死时间率} = \frac{32\mu\text{s}}{2\text{ms}} = \frac{32\mu\text{s}}{2000\mu\text{s}} = 1.6\%\]</div>
+</details>
+</div>
+<div class="co-question">
+<p class="co-question-title">【例 4-1-50】16K×1 位 DRAM 的刷新周期与刷新时间计算</p>
+<p><strong>题目：</strong><br />
+某 <span class="arithmatex">\(16\text{K} \times 1\)</span> 位的 DRAM 存储芯片的读/写周期 <span class="arithmatex">\(T_m = 0.1\mu\text{s}\)</span>，设芯片的最大刷新间隔不允许超过 <span class="arithmatex">\(2\text{ms}\)</span>（<span class="arithmatex">\(1\text{ms} = 10^3\mu\text{s}\)</span>），否则有可能丢失信息。回答以下问题：<br />
+(1) 单行刷新周期是多少？将 DRAM 存储芯片刷新一遍需要多少个刷新周期？<br />
+(2) 若将刷新平均分散在 <span class="arithmatex">\(2\text{ms}\)</span> 内（异步分散），则刷新信号周期是多少？<br />
+(3) 若采用集中刷新方式，则将 DRAM 芯片刷新一遍需要多少时间？不能提供读写服务的百分比是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+<strong>(1)</strong> 按该教材定义，刷新操作等于一次读操作加一次写回操作，故单行刷新周期 <span class="arithmatex">\(= 2 \times T_m = 2 \times 0.1\mu\text{s} = 0.2\mu\text{s}\)</span>。<br />
+<span class="arithmatex">\(16\text{K} \times 1\)</span> 位芯片共有 <span class="arithmatex">\(14\)</span> 根地址线（<span class="arithmatex">\(2^{14} = 16\text{K}\)</span>），按行、列数相同计算，片内共有 <span class="arithmatex">\(2^7 = 128\)</span> 行，因此刷新一遍共需 <strong><span class="arithmatex">\(128\)</span> 个刷新周期</strong>。<br />
+<strong>(2)</strong> 在 <span class="arithmatex">\(2\text{ms}\)</span> 内把 <span class="arithmatex">\(128\)</span> 行均匀刷新一遍，刷新信号周期为：</p>
+<div class="arithmatex">\[\text{刷新信号周期} = \frac{2\text{ms}}{128} = 15.625\mu\text{s} \quad (\text{可取 } 16\mu\text{s})\]</div>
+<p><strong>(3)</strong> 集中刷新方式下，全部存储单元刷新一遍所需时间（即死区时间）与死时间率为：</p>
+<div class="arithmatex">\[\text{刷新总时间} = 128 \times 0.2\mu\text{s} = 25.6\mu\text{s}, \qquad \text{不能提供读写服务的百分比} = \frac{25.6\mu\text{s}}{2\text{ms}} = 1.28\%\]</div>
+</details>
+</div>
+<h3 id="3-rom">3. 常考对比：ROM 的分类与特点</h3>
+<p>ROM（只读存储器）的核心特征是<strong>非易失性</strong>（断电不丢数据），常用于存放固件与 BIOS 引导程序：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">ROM 类型</th>
+<th style="text-align: left;">写入与可改写性</th>
+<th style="text-align: left;">擦除方式与粒度</th>
+<th style="text-align: left;">特点与典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>掩膜 ROM（Mask ROM）</strong></td>
+<td style="text-align: left;">出厂生产时一次性固化，<strong>不可修改</strong></td>
+<td style="text-align: left;">不可擦除</td>
+<td style="text-align: left;">大批量生产成本极低、可靠性高，适合定型产品固件</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>PROM（可编程 ROM）</strong></td>
+<td style="text-align: left;">用户用编程器<strong>一次性烧录</strong></td>
+<td style="text-align: left;">不可擦除（仅写一次）</td>
+<td style="text-align: left;">适合小批量定制，写错即报废</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EPROM</strong></td>
+<td style="text-align: left;">可多次擦除重写（次数有限）</td>
+<td style="text-align: left;"><strong>紫外线照射整片擦除</strong></td>
+<td style="text-align: left;">必须从电路板上拆下芯片照射擦除，操作不便</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>EEPROM</strong></td>
+<td style="text-align: left;">可在线电信号多次擦写</td>
+<td style="text-align: left;"><strong>电信号按字节擦写</strong></td>
+<td style="text-align: left;">无需拆下芯片，灵活性高，但容量较小、成本较高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Flash Memory（闪存）</strong></td>
+<td style="text-align: left;">快速在线多次电擦写</td>
+<td style="text-align: left;"><strong>电信号按块（扇区）擦写</strong></td>
+<td style="text-align: left;">集成度高、擦写快，广泛用于 <strong>U 盘、SSD、现代 BIOS</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>演进速记链条</strong>：掩膜 ROM（出厂固化） <span class="arithmatex">\(\rightarrow\)</span> PROM（用户写一次） <span class="arithmatex">\(\rightarrow\)</span> EPROM（紫外线整片擦） <span class="arithmatex">\(\rightarrow\)</span> EEPROM（电信号按字节擦） <span class="arithmatex">\(\rightarrow\)</span> Flash（电信号按块擦，最快）。</p>
+</blockquote>
+<hr />
+<h3 id="4">4. 必考设计题：存储器容量的扩展</h3>
+<p>当单片存储芯片的字数或位宽不够时，需通过多片组合构成目标主存，连线规则总结如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">扩展方式</th>
+<th style="text-align: left;">扩展目的与示例</th>
+<th style="text-align: left;">地址线接法</th>
+<th style="text-align: left;">数据线接法</th>
+<th style="text-align: left;">片选线（<span class="arithmatex">\(\overline{\text{CS}}\)</span>）与读写线</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>位扩展</strong></td>
+<td style="text-align: left;"><strong>增加存储字长</strong>（如 2 片 <span class="arithmatex">\(1\text{K}\times 4\)</span> 位 <span class="arithmatex">\(\rightarrow 1\text{K}\times 8\)</span> 位）</td>
+<td style="text-align: left;">地址线<strong>全部并联</strong></td>
+<td style="text-align: left;"><strong>分开连接</strong>数据总线不同位（如 <span class="arithmatex">\(D_7\sim D_4\)</span> 与 <span class="arithmatex">\(D_3\sim D_0\)</span>）</td>
+<td style="text-align: left;">片选线 <span class="arithmatex">\(\overline{\text{CS}}\)</span> <strong>并联</strong>，读写线并联</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>字扩展</strong></td>
+<td style="text-align: left;"><strong>增加存储字数</strong>（如 2 片 <span class="arithmatex">\(1\text{K}\times 8\)</span> 位 <span class="arithmatex">\(\rightarrow 2\text{K}\times 8\)</span> 位）</td>
+<td style="text-align: left;">低位片内地址线并联</td>
+<td style="text-align: left;">数据线<strong>对应位全部并联</strong></td>
+<td style="text-align: left;"><strong>高位地址线经译码器</strong>（如 74LS138）分别接各芯片 <span class="arithmatex">\(\overline{\text{CS}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>字位同时扩展</strong></td>
+<td style="text-align: left;"><strong>同时增加字数与位数</strong>（排成 <span class="arithmatex">\(M\text{ 行} \times N\text{ 列}\)</span> 芯片阵列）</td>
+<td style="text-align: left;">低位地址并联入片内</td>
+<td style="text-align: left;"><strong>同列</strong>芯片数据线并联（各列接不同数据位）</td>
+<td style="text-align: left;"><strong>同行</strong>芯片 <span class="arithmatex">\(\overline{\text{CS}}\)</span> 并联；<strong>不同行</strong>由高位地址译码轮流选中</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="5">5. 性能优化：多模块交叉存储器</h3>
+<p>为缓解“CPU 快、主存慢”的速度鸿沟，采用 <span class="arithmatex">\(m\)</span> 个独立主存模块并行组织（设单模块存取周期为 <span class="arithmatex">\(T\)</span>，总线传送周期为 <span class="arithmatex">\(\tau\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">编址方式</th>
+<th style="text-align: center;">地址划分结构</th>
+<th style="text-align: left;">连续地址分布规律</th>
+<th style="text-align: left;">并行性与核心用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>高位交叉编址（顺序方式）</strong></td>
+<td style="text-align: center;"><code>高位：体号</code> + <code>低位：体内地址</code></td>
+<td style="text-align: left;">连续地址集中在<strong>同一个模块</strong>内</td>
+<td style="text-align: left;">访问连续数据块时仍是<strong>串行</strong>（耗时 <span class="arithmatex">\(nT\)</span>），仅用于单纯扩充容量与故障隔离</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>低位交叉编址（轮流方式）</strong></td>
+<td style="text-align: center;"><code>高位：体内地址</code> + <code>低位：体号</code></td>
+<td style="text-align: left;">连续地址<strong>轮流分散在相邻不同模块</strong>中</td>
+<td style="text-align: left;">满足交叉存取度 <span class="arithmatex">\(T = m\tau\)</span> 时可实现 <mark>流水线式不间断并行读写</mark></td>
+</tr>
+</tbody>
+</table>
+<p><strong>四体低位交叉存储器（<span class="arithmatex">\(m=4,\ T=4\tau\)</span>）连续读取 <span class="arithmatex">\(n\)</span> 个字的流水线重叠示意：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">模块 \ 时间节拍</th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_3\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_4\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_5\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_6\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\tau_7\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>体 <span class="arithmatex">\(M_0\)</span>（地址 <span class="arithmatex">\(0, 4\dots\)</span>）</strong></td>
+<td style="text-align: center;"><strong>启动读字 0</strong></td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;"><strong>送出字 0</strong></td>
+<td style="text-align: center;"><strong>启动读字 4</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(\cdots\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>体 <span class="arithmatex">\(M_1\)</span>（地址 <span class="arithmatex">\(1, 5\dots\)</span>）</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>启动读字 1</strong></td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;"><strong>送出字 1</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(\cdots\)</span></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>体 <span class="arithmatex">\(M_2\)</span>（地址 <span class="arithmatex">\(2, 6\dots\)</span>）</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>启动读字 2</strong></td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;"><strong>送出字 2</strong></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>体 <span class="arithmatex">\(M_3\)</span>（地址 <span class="arithmatex">\(3, 7\dots\)</span>）</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>启动读字 3</strong></td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;">存取中</td>
+<td style="text-align: center;"><strong>送出字 3</strong></td>
+</tr>
+</tbody>
+</table>
+<p>由此直接看出<strong>低位交叉连续读取 <span class="arithmatex">\(n\)</span> 个字的总耗时核心公式</strong>：</p>
+<div class="arithmatex">\[t = T + (n - 1)\tau\]</div>
+<h3 id="6-cache">6. 绝对核心压轴大题：Cache（高速缓冲存储器）</h3>
+<h4 id="1_1">（1）理论基础与性能指标计算</h4>
+<ul>
+<li><strong>局部性原理</strong>：包含<strong>空间局部性</strong>（程序倾向于访问刚访问过的数据的邻近位置，如顺序执行指令、按行遍历数组）和<strong>时间局部性</strong>（程序倾向于在不久的将来再次访问同一数据或指令，如循环体、累加变量）。</li>
+<li><strong>命中率与平均访问时间</strong>：增加 Cache 的目的，是在性能上使主存的平均读出时间尽可能接近 Cache 的读出时间。设程序执行期间 Cache 完成存取 <span class="arithmatex">\(N_c\)</span> 次，主存完成存取 <span class="arithmatex">\(N_m\)</span> 次，命中时 Cache 访问时间为 <span class="arithmatex">\(t_c\)</span>，未命中时主存访问时间为 <span class="arithmatex">\(t_m\)</span>，主存慢于 Cache 的倍率为 <span class="arithmatex">\(r = \dfrac{t_m}{t_c}\)</span>，则：</li>
+</ul>
+<div class="arithmatex">\[\text{命中率 } h = \frac{N_c}{N_c + N_m}, \qquad \text{平均访问时间 } t_a = h \cdot t_c + (1 - h) t_m\]</div>
+<div class="arithmatex">\[\text{访问效率 } e = \frac{t_c}{t_a} = \frac{t_c}{h \cdot t_c + (1 - h) t_m} = \frac{1}{h + (1 - h)r}\]</div>
+<blockquote>
+<p><strong>结论</strong>：为提高访问效率 <span class="arithmatex">\(e\)</span>，命中率 <span class="arithmatex">\(h\)</span> 越接近 <span class="arithmatex">\(1\)</span> 越好，<span class="arithmatex">\(r\)</span> 值以 <span class="arithmatex">\(5 \sim 10\)</span> 为宜；命中率 <span class="arithmatex">\(h\)</span> 与程序行为、Cache 容量、组织方式及块大小密切相关。（注：若题目说明采用“先查 Cache，未命中再访问主存”的串行访存方式，则 <span class="arithmatex">\(t_a = h \cdot t_c + (1 - h)(t_c + t_m) = t_c + (1 - h)t_m\)</span>。）</p>
+</blockquote>
+<h4 id="2-cache">（2）主存与 Cache 的三种地址映射方式</h4>
+<p>由于 Cache 行数远少于主存块数，需要为每个 Cache 行设置一个<strong>标记位（Tag）</strong>记录其存放的主存块编号，并设置 1 位<strong>有效位（Valid bit）</strong>指示该行数据是否有效（写回法还需 1 位<strong>脏位 Dirty bit</strong>）。三种映射方式对比如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">映射方式</th>
+<th style="text-align: left;">映射规则</th>
+<th style="text-align: left;">主存地址划分（从高到低）</th>
+<th style="text-align: left;">比较器数量与硬件开销</th>
+<th style="text-align: left;">块冲突概率与空间利用率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. 直接映射</strong></td>
+<td style="text-align: left;">主存块只能装入 Cache <strong>唯一指定行</strong>：<br><span class="arithmatex">\(\text{Cache 行号} = \text{主存块号} \bmod \text{Cache 总行数}\)</span></td>
+<td style="text-align: left;"><code>标记 (Tag) + Cache 行号 (Index) + 块内地址 (Offset)</code></td>
+<td style="text-align: left;">仅需 <strong>1 个</strong>比较器，实现最简单、判断最快</td>
+<td style="text-align: left;">冲突概率<strong>最高</strong>，空间利用率最低，无须替换算法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. 全相联映射</strong></td>
+<td style="text-align: left;">主存块可装入 Cache <strong>任意空闲行</strong></td>
+<td style="text-align: left;"><code>主存块号/标记 (Tag) + 块内地址 (Offset)</code></td>
+<td style="text-align: left;">需与所有行并行比较，相联存储器成本<strong>最高</strong>、最慢</td>
+<td style="text-align: left;">冲突概率<strong>最低</strong>，空间利用率与命中率<strong>最高</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. 组相联映射</strong></td>
+<td style="text-align: left;"><strong>组间直接映射，组内全相联</strong>（每组 <span class="arithmatex">\(r\)</span> 行称为 <span class="arithmatex">\(r\)</span> 路组相联）：<br><span class="arithmatex">\(\text{Cache 组号} = \text{主存块号} \bmod \text{Cache 总组数 } Q\)</span></td>
+<td style="text-align: left;"><code>标记 (Tag) + 组号 (Set) + 块内地址 (Offset)</code></td>
+<td style="text-align: left;"><span class="arithmatex">\(r\)</span> 路组相联需 <strong><span class="arithmatex">\(r\)</span> 个</strong>比较器，硬件与性能折中</td>
+<td style="text-align: left;">随路数 <span class="arithmatex">\(r\)</span> 增大，冲突减少，最常用于现代 CPU</td>
+</tr>
+</tbody>
+</table>
+<details class="info">
+<summary>展开查看教材原图：直接映射、全相联映射与 2 路组相联映射示意图（图 3.19 ~ 3.21）</summary>
+<p><img loading="lazy" decoding="async" alt="直接映射与全相联映射的地址结构和 CPU 访存过程" src="../resources/z2.png" width="984" height="1340" /></p>
+<p><img loading="lazy" decoding="async" alt="2 路组相联映射示意图：主存地址划分为标记、组号和块内地址" src="../resources/z3.png" width="914" height="1226" /></p>
+</details>
+<hr />
+<h4 id="cache-lab">交互图解：冲突、落点与 LRU</h4>
+<p>Cache 有空行，不等于当前主存块能放进去。直接映射限制“只能放哪一行”；组相联限制“只能进哪一组”，但允许在组内选一行。下面固定为 <strong>4 行 Cache、初始全空</strong>，输入是<strong>主存块号</strong>，不是字节地址。2 路组相联在组内采用 LRU（最近最少使用）替换。</p>
+<div class="study-viz concept-lab" data-concept-viz="cache">
+<p>静态示例：访问 0、4、0、4、1、5、1、5。直接映射时行号 = 块号 mod 4，0 与 4 争用行 0，1 与 5 争用行 1，8 次访问全未命中。2 路组相联有 2 组，组号 = 块号 mod 2；0 与 4 可同时留在组 0，1 与 5 可同时留在组 1，因此命中 4 次。</p>
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">把规则变成计算</p>
+<p>4 行直接映射：<code>块 4 → 组/行 0，Tag = 1</code>。2 路、2 组：<code>块 4 → 组 0，Tag = 2</code>。图中每行显示 <strong>V、Tag 和块号</strong>；V 是有效位。块号是帮助读图的标记，真实 Cache 数据区存储的是整块数据。</p>
+</div>
+<p>再切到“同组放入三个块”：虽然整个 Cache 有 4 行，块 <code>0、4、8</code> 都只能进 2 路 Cache 的组 0，组内仍然放不下。这说明<strong>相联度能缓解某些冲突，不会消除所有未命中</strong>。这些命中率只对应所示访问序列，不是通用性能结论。</p>
+<p>规则核对：<a href="https://notes.cs61c.org/content/caches-ii/set-associative/">CS 61C 组相联 Cache 课程笔记</a>。</p>
+<h4 id="3_1">（3）三种映射方式手写笔记与经典例题</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">① 直接映射（2 道例题）</label><label for="__tabbed_1_2">② 全相联映射（综合例题）</label><label for="__tabbed_1_3">③ 组相联映射（2 道例题）</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>直接映射相当于把主存地址的“低位（Cache 行号 + 块内地址）”直接对应到 Cache 中，高位作为标记（Tag）。</p>
+<div class="co-question" markdown="1">
+<p><strong>【直接映射·例 1】</strong><br />
+某 32 位计算机的 Cache 容量为 <span class="arithmatex">\(16\text{KB}\)</span>，Cache 块大小为 <span class="arithmatex">\(16\text{B}\)</span>，若主存与 Cache 地址映射采用直接映射方式，则主存地址 <code>0x1234E8F8</code> 的单元装入 Cache 的地址是多少？</p>
+<p><details class="co-answer" markdown="1">
+<summary>查看答案与解析</summary></p>
+<p><strong>解析：</strong> Cache 容量 <span class="arithmatex">\(= 16\text{KB} = 2^{14}\text{B}\)</span>，按字节编址需要 <strong><span class="arithmatex">\(14\)</span> 根地址线</strong>。将主存十六进制地址展开为二进制，只取低 14 位作为 Cache 地址：</p>
+<div class="arithmatex">\[(1234\text{E}8\text{F}8)_{\text{H}} = 0001\ 0010\ 0011\ 0100\ 11\underbrace{10\ 1000\ 1111\ 1000}_{\text{低 14 位存入 Cache}}\]</div>
+<p><strong>答案：</strong> 装入 Cache 的 14 位地址是 <strong><code>10 1000 1111 1000</code></strong>。</p>
+</details>
+</div>
+<div class="co-question" markdown="1">
+<p><strong>【直接映射·例 2】</strong><br />
+设有一个主存-Cache 层次的存储器，其主存容量为 <span class="arithmatex">\(1\text{MB}\)</span>，Cache 容量为 <span class="arithmatex">\(16\text{KB}\)</span>，每字块有 8 个字，每字 32 位，采用直接映射方式。若主存地址为 <code>35301H</code>，且 CPU 访问 Cache 命中，设 Cache 起始字块编号为 0，则该主存块在 Cache 的第几个字块中？</p>
+<p><details class="co-answer" markdown="1">
+<summary>查看答案与解析</summary></p>
+<p><strong>解析：</strong></p>
+<ol>
+<li><strong>计算各字段位数</strong>：主存容量 <span class="arithmatex">\(1\text{MB} = 2^{20}\text{B}\)</span>（主存地址 <strong>20 位</strong>）；每字块 8 个字 <span class="arithmatex">\(= 8 \times 32\text{ bit} = 32\text{B} = 2^5\text{B}\)</span>（<strong>低 5 位块内地址</strong>）；Cache 容量 <span class="arithmatex">\(16\text{KB} = 2^{14}\text{B}\)</span>（<strong>Cache 地址 14 位</strong>，其中高 <span class="arithmatex">\(14-5=9\)</span> 位为 Cache 块号）。</li>
+<li>
+<p><strong>拆分主存地址 <code>(35301)H</code></strong>：</p>
+<div class="arithmatex">\[(35301)_{\text{H}} = \underbrace{0011\ 01}_{\text{标记 (6位)}}\ \underbrace{01\ 0011\ 000}_{\text{Cache 块号 (9位)}}\ \underbrace{0\ 0001}_{\text{块内地址 (5位)}}\]</div>
+</li>
+<li>
+<p><strong>计算十进制块号</strong>：<span class="arithmatex">\((010011000)_2 = 2^7 + 2^4 + 2^3 = 128 + 16 + 8 = 152\)</span>。</p>
+</li>
+</ol>
+<p><strong>答案：</strong> 在 Cache 的第 <strong>152</strong> 个字块中。</p>
+</details>
+</div>
+</div>
+<div class="tabbed-block">
+<p>在全相联映射下，主存中的任意一块可以装入 Cache 中的任意一块。设主存地址总长为 <span class="arithmatex">\(n\)</span> 位，块内地址占 <span class="arithmatex">\(b\)</span> 位，则主存字块号（即标记 Tag）占 <span class="arithmatex">\(n - b\)</span> 位，通过<strong>相联存储器（按内容寻址）</strong>与所有 Cache 行的标记同时比较。</p>
+<div class="co-question" markdown="1">
+<p><strong>【全相联映射·例题】</strong><br />
+若主存为 <span class="arithmatex">\(1\text{MB}\)</span>，Cache 为 <span class="arithmatex">\(2\text{KB}\)</span>，按 <span class="arithmatex">\(256\text{B}\)</span> 分块。回答下列问题：<br />
+(1) 若 Cache-主存层次采用全相联映射，则主存、Cache 各分多少块？并写出主存与 Cache 的地址格式。<br />
+(2) 若由相联存储器实现主存-Cache 地址变换，问该相联存储器应包含几个单元，每单元几位？<br />
+(3) 若 Cache 读写周期为 <span class="arithmatex">\(25\text{ns}\)</span>，主存读写周期为 <span class="arithmatex">\(250\text{ns}\)</span>，平均命中率为 <span class="arithmatex">\(98\%\)</span>，求平均访问时间 <span class="arithmatex">\(t_a\)</span>。</p>
+<p><details class="co-answer" markdown="1">
+<summary>查看答案与解析</summary></p>
+<p><strong>解析：</strong></p>
+<p><strong>(1)</strong> 每块大小为 <span class="arithmatex">\(256\text{B} = 2^8\text{B}\)</span>，故块内地址占 <strong>8 位</strong>：</p>
+<div class="arithmatex">\[\text{主存块数} = \frac{1\text{MB}}{256\text{B}} = \frac{2^{20}}{2^8} = 2^{12}\text{ 块}\ (\text{12 位}), \qquad \text{Cache 块数} = \frac{2\text{KB}}{256\text{B}} = \frac{2^{11}}{2^8} = 8\text{ 块}\ (\text{3 位})\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">地址类型</th>
+<th style="text-align: center;">高位字段</th>
+<th style="text-align: center;">低位字段（块内地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>主存地址格式（共 20 位）</strong></td>
+<td style="text-align: center;">主存块号 / 标记（12 位）</td>
+<td style="text-align: center;">块内地址（8 位）</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Cache 地址格式（共 11 位）</strong></td>
+<td style="text-align: center;">Cache 块号（3 位）</td>
+<td style="text-align: center;">块内地址（8 位）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>(2)</strong> 相联存储器单元数与 Cache 块数一一对应，包含 <strong>8 个单元</strong>；每单元与主存块号比较，含 <strong>12 位</strong>（计入 1 位有效位则为 13 位）。</p>
+<p><strong>(3)</strong> 平均访问时间 <span class="arithmatex">\(t_a = 0.98 \times 25\text{ns} + (1 - 0.98) \times 250\text{ns} = 24.5\text{ns} + 5\text{ns} = \mathbf{29.5\text{ns}}\)</span>。</p>
+</details>
+</div>
+</div>
+<div class="tabbed-block">
+<p>设主存地址为 <span class="arithmatex">\(n\)</span> 位，组号占 <span class="arithmatex">\(q\)</span> 位（总组数 <span class="arithmatex">\(Q = 2^q\)</span>），块内地址占 <span class="arithmatex">\(b\)</span> 位，高位标记占 <span class="arithmatex">\(t = n - q - b\)</span> 位。主存第 <span class="arithmatex">\(j\)</span> 块映射到 Cache 组号 <span class="arithmatex">\(i = j \bmod Q\)</span>。</p>
+<div class="co-question" markdown="1">
+<p><strong>【组相联映射·例 1】</strong><br />
+某计算机的 Cache 共有 16 块，采用 2 路组相联映射方式（每组 2 块）。每个主存块大小为 32 字节，按字节编址。主存 129 号单元所在主存块装入到 Cache 的组号是多少？</p>
+<p><details class="co-answer" markdown="1">
+<summary>查看答案与解析</summary></p>
+<p><strong>解析：</strong> 129 号字节单元位于主存第 <span class="arithmatex">\(j = \lfloor 129 / 32 \rfloor = 4\)</span> 块（从 0 编号）；Cache 共 <span class="arithmatex">\(Q = 16 / 2 = 8\)</span> 组；装入组号 <span class="arithmatex">\(i = 4 \bmod 8 = \mathbf{4}\)</span>。</p>
+</details>
+</div>
+<div class="co-question" markdown="1">
+<p><strong>【组相联映射·例 2】</strong><br />
+设有一个主存-Cache 层次的存储器，Cache 的容量为 64 块，采用组相联映射方法，字块大小为 128 个字，每 4 块为 1 组。若主存容量为 4096 块，采用字编址，则主存地址和主存标记的位数分别是多少？</p>
+<p><details class="co-answer" markdown="1">
+<summary>查看答案与解析</summary></p>
+<p><strong>解析：</strong> 按字编址，主存容量 <span class="arithmatex">\(= 4096 \times 128 = 2^{12} \times 2^7 = 2^{19}\text{ 字}\)</span>（<strong>19 位</strong>）；Cache 组数 <span class="arithmatex">\(= 64 / 4 = 16 = 2^4\)</span>（<strong>组号 4 位</strong>）；块内地址 <span class="arithmatex">\(128 = 2^7\)</span>（<strong>7 位</strong>）；标记位数 <span class="arithmatex">\(= 19 - 4 - 7 = \mathbf{8\text{ 位}}\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">主存标记 (Tag)</th>
+<th style="text-align: center;">组号 (Set)</th>
+<th style="text-align: center;">块内地址 (Offset)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>8 位</strong></td>
+<td style="text-align: center;"><strong>4 位</strong></td>
+<td style="text-align: center;"><strong>7 位</strong></td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+<hr />
+<h4 id="4-cache">（4）替换算法、写策略与 Cache 总容量计算</h4>
+<ul>
+<li><strong>常用替换算法</strong>：当 Cache 行（或组）已满时，常考 <strong>LRU（近期最少使用法，命中率最高）</strong>、<strong>FIFO（先进先出法）</strong>、<strong>LFU（最不经常使用法）</strong> 和 <strong>随机算法（RAND）</strong>。</li>
+<li><strong>两种写一致性策略对比</strong>：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">写策略</th>
+<th style="text-align: left;">写命中时操作</th>
+<th style="text-align: center;">是否需要脏位（Dirty bit）</th>
+<th style="text-align: left;">优缺点与特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>全写法（Write-Through，写直达）</strong></td>
+<td style="text-align: left;"><strong>同时写入</strong> Cache 和主存</td>
+<td style="text-align: center;">否（<span class="arithmatex">\(0\)</span> 位）</td>
+<td style="text-align: left;">数据强一致、实现简单；频繁写主存拖慢速度（常配写缓冲队列）</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>写回法（Write-Back）</strong></td>
+<td style="text-align: left;"><strong>只修改 Cache</strong>，置该行 <code>脏位 = 1</code>；仅被替换出 Cache 时才写回主存</td>
+<td style="text-align: center;"><strong>是（需 <span class="arithmatex">\(1\)</span> 位脏位）</strong></td>
+<td style="text-align: left;">大幅减少访存次数、速度快；存在短暂不一致风险</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">必考审题陷阱：Cache 数据容量 vs Cache 物理总容量</p>
+<div class="arithmatex">\[\text{Cache 总容量} = \text{Cache 总行数} \times \big(\text{Tag 位数} + \text{有效位 1 位} + [\text{写回法脏位 1 位}] + \text{每块数据位数}\big)\]</div>
+<p>题目问 <strong>“Cache 数据容量”</strong> 时只算数据块部分；问 <strong>“Cache 总容量”</strong> 时必须加上每行的标记位与控制位！</p>
+</div>
+<h3 id="7-tlb">7. 拓展：虚拟存储器与 TLB 快表</h3>
+<p>虚拟存储器是“主存—辅存”层次的核心技术，将程序员编写的<strong>虚拟地址（逻辑地址）</strong>由硬件 MMU 配合操作系统维护的页表/段表自动转换为<strong>物理地址（实地址）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">虚存组织方式</th>
+<th style="text-align: left;">划分依据与块长</th>
+<th style="text-align: left;">主要优点</th>
+<th style="text-align: left;">主要缺点与开销</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>页式虚拟存储器</strong></td>
+<td style="text-align: left;">固定大小的<strong>页（Page）</strong></td>
+<td style="text-align: left;">页长固定、管理简单、<strong>无外部碎片</strong></td>
+<td style="text-align: left;">最末一页存在页内碎片；页表本身可能很大</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>段式虚拟存储器</strong></td>
+<td style="text-align: left;">按程序逻辑模块分<strong>段（Segment）</strong>，段长可变</td>
+<td style="text-align: left;">逻辑独立，极便于模块化编译、<strong>共享与保护</strong></td>
+<td style="text-align: left;">段长不一，易产生<strong>段间外部碎片</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>段页式虚拟存储器</strong></td>
+<td style="text-align: left;">先按逻辑分段，段内再固定分页</td>
+<td style="text-align: left;">兼具段式的逻辑共享保护与页式的紧凑物理分配</td>
+<td style="text-align: left;">地址变换需<strong>查段表 + 查页表两次</strong>，访存开销大</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tlb-cache">TLB（快表）与 Cache 协同访存流程</h4>
+<p>由于页表存放在主存中，无快表时读写一次数据需访问 <strong>2 次主存</strong>（先查页表、再取数据）。CPU 内部增设 <strong>TLB（Translation Lookaside Buffer，页表项高速缓存）</strong> 后，完整地址变换与数据读取流程如下：</p>
+<pre class="mermaid"><code>flowchart LR
+    VA["CPU 给出虚拟地址&lt;br/&gt;(虚页号 + 页内偏移)"] --&gt; TLB{"查快表 TLB&lt;br/&gt;是否命中?"}
+    TLB --&gt;|"命中 (无需访存查表)"| PA["拼接物理页框号 + 偏移&lt;br/&gt;得到物理地址 PA"]
+    TLB --&gt;|"未命中"| PT["访问主存慢表(页表)&lt;br/&gt;并更新 TLB"]
+    PT --&gt;|"缺页则调入主存"| PA
+    PA --&gt; CACHE{"查 Cache&lt;br/&gt;是否命中?"}
+    CACHE --&gt;|"命中"| CPU["直接送回 CPU"]
+    CACHE --&gt;|"未命中"| MEM["访问主存读数据块&lt;br/&gt;装入 Cache 并送 CPU"]</code></pre>
+<h3 id="8">8. 其他补充（从其他教材整理的笔记）</h3>
+<h4 id="1marmdr">（1）主存储器的地址寄存器（MAR）和数据寄存器（MDR）</h4>
+<p>在主存储器接口中，<strong>地址寄存器（MAR）</strong>用来存放当前 CPU 要访问（读或写）的主存单元地址；<strong>数据寄存器（MDR）</strong>用来暂存从主存中读出的信息，或准备写入主存的信息。</p>
+<h4 id="2byte-address-space">（2）字节地址空间（Byte Address Space）</h4>
+<p><strong>字节地址空间</strong>就是 <strong>CPU 能够直接寻址和访问的、以“字节（Byte）”为最小独立单位的内存地址范围</strong>。</p>
+<ol>
+<li><strong>为什么要“按字节寻址”？</strong><br />
+   如果把内存比作一栋巨大的公寓楼，字节地址空间就是这栋楼的房间号系统。内存里最小的物理存储位是 bit（<code>0</code> 或 <code>1</code>），但按位寻址过于繁琐，因此计算机规定每 <strong>8 个 bit 组成 1 个字节（Byte）</strong>，每个字节分配一个专属门牌号（内存地址），称为<strong>按字节寻址（Byte-addressable）</strong>。</li>
+<li>
+<p><strong>空间大小由什么决定？</strong><br />
+   地址空间的大小取决于 <strong>CPU 的地址总线宽度 <span class="arithmatex">\(n\)</span></strong>。若有 <span class="arithmatex">\(n\)</span> 根地址线，就能产生 <span class="arithmatex">\(2^n\)</span> 个不同的地址组合，每个地址对应 <span class="arithmatex">\(1\text{ Byte}\)</span>：</p>
+<div class="arithmatex">\[\text{字节地址空间大小} = 2^n \times 1\text{ Byte}\]</div>
+</li>
+<li>
+<p><strong>经典实例：32 位字节地址空间 + 64 位数据线</strong></p>
+</li>
+<li><strong>最大寻址空间</strong>：<span class="arithmatex">\(2^{32} \times 1\text{B} = 4\text{GB}\)</span>，地址范围从 <code>0x00000000</code> 到 <code>0xFFFFFFFF</code>。</li>
+<li><strong>单次访存位宽</strong>：64 位数据线每次访存可同时并行传输 <strong>8 个字节</strong>（64 位）。</li>
+<li><strong>硬件地址拆分</strong>：高 29 位（<span class="arithmatex">\(A_{31} \sim A_3\)</span>）用于选中哪一个 64 位的“数据行”，低 3 位（<span class="arithmatex">\(A_2 \sim A_0\)</span>）决定这 8 个字节中的哪几个字节生效。因此 8 字节数据对象的起始地址最好是 <strong>8 的整数倍</strong>（低 3 位为 <code>000</code>），否则跨行存放需要访存 <strong>2 次</strong>——这也是 C/C++ 编译器自动做<strong>边界对齐</strong>的硬件原因。</li>
+</ol>
+<hr />
+<h2 id="_2">课堂与课后习题</h2>
+<div class="co-question">
+<h3 id="1pptc">练习 1（PPT）：C 结构体边界对齐与小端存储</h3>
+<p><strong>题目：</strong><br />
+在按字节编址、采用<strong>小端方式</strong>的 32 位计算机中，按边界对齐方式，对以下 C 语言结构型变量 <code>a</code> 分配存储空间：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">record</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="kt">short</span><span class="w"> </span><span class="n">x1</span><span class="p">;</span><span class="w"> </span><span class="c1">// short 占 2 字节</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x2</span><span class="p">;</span><span class="w">   </span><span class="c1">// int 占 4 字节</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+</code></pre></div>
+<p>若 <code>a</code> 的首地址为 <code>2020 FE00H</code>，<code>a</code> 的成员变量 <code>x2</code> 的机器数为 <code>1234 0000H</code>，则其中 <code>34H</code> 所在存储单元的地址是多少？<br />
+A. <code>2020FE03H</code><br />
+B. <code>2020FE04H</code><br />
+C. <code>2020FE05H</code><br />
+D. <code>2020FE06H</code></p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>答案：D</strong></p>
+<p><strong>解析（手写解题步骤整理）：</strong></p>
+<ul>
+<li><strong>考点梳理</strong>：</li>
+<li><strong>边界对齐原则</strong>：为了让 CPU 读写效率最高，数据成员的起始地址必须是<strong>自身类型大小的整数倍</strong>。</li>
+<li><strong>小端方式（Little-endian）</strong>：数据的<strong>低位字节</strong>存放在内存的<strong>低地址端</strong>，高位字节存放在高地址端（口诀：<strong>低对低，高对高</strong>）。</li>
+<li><strong>第 1 步：计算结构体的内存对齐</strong></li>
+<li><code>short x1</code> 占 2 字节，<code>int x2</code> 占 4 字节，结构体 <code>a</code> 的首地址为 <code>2020 FE00H</code>。</li>
+<li>故 <code>x1</code> 先占用首地址 <code>2020 FE00H</code> 与 <code>2020 FE01H</code>。</li>
+<li><code>x2</code> 为 <code>int</code> 类型（4 字节），根据边界对齐原则，其起始地址必须能被 4 整除（<code>2020 FE02H</code> 和 <code>2020 FE03H</code> 留空填充），故 <code>x2</code> 占用 <strong><code>2020 FE04H</code> ~ <code>2020 FE07H</code></strong> 这 4 个字节。</li>
+<li><strong>第 2 步：按小端方式摆放机器数</strong></li>
+<li><code>x2</code> 的机器数为 <code>12 34 00 00 H</code>（每 2 位十六进制数 <span class="arithmatex">\(= 1\text{ Byte} = 8\text{ bit}\)</span>），从高位字节到低位字节依次为 <code>12H</code>、<code>34H</code>、<code>00H</code>、<code>00H</code>。</li>
+<li>按小端方式（低位字节放低地址）依次存放如下表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">内存地址</th>
+<th style="text-align: center;"><code>2020 FE00H</code></th>
+<th style="text-align: center;"><code>2020 FE01H</code></th>
+<th style="text-align: center;"><code>2020 FE02H</code></th>
+<th style="text-align: center;"><code>2020 FE03H</code></th>
+<th style="text-align: center;"><code>2020 FE04H</code></th>
+<th style="text-align: center;"><code>2020 FE05H</code></th>
+<th style="text-align: center;"><strong><code>2020 FE06H</code></strong></th>
+<th style="text-align: center;"><code>2020 FE07H</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>存放数据</strong></td>
+<td style="text-align: center;"><code>x1</code> 低字节</td>
+<td style="text-align: center;"><code>x1</code> 高字节</td>
+<td style="text-align: center;">空（对齐）</td>
+<td style="text-align: center;">空（对齐）</td>
+<td style="text-align: center;"><code>00H</code></td>
+<td style="text-align: center;"><code>00H</code></td>
+<td style="text-align: center;"><strong><code>34H</code></strong></td>
+<td style="text-align: center;"><code>12H</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+<h3 id="2ppt">练习 2（PPT）：存储芯片引脚数与按半字寻址</h3>
+<div class="co-question">
+<p><strong>题目 1：</strong><br />
+某存储器芯片，其存储容量为 <span class="arithmatex">\(64\text{K} \times 8\)</span> 位，该芯片的地址线和数据线的数目分别是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>答案：16 根地址线、8 根数据线</strong></p>
+<p><strong>解析：</strong><br />
+因为 <span class="arithmatex">\(64\text{K} = 2^{16}\)</span>，寻址 <span class="arithmatex">\(2^{16}\)</span> 个单元需要 <strong>16 根地址线</strong>；每个单元位宽为 8 位，故需要 <strong>8 根数据线</strong>。</p>
+</details>
+</div>
+<div class="co-question">
+<p><strong>题目 2：</strong><br />
+某计算机字长 32 位，容量 <span class="arithmatex">\(4\text{MB}\)</span>，若按半字编址，寻址范围是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>答案：<code>2M</code>（即 <span class="arithmatex">\(2 \times 2^{20}\)</span> 个地址单元）</strong></p>
+<p><strong>解析：</strong></p>
+<ol>
+<li><strong>概念区分</strong>：</li>
+<li><strong>容量（以字节为单位）</strong>：存储器物理上总共能装多少个 Byte（<span class="arithmatex">\(1\text{B} = 8\text{ bit}\)</span>）。</li>
+<li><strong>编址方式</strong>：按字节编址每 <span class="arithmatex">\(1\text{B}\)</span> 分配一个地址；按半字编址每半个字分配一个地址；按字编址每个字分配一个地址。</li>
+<li><strong>分步计算</strong>：</li>
+<li>计算机字长 <span class="arithmatex">\(= 32\text{ bit} = 4\text{B}\)</span>，故半字大小 <span class="arithmatex">\(= \dfrac{4\text{B}}{2} = 2\text{B}\)</span>。</li>
+<li>总容量 <span class="arithmatex">\(= 4\text{MB} = 4 \times 2^{20}\text{B}\)</span>。</li>
+<li>寻址范围（地址单元总数）为：</li>
+</ol>
+<div class="arithmatex">\[\text{寻址范围} = \frac{\text{总容量}}{\text{编址单位大小}} = \frac{4 \times 2^{20}\text{B}}{2\text{B}} = 2 \times 2^{20} = 2\text{M}\]</div>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p122-1">作业 P122-1：存储器容量与芯片扩展计算</h3>
+<p><strong>题目：</strong><br />
+设有一个具有 20 位地址和 32 位字长的存储器，问：<br />
+(1) 该存储器能存储多少字节的信息？<br />
+(2) 如果存储器由 <span class="arithmatex">\(512\text{K} \times 8\)</span> 位 SRAM 芯片组成，需要多少片？<br />
+(3) 需要多少位地址作芯片选择？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ul>
+<li><strong>(1) 求存储器总字节容量</strong>：<br />
+  地址线 20 位，说明有 <span class="arithmatex">\(2^{20} = 1\text{M}\)</span> 个存储单元；每个单元字长 <span class="arithmatex">\(32\text{ bit} = 4\text{B}\)</span>，故总容量 <span class="arithmatex">\(= 1\text{M} \times 4\text{B} = \mathbf{4\text{MB}}\)</span>。</li>
+<li><strong>(2) 求所需 <span class="arithmatex">\(512\text{K} \times 8\)</span> 位芯片片数</strong>：<br />
+  目标规格为 <span class="arithmatex">\(1\text{M} \times 32\)</span> 位，单片规格为 <span class="arithmatex">\(512\text{K} \times 8\)</span> 位：</li>
+<li><strong>位扩展（列数）</strong>：<span class="arithmatex">\(32 / 8 = 4\)</span> 列；</li>
+<li><strong>字扩展（行数）</strong>：<span class="arithmatex">\(1\text{M} / 512\text{K} = 1024\text{K} / 512\text{K} = 2\)</span> 行；</li>
+<li>构成 <span class="arithmatex">\(2 \times 4\)</span> 的芯片阵列，总片数 <span class="arithmatex">\(= 2 \times 4 = \mathbf{8\text{ 片}}\)</span>。</li>
+<li><strong>(3) 求片选地址位数</strong>：<br />
+  单片容量 <span class="arithmatex">\(512\text{K} = 2^{19}\)</span>，片内寻址需要 <strong>19 位</strong>地址线（<span class="arithmatex">\(A_{18} \sim A_0\)</span>）。剩余高位地址线数量 <span class="arithmatex">\(= 20 - 19 = \mathbf{1\text{ 位}}\)</span>（即最高位 <span class="arithmatex">\(A_{19}\)</span>），可产生 2 个片选信号分别选中 2 行芯片。</li>
+</ul>
+<p><strong>答案：</strong> (1) <span class="arithmatex">\(4\text{MB}\)</span>；(2) <span class="arithmatex">\(8\)</span> 片；(3) <span class="arithmatex">\(1\)</span> 位地址作片选。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p122-316k8-64k32">作业 P122-3：16K×8 位芯片扩展为 64K×32 位存储器</h3>
+<p><strong>题目：</strong><br />
+用 <span class="arithmatex">\(16\text{K} \times 8\)</span> 位的 DRAM 芯片构成 <span class="arithmatex">\(64\text{K} \times 32\)</span> 位存储器，请画出该存储器的组成逻辑框图。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<p><strong>1. 芯片总数与阵列规划</strong></p>
+<ul>
+<li><strong>目标容量</strong>：<span class="arithmatex">\(64\text{K} \times 32\text{ 位}\)</span>；<strong>单片容量</strong>：<span class="arithmatex">\(16\text{K} \times 8\text{ 位}\)</span>。</li>
+<li><strong>字扩展（行数）</strong>：<span class="arithmatex">\(64\text{K} / 16\text{K} = 4\text{ 行}\)</span>（4 组芯片轮流工作）。</li>
+<li><strong>位扩展（列数）</strong>：<span class="arithmatex">\(32 / 8 = 4\text{ 列}\)</span>（每组 4 片芯片拼成 32 位字长）。</li>
+<li><strong>总片数</strong>：<span class="arithmatex">\(4 \times 4 = 16\text{ 片}\)</span>。</li>
+</ul>
+<p><strong>2. 地址线、数据线与控制线分配</strong></p>
+<ul>
+<li><strong>地址线（共 16 位 <span class="arithmatex">\(A_{15} \sim A_0\)</span>，因 <span class="arithmatex">\(64\text{K} = 2^{16}\)</span>）</strong>：</li>
+<li><strong>片内地址线（14 位）</strong>：单片 <span class="arithmatex">\(16\text{K} = 2^{14}\)</span>，低 14 位 <span class="arithmatex">\(A_{13} \sim A_0\)</span> 并行连接到所有 16 片芯片的地址端。</li>
+<li><strong>片选地址线（2 位）</strong>：高 2 位 <span class="arithmatex">\(A_{15}, A_{14}\)</span> 接 <strong>2-4 译码器</strong>（以访存控制信号 <span class="arithmatex">\(\overline{\text{MREQ}}\)</span> 作为译码器使能端），译码器输出的 4 个片选信号 <span class="arithmatex">\(\overline{Y_0} \sim \overline{Y_3}\)</span> 分别横向接第 1~4 行芯片的片选端 <span class="arithmatex">\(\overline{\text{CS}}\)</span>。</li>
+<li><strong>数据线（共 32 位 <span class="arithmatex">\(D_{31} \sim D_0\)</span>）</strong>：按列并联，每行的 4 片芯片分别连接 <span class="arithmatex">\(D_7 \sim D_0\)</span>、<span class="arithmatex">\(D_{15} \sim D_8\)</span>、<span class="arithmatex">\(D_{23} \sim D_{16}\)</span>、<span class="arithmatex">\(D_{31} \sim D_{24}\)</span>。</li>
+<li><strong>读写控制线（<span class="arithmatex">\(\overline{\text{WE}}\)</span>）</strong>：同时并联到所有 16 片芯片的读写控制端。</li>
+</ul>
+<p><img loading="lazy" decoding="async" alt="教材 p122 第 3 题：存储器扩展与片选逻辑图" src="../resources/p122_3.png" width="1668" height="881" /></p>
+<details class="info">
+<summary>补充参考：王道教材存储器位扩展、字扩展与字位同时扩展连接图（图 3.12 ~ 3.14）</summary>
+<p>借鉴王道计算机考研资料（如需电子版可联系我）：</p>
+<p><img loading="lazy" decoding="async" alt="存储器位扩展与字扩展连接示意图（教材图 3.12、3.13）" src="../resources/t3_1.png" width="998" height="1390" /></p>
+<p><img loading="lazy" decoding="async" alt="字位同时扩展及 CPU 连接图（教材图 3.14）" src="../resources/t3_2.png" width="996" height="562" /></p>
+</details>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p122-8">作业 P122-8：顺序存储器与交叉存储器带宽计算</h3>
+<p><strong>题目：</strong><br />
+设存储器容量为 <span class="arithmatex">\(64\text{MB}\)</span>，字长为 64 位，模块数 <span class="arithmatex">\(m = 8\)</span>，分别用顺序和交叉方式进行组织。存储周期 <span class="arithmatex">\(T = 100\text{ns}\)</span>，数据总线宽度为 64 位，总线传送周期 <span class="arithmatex">\(\tau = 50\text{ns}\)</span>。求：顺序存储器和交叉存储器的带宽各是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<p><strong>1. 基本单位统一</strong></p>
+<ul>
+<li>字长 <span class="arithmatex">\(= 64\text{ bit} = 8\text{B}\)</span>；存储周期 <span class="arithmatex">\(T = 100\text{ns} = 10^{-7}\text{s}\)</span>；总线传送周期 <span class="arithmatex">\(\tau = 50\text{ns} = 0.5 \times 10^{-7}\text{s}\)</span>；模块数 <span class="arithmatex">\(m = 8\)</span>。</li>
+</ul>
+<p><strong>2. 顺序存储器（高位交叉）带宽</strong></p>
+<p>各模块串行工作，每隔一个完整的存储周期 <span class="arithmatex">\(T = 100\text{ns}\)</span> 只能读写一个字（<span class="arithmatex">\(8\text{B}\)</span>）：</p>
+<div class="arithmatex">\[W_{\text{顺序}} = \frac{\text{字长}}{T} = \frac{8\text{B}}{100 \times 10^{-9}\text{s}} = 8 \times 10^7\text{B/s} = 80\text{MB/s} \quad (\text{或 } 640\text{Mbps})\]</div>
+<p><strong>3. 交叉存储器（低位交叉）最大极限带宽</strong></p>
+<p>各模块流水线并行工作，满足 <span class="arithmatex">\(T \le m\tau\)</span>。在流水线完全充满的极限状态下，每隔一个总线传送周期 <span class="arithmatex">\(\tau = 50\text{ns}\)</span> 即可输出一个字（<span class="arithmatex">\(8\text{B}\)</span>）：</p>
+<div class="arithmatex">\[W_{\text{交叉（极限）}} = \frac{\text{字长}}{\tau} = \frac{8\text{B}}{50 \times 10^{-9}\text{s}} = 1.6 \times 10^8\text{B/s} = 160\text{MB/s} \quad (\text{或 } 1280\text{Mbps})\]</div>
+<div class="admonition warning">
+<p class="admonition-title">重点辨析：极限最大带宽 vs 连续读出 <span class="arithmatex">\(n=8\)</span> 个字的实际数据传输率</p>
+<p>老师给的标准答案以 <span class="arithmatex">\(\text{bit}\)</span> 为单位（顺序 <strong><span class="arithmatex">\(640\text{Mbps}\)</span></strong>、交叉 <strong><span class="arithmatex">\(1280\text{Mbps}\)</span></strong>），与上面的 <strong><span class="arithmatex">\(80\text{MB/s}\)</span></strong>、<strong><span class="arithmatex">\(160\text{MB/s}\)</span></strong> 物理意义完全一致（<span class="arithmatex">\(1\text{B} = 8\text{bit}\)</span>）。</p>
+<p>但要注意 <strong>408 考研常考的变体问法</strong>——如果题目明确限定 <strong>“若连续读出 8 个字，求顺序存储器和交叉存储器的数据传输率各是多少？”</strong>，就必须计入流水线第一个字的建立时间 <span class="arithmatex">\(T\)</span>：</p>
+<ul>
+<li><strong>顺序存储器（读 8 个字）</strong>：耗时 <span class="arithmatex">\(t_{\text{顺序}} = 8T = 800\text{ns}\)</span>，实际传输率 <span class="arithmatex">\(= \dfrac{64\text{B}}{800\text{ns}} = \mathbf{80\text{MB/s}}\)</span>（与极限带宽相同）。</li>
+<li><strong>交叉存储器（读 8 个字）</strong>：耗时 <span class="arithmatex">\(t_{\text{交叉}} = T + (8 - 1)\tau = 100\text{ns} + 7 \times 50\text{ns} = 450\text{ns}\)</span>，实际传输率为：</li>
+</ul>
+<div class="arithmatex">\[\text{实际数据传输率}_{\text{交叉}} = \frac{8 \times 8\text{B}}{450\text{ns}} = \frac{64\text{B}}{450 \times 10^{-9}\text{s}} \approx \mathbf{142.22\text{MB/s}}\]</div>
+<p><strong>避坑总结</strong>：只要题目出现 <strong>“连续读出 <span class="arithmatex">\(n\)</span> 个字”</strong>，交叉存储器分母必须用 <span class="arithmatex">\(T + (n-1)\tau\)</span>；只有未限定字数、单纯问“交叉存储器的最大带宽”时，才直接用极限公式 <span class="arithmatex">\(\dfrac{\text{字长}}{\tau}\)</span>。</p>
+</div>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p122-9cache">作业 P122-9：Cache 平均访问时间与系统效率</h3>
+<p><strong>题目：</strong><br />
+CPU 执行一段程序时，Cache 完成存取的次数为 <span class="arithmatex">\(2420\)</span> 次，主存完成存取的次数为 <span class="arithmatex">\(80\)</span> 次，已知 Cache 存储周期为 <span class="arithmatex">\(40\text{ns}\)</span>，主存存储周期为 <span class="arithmatex">\(240\text{ns}\)</span>，求 Cache/主存系统的效率和平均访问时间。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ol>
+<li>
+<p><strong>计算 Cache 命中率 <span class="arithmatex">\(H\)</span></strong>：</p>
+<div class="arithmatex">\[N = N_c + N_m = 2420 + 80 = 2500\text{ 次}, \qquad H = \frac{N_c}{N} = \frac{2420}{2500} = 0.968\]</div>
+</li>
+<li>
+<p><strong>计算平均访问时间 <span class="arithmatex">\(T_a\)</span></strong>（已知 <span class="arithmatex">\(T_c = 40\text{ns}\)</span>，<span class="arithmatex">\(T_m = 240\text{ns}\)</span>）：</p>
+<div class="arithmatex">\[T_a = H \times T_c + (1 - H) \times T_m = 0.968 \times 40\text{ns} + 0.032 \times 240\text{ns} = 38.72\text{ns} + 7.68\text{ns} = \mathbf{46.4\text{ns}}\]</div>
+</li>
+<li>
+<p><strong>计算 Cache/主存系统的访问效率 <span class="arithmatex">\(e\)</span></strong>：</p>
+<div class="arithmatex">\[e = \frac{T_c}{T_a} \times 100\% = \frac{40\text{ns}}{46.4\text{ns}} \times 100\% \approx \mathbf{86.2\%}\]</div>
+</li>
+</ol>
+<p><strong>答案：</strong> 平均访问时间为 <strong><span class="arithmatex">\(46.4\text{ns}\)</span></strong>，系统效率约为 <strong><span class="arithmatex">\(86.2\%\)</span></strong>。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p123-10-cache">作业 P123-10：由平均访问时间反推 Cache 命中率</h3>
+<p><strong>题目：</strong><br />
+已知 Cache 存储周期 <span class="arithmatex">\(40\text{ns}\)</span>，主存存储周期 <span class="arithmatex">\(200\text{ns}\)</span>，Cache/主存系统平均访问时间为 <span class="arithmatex">\(50\text{ns}\)</span>，求 Cache 的命中率是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+将已知条件 <span class="arithmatex">\(T_c = 40\text{ns}\)</span>、<span class="arithmatex">\(T_m = 200\text{ns}\)</span>、<span class="arithmatex">\(T_a = 50\text{ns}\)</span> 代入平均访问时间公式 <span class="arithmatex">\(T_a = H \times T_c + (1 - H) \times T_m\)</span>：</p>
+<div class="arithmatex">\[\begin{aligned}
+50 &amp;= 40H + 200(1 - H) \\
+160H &amp;= 150 \implies H = \frac{150}{160} = \frac{15}{16} = 0.9375 = 93.75\%
+\end{aligned}\]</div>
+<p><strong>答案：</strong> Cache 的命中率是 <strong><span class="arithmatex">\(93.75\%\)</span></strong>（或 <span class="arithmatex">\(\dfrac{15}{16}\)</span>）。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p123-13-cache">作业 P123-13：组相联 Cache 内存地址格式划分</h3>
+<p><strong>题目：</strong><br />
+一个组相联 Cache 由 64 个行组成，每组 4 行。主存储器包含 <span class="arithmatex">\(4\text{K}\)</span> 个块，每块 128 字。请表示内存地址的格式。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+按字编址下，组相联映射地址从高到低分为 <code>主存字块标记 (Tag) + 组索引 (Index) + 块内字地址 (Offset)</code> 三部分：</p>
+<ol>
+<li><strong>块内地址（Offset）</strong>：每块有 <span class="arithmatex">\(128 = 2^7\)</span> 字 <span class="arithmatex">\(\implies\)</span> <strong>块内地址占 7 位</strong>。</li>
+<li><strong>组索引（Index）</strong>：Cache 共 64 行，每组 4 行，总组数 <span class="arithmatex">\(= \dfrac{64}{4} = 16 = 2^4\)</span> 组 <span class="arithmatex">\(\implies\)</span> <strong>组索引占 4 位</strong>。</li>
+<li><strong>主存字块标记（Tag）</strong>：主存共 <span class="arithmatex">\(4\text{K} = 2^{12}\)</span> 块（主存块号共 12 位），故 <span class="arithmatex">\(\text{Tag 位数} = 12 - 4 = \mathbf{8\text{ 位}}\)</span>；系统总地址长度为 <span class="arithmatex">\(8 + 4 + 7 = 19\)</span> 位。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">主存字块标记 (Tag)</th>
+<th style="text-align: center;">组索引 (Index)</th>
+<th style="text-align: center;">块内地址 (Offset)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>8 位</strong>（<span class="arithmatex">\(A_{18} \sim A_{11}\)</span>）</td>
+<td style="text-align: center;"><strong>4 位</strong>（<span class="arithmatex">\(A_{10} \sim A_7\)</span>）</td>
+<td style="text-align: center;"><strong>7 位</strong>（<span class="arithmatex">\(A_6 \sim A_0\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案：</strong> 内存地址总长 <strong>19 位</strong>，其中 <strong>Tag 占 8 位，组索引占 4 位，块内字地址占 7 位</strong>。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p123-14">作业 P123-14：直接映射冲突地址构造</h3>
+<p><strong>题目：</strong><br />
+有一个处理机，主存容量 <span class="arithmatex">\(1\text{MB}\)</span>，字长 <span class="arithmatex">\(1\text{B}\)</span>，块大小 <span class="arithmatex">\(16\text{B}\)</span>，Cache 容量 <span class="arithmatex">\(64\text{KB}\)</span>。若 Cache 采用直接映射方式，请给出两个不同标记的内存地址，它们映射到同一个 Cache 行。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ol>
+<li><strong>划分 20 位物理地址结构</strong>：</li>
+<li>物理地址总位数：<span class="arithmatex">\(1\text{MB} = 2^{20}\text{B} \implies 20\text{ 位}\)</span>；</li>
+<li>块内地址（Offset）：<span class="arithmatex">\(16\text{B} = 2^4\text{B} \implies 4\text{ 位}\)</span>（<span class="arithmatex">\(A_3 \sim A_0\)</span>）；</li>
+<li>Cache 行号（Index）：<span class="arithmatex">\(\dfrac{64\text{KB}}{16\text{B}} = 4096 = 2^{12} \implies 12\text{ 位}\)</span>（<span class="arithmatex">\(A_{15} \sim A_4\)</span>）；</li>
+<li>主存标记（Tag）：<span class="arithmatex">\(20 - 12 - 4 = 4\text{ 位}\)</span>（<span class="arithmatex">\(A_{19} \sim A_{16}\)</span>）。</li>
+<li><strong>构造冲突地址对</strong>：要使两个地址映射到同一个 Cache 行且标记不同，只需<strong>保持中间 12 位 Index 相同，改变高 4 位 Tag</strong>（例如均取第 0 行、第 0 字节）：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">示例地址</th>
+<th style="text-align: center;">4 位 Tag (<span class="arithmatex">\(A_{19}\sim A_{16}\)</span>)</th>
+<th style="text-align: center;">12 位 Index (<span class="arithmatex">\(A_{15}\sim A_4\)</span>)</th>
+<th style="text-align: center;">4 位 Offset (<span class="arithmatex">\(A_3\sim A_0\)</span>)</th>
+<th style="text-align: center;">十六进制表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>地址 1</strong></td>
+<td style="text-align: center;"><code>0000</code></td>
+<td style="text-align: center;"><code>0000 0000 0000</code></td>
+<td style="text-align: center;"><code>0000</code></td>
+<td style="text-align: center;"><strong><code>00000H</code></strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>地址 2</strong></td>
+<td style="text-align: center;"><code>0001</code></td>
+<td style="text-align: center;"><code>0000 0000 0000</code></td>
+<td style="text-align: center;"><code>0000</code></td>
+<td style="text-align: center;"><strong><code>10000H</code></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案：</strong> 例如 <strong><code>00000H</code></strong> 和 <strong><code>10000H</code></strong>（均映射到 Cache 第 0 行，但 Tag 分别为 <code>0H</code> 和 <code>1H</code>）。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p123-15">作业 P123-15：按字编址下的直接映射参数与地址格式</h3>
+<p><strong>题目：</strong><br />
+假设主存容量 <span class="arithmatex">\(16\text{M} \times 32\)</span> 位，Cache 容量 <span class="arithmatex">\(64\text{K} \times 32\)</span> 位，主存与 Cache 之间以每块 <span class="arithmatex">\(4 \times 32\)</span> 位大小传送数据，请确定直接映射方式的有关参数，并画出主存地址格式。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+注意本题所有容量均以 <strong><code>×32位</code>（即 32 位字）</strong> 为单位，说明系统<strong>按字编址</strong>：</p>
+<ol>
+<li><strong>主存总地址位数</strong>：主存共 <span class="arithmatex">\(16\text{M} = 2^{24}\)</span> 个字单元 <span class="arithmatex">\(\implies\)</span> <strong>总地址 24 位</strong>。</li>
+<li><strong>块内字地址（Offset）</strong>：每块含 <span class="arithmatex">\(4 = 2^2\)</span> 个字 <span class="arithmatex">\(\implies\)</span> <strong>块内地址占 2 位</strong>。</li>
+<li><strong>Cache 行号（Index）</strong>：Cache 共 <span class="arithmatex">\(\dfrac{64\text{K}}{4} = 16\text{K} = 2^{14}\)</span> 行 <span class="arithmatex">\(\implies\)</span> <strong>Cache 行号占 14 位</strong>。</li>
+<li><strong>主存标记（Tag）</strong>：<span class="arithmatex">\(24 - 14 - 2 = \mathbf{8\text{ 位}}\)</span>。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">主存字块标记 (Tag)</th>
+<th style="text-align: center;">Cache 行号 (Index)</th>
+<th style="text-align: center;">块内地址 (Offset)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>8 位</strong>（<span class="arithmatex">\(A_{23} \sim A_{16}\)</span>）</td>
+<td style="text-align: center;"><strong>14 位</strong>（<span class="arithmatex">\(A_{15} \sim A_2\)</span>）</td>
+<td style="text-align: center;"><strong>2 位</strong>（<span class="arithmatex">\(A_1 \sim A_0\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案：</strong> 主存总地址 <strong>24 位</strong>，其中 <strong>Tag 占 8 位、Cache 行号占 14 位、块内字地址占 2 位</strong>。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="p123-21-tlb-eat">作业 P123-21：页式虚拟存储与 TLB 有效访问时间（EAT）</h3>
+<p><strong>题目：</strong><br />
+设某系统采用页式虚拟存储管理，页表存放在主存中。<br />
+(1) 如果一次内存访问使用 <span class="arithmatex">\(50\text{ns}\)</span>，访问一次主存数据需用多少时间？<br />
+(2) 如果增加 TLB，忽略查找 TLB 表项占用的时间，并且 <span class="arithmatex">\(75\%\)</span> 的页表访问命中 TLB，内存的有效访问时间（EAT）是多少？</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ul>
+<li>
+<p><strong>(1) 无 TLB 时的访存时间</strong>：<br />
+  页表存放在主存中，CPU 每次按虚拟地址读写数据都必须访问 <strong>2 次主存</strong>（第 1 次查主存页表得到物理页号，第 2 次访问主存读写实际数据）：</p>
+<div class="arithmatex">\[T_{\text{无 TLB}} = 50\text{ns} + 50\text{ns} = \mathbf{100\text{ns}}\]</div>
+</li>
+<li>
+<p><strong>(2) 引入 TLB 后的有效访问时间（EAT）</strong>：</p>
+</li>
+<li><strong>TLB 命中（概率 <span class="arithmatex">\(75\%\)</span>）</strong>：忽略查 TLB 时间（<span class="arithmatex">\(0\text{ns}\)</span>），直接访问 1 次主存读数据，耗时 <span class="arithmatex">\(50\text{ns}\)</span>；</li>
+<li><strong>TLB 未命中（概率 <span class="arithmatex">\(25\%\)</span>）</strong>：需先查主存页表（<span class="arithmatex">\(50\text{ns}\)</span>）再访问主存数据（<span class="arithmatex">\(50\text{ns}\)</span>），耗时 <span class="arithmatex">\(100\text{ns}\)</span>；</li>
+<li>
+<p>加权平均得有效访问时间：</p>
+<div class="arithmatex">\[\text{EAT} = 0.75 \times 50\text{ns} + 0.25 \times 100\text{ns} = 37.5\text{ns} + 25\text{ns} = \mathbf{62.5\text{ns}}\]</div>
+</li>
+</ul>
+<p><strong>答案：</strong> (1) 无 TLB 时需 <strong><span class="arithmatex">\(100\text{ns}\)</span></strong>；(2) 引入 TLB 后有效访问时间为 <strong><span class="arithmatex">\(62.5\text{ns}\)</span></strong>。</p>
+</details>
+</div>
+<h2 id="_3">补充典型例题</h2>
+<div class="co-question">
+<h3 id="1cache">补充题 1：Cache 地址划分与总容量计算（含有效位/脏位）</h3>
+<p><strong>题目：</strong><br />
+某计算机的主存容量为 <span class="arithmatex">\(256\text{KB}\)</span>，Cache 容量为 <span class="arithmatex">\(2\text{KB}\)</span>，每块大小为 <span class="arithmatex">\(64\text{B}\)</span>。分别求直接映射和 2 路组相联映射下主存地址各字段的位数，并计算 Cache 总容量。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ul>
+<li><strong>基本参数</strong>：主存容量 <span class="arithmatex">\(256\text{KB} = 2^{18}\text{B}\)</span>（总地址 <strong>18 位</strong>）；块大小 <span class="arithmatex">\(64\text{B} = 2^6\text{B}\)</span>（块内地址 <strong>6 位</strong>，每块数据 <span class="arithmatex">\(64 \times 8 = 512\)</span> 位）；Cache 总行数 <span class="arithmatex">\(= \dfrac{2\text{KB}}{64\text{B}} = 32 = 2^5\)</span> 行。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">映射方式</th>
+<th style="text-align: left;">主存地址划分（共 18 位）</th>
+<th style="text-align: left;">Cache 总容量（全写法，含 1 位有效位）</th>
+<th style="text-align: left;">Cache 总容量（写回法，再加 1 位脏位）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>直接映射</strong></td>
+<td style="text-align: left;"><code>Tag (7位) + Line (5位) + Word (6位)</code></td>
+<td style="text-align: left;"><span class="arithmatex">\(32 \times (7 + 1 + 512) = \mathbf{16640\text{ 位}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(32 \times (7 + 1 + 1 + 512) = \mathbf{16672\text{ 位}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2 路组相联</strong></td>
+<td style="text-align: left;"><code>Tag (8位) + Set (4位) + Word (6位)</code></td>
+<td style="text-align: left;"><span class="arithmatex">\(32 \times (8 + 1 + 512) = \mathbf{16672\text{ 位}}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(32 \times (8 + 1 + 1 + 512) = \mathbf{16704\text{ 位}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+<div class="co-question">
+<h3 id="2-vs-cache">补充题 2：同时访问 vs 先查 Cache 再访存的平均访问时间</h3>
+<p><strong>题目：</strong><br />
+某 Cache-主存系统中，Cache 存取周期为 <span class="arithmatex">\(20\text{ns}\)</span>，主存存取周期为 <span class="arithmatex">\(200\text{ns}\)</span>。设 Cache 命中率为 <span class="arithmatex">\(90\%\)</span>，求平均访问时间和访问效率。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ul>
+<li>
+<p><strong>同时访问方式（默认公式）</strong>：</p>
+<div class="arithmatex">\[t_a = h \cdot t_c + (1 - h) t_m = 0.9 \times 20\text{ns} + 0.1 \times 200\text{ns} = 38\text{ns}, \qquad e = \frac{20}{38} \approx 52.6\%\]</div>
+</li>
+<li>
+<p><strong>先查 Cache、未命中再访问主存方式</strong>：未命中时需耗时 <span class="arithmatex">\(t_c + t_m = 220\text{ns}\)</span>，此时：</p>
+<div class="arithmatex">\[t_a = 0.9 \times 20\text{ns} + 0.1 \times (20 + 200)\text{ns} = 40\text{ns}, \qquad e = \frac{20}{40} = 50\%\]</div>
+</li>
+</ul>
+</details>
+</div>
+<div class="co-question">
+<h3 id="3lru">补充题 3：LRU 替换算法命中率计算</h3>
+<p><strong>题目：</strong><br />
+某 Cache 采用 4 路组相联映射，某组中已有块号为 <code>2, 8, 6, 4</code> 的数据（按从最远到最近访问排序为：<code>4, 6, 8, 2</code>）。现在依次访问块号为 <code>8, 2, 6, 8, 4</code> 的数据，采用 LRU 替换算法，求命中率。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong><br />
+LRU 规则将最近访问的块移至队首（最近使用端），淘汰时移出队尾（最久未用端）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">访问步序</th>
+<th style="text-align: center;">访问块号</th>
+<th style="text-align: center;">是否命中</th>
+<th style="text-align: center;">调整后队列（最近使用 <span class="arithmatex">\(\rightarrow\)</span> 最久未用）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">初始</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><code>4, 6, 8, 2</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><code>8</code></td>
+<td style="text-align: center;">命中</td>
+<td style="text-align: center;"><code>8, 4, 6, 2</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><code>2</code></td>
+<td style="text-align: center;">命中</td>
+<td style="text-align: center;"><code>2, 8, 4, 6</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><code>6</code></td>
+<td style="text-align: center;">命中</td>
+<td style="text-align: center;"><code>6, 2, 8, 4</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><code>8</code></td>
+<td style="text-align: center;">命中</td>
+<td style="text-align: center;"><code>8, 6, 2, 4</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><code>4</code></td>
+<td style="text-align: center;">命中</td>
+<td style="text-align: center;"><code>4, 8, 6, 2</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>答案：</strong> 5 次访问全部命中，命中率 <span class="arithmatex">\(= 5 / 5 = \mathbf{100\%}\)</span>。</p>
+</details>
+</div>
+<div class="co-question">
+<h3 id="44">补充题 4：4 体低位交叉存储器连续读耗时与带宽</h3>
+<p><strong>题目：</strong><br />
+一个 4 体低位交叉存储器，每个模块的存取周期为 <span class="arithmatex">\(200\text{ns}\)</span>，总线传送周期为 <span class="arithmatex">\(50\text{ns}\)</span>。求连续读取 8 个字的时间和带宽。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<ol>
+<li><strong>验证流水线条件</strong>：<span class="arithmatex">\(m \times \tau = 4 \times 50\text{ns} = 200\text{ns} = T\)</span>，满足 <span class="arithmatex">\(T = m\tau\)</span>。</li>
+<li>
+<p><strong>连续读取 8 个字的总时间</strong>：</p>
+<div class="arithmatex">\[t = T + (8 - 1)\tau = 200\text{ns} + 7 \times 50\text{ns} = \mathbf{550\text{ns}}\]</div>
+</li>
+<li>
+<p><strong>实际带宽对比</strong>：</p>
+</li>
+<li>低位交叉带宽 <span class="arithmatex">\(= \dfrac{8\text{ 字}}{550\text{ns}} \approx \mathbf{1.45 \times 10^7\text{ 字/秒}}\)</span>；</li>
+<li>顺序方式需 <span class="arithmatex">\(8 \times 200\text{ns} = 1600\text{ns}\)</span>，带宽仅 <span class="arithmatex">\(\dfrac{8\text{ 字}}{1600\text{ns}} = 5 \times 10^6\text{ 字/秒}\)</span>（低位交叉约为顺序方式的 <span class="arithmatex">\(2.9\)</span> 倍）。</li>
+</ol>
+</details>
+</div>
+<div class="co-question">
+<h3 id="5dram">补充题 5：DRAM 三种刷新方式的死时间对比</h3>
+<p><strong>题目：</strong><br />
+某 DRAM 芯片有 128 行，存取周期为 <span class="arithmatex">\(50\text{ns}\)</span>，刷新周期为 <span class="arithmatex">\(2\text{ms}\)</span>。分别计算集中刷新、分散刷新和异步刷新下的死时间与特点。</p>
+<details class="co-answer">
+<summary>查看答案与解析</summary>
+<p><strong>解析：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">刷新方式</th>
+<th style="text-align: left;">刷新安排方式</th>
+<th style="text-align: left;">死时间（死区）计算</th>
+<th style="text-align: left;">特点对比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>集中刷新</strong></td>
+<td style="text-align: left;">在 <span class="arithmatex">\(2\text{ms}\)</span> 末尾集中刷新 128 行</td>
+<td style="text-align: left;"><span class="arithmatex">\(128 \times 50\text{ns} = \mathbf{6400\text{ns}} = 6.4\mu\text{s}\)</span></td>
+<td style="text-align: left;">读写操作不受刷新干扰，但存在连续 <span class="arithmatex">\(6.4\mu\text{s}\)</span> 死区</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>分散刷新</strong></td>
+<td style="text-align: left;">每个存储周期前半 <span class="arithmatex">\(50\text{ns}\)</span> 读写，后半 <span class="arithmatex">\(50\text{ns}\)</span> 刷新</td>
+<td style="text-align: left;"><strong>无死区（<span class="arithmatex">\(0\text{ns}\)</span>）</strong></td>
+<td style="text-align: left;">系统等效存取周期翻倍为 <span class="arithmatex">\(100\text{ns}\)</span>，过度刷新降低速度</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>异步刷新</strong></td>
+<td style="text-align: left;">每隔 <span class="arithmatex">\(2\text{ms} / 128 = 15.625\mu\text{s}\)</span> 刷新 1 行</td>
+<td style="text-align: left;">单次刷新耗时 <strong><span class="arithmatex">\(\mathbf{50\text{ns}}\)</span></strong></td>
+<td style="text-align: left;">兼顾两者优点，将死区分散为每次仅 <span class="arithmatex">\(50\text{ns}\)</span></td>
+</tr>
+</tbody>
+</table>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../%E7%AC%AC2%E7%AB%A0%EF%BC%9A%E8%BF%90%E7%AE%97%E6%96%B9%E6%B3%95%E5%92%8C%E8%BF%90%E7%AE%97%E5%99%A8/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 第2章：运算方法和运算器">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                第2章：运算方法和运算器
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../%E7%AC%AC4%E7%AB%A0%EF%BC%9A%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/" class="md-footer__link md-footer__link--next" aria-label="下一页: 第4章：指令系统">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                第4章：指令系统
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 xurry
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/xurry-ace" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="mailto:2897964385@qq.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M536.4-26.3c9.8-3.5 20.6-1 28 6.3s9.8 18.2 6.3 28l-178 496.9c-5 13.9-18.1 23.1-32.8 23.1-14.2 0-27-8.6-32.3-21.7l-64.2-158c-4.5-11-2.5-23.6 5.2-32.6l94.5-112.4c5.1-6.1 4.7-15-.9-20.6s-14.6-6-20.6-.9l-112.4 94.3c-9.1 7.6-21.6 9.6-32.6 5.2L38.1 216.8c-13.1-5.3-21.7-18.1-21.7-32.3 0-14.7 9.2-27.8 23.1-32.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "search.suggest", "content.code.copy", "content.action.edit", "navigation.footer", "header.autohide", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="../../javascripts/study-viz.js"></script>
+      
+        <script src="../../javascripts/concept-models.js"></script>
+      
+        <script src="../../javascripts/concept-lab.js"></script>
+      
+    
+  </body>
+</html>
