@@ -11,8 +11,6 @@ hide:
 
 <div class="home-hero__copy" markdown="1">
 
-<span class="home-eyebrow">代码 · 系统 · 思考</span>
-
 # xurry 的代码空间
 
 <p class="home-hero__lead">把零散知识，连成能解释问题的线索。</p>
@@ -38,55 +36,61 @@ hide:
 
 </div>
 
+<div class="home-section-heading" markdown="1">
+
 ## 先带着一个问题来 { #start-with-a-question }
+
+[查看全部 19 个主题](图解实验室.md)
+
+</div>
 
 抽象概念读起来容易相似，真正拉开差别的是**条件、状态和变化过程**。从一个具体问题出发，看清机制，再回到完整笔记。
 
 <div class="lab-catalog home-experiments" markdown="1">
 
-- <span class="lab-tag">计算机组成 · 可交互</span>
+- ### Cache 明明还有空行，为什么照样冲突？
 
-    **Cache 明明还有空行，为什么照样冲突？**
+    <span class="lab-tag">计算机组成 · 可交互</span>
 
     同样的容量，两种映射；看一块数据究竟能放在哪里。
 
     [观察 Cache 落点 →](计算机组成原理/第3章：存储系统.md#cache-lab)
 
-- <span class="lab-tag">Python · 可交互</span>
+- ### 只改了一个列表，为什么三个名字都变了？
 
-    **只改了一个列表，为什么三个名字都变了？**
+    <span class="lab-tag">Python · 可交互</span>
 
     把变量绑定、外层复制与内层共享分开画出来。
 
     [观察对象引用 →](python基础/第2章：字符串、列表、字典、元组.md#reference-lab)
 
-- <span class="lab-tag">模式识别 · 可交互</span>
+- ### 降低分类阈值，得到的都是真正例吗？
 
-    **降低分类阈值，得到的都是真正例吗？**
+    <span class="lab-tag">模式识别 · 可交互</span>
 
     从四个样本出发，联动看预测、混淆矩阵和 ROC。
 
     [移动阈值看看 →](模式识别/考试复习.md#metrics-lab)
 
-- <span class="lab-tag">算法 · 可交互</span>
+- ### 同一棵树，队列和递归会先处理谁？
 
-    **同一棵树，队列和递归会先处理谁？**
+    <span class="lab-tag">算法 · 可交互</span>
 
     不只看访问顺序，还看队列与调用链怎样变化。
 
     [对照 BFS / DFS →](洛谷题目/8_1/bfs.md#search-demo)
 
-- <span class="lab-tag">操作系统 · 可交互</span>
+- ### TLB 未命中，页面就一定不在内存吗？
 
-    **TLB 未命中，页面就一定不在内存吗？**
+    <span class="lab-tag">操作系统 · 可交互</span>
 
     输入虚拟地址，沿页号、偏移与页表找到访问结果。
 
     [追踪地址转换 →](操作系统/03-内存管理/内存管理基础.md#paging-lab)
 
-- <span class="lab-tag">操作系统 · 可交互</span>
+- ### 文件里相邻的字节，为什么会落在不相邻的数据块？
 
-    **文件里相邻的字节，为什么会落在不相邻的数据块？**
+    <span class="lab-tag">操作系统 · 可交互</span>
 
     从文件偏移出发，追踪直接指针、索引块与正文的位置。
 
@@ -102,53 +106,45 @@ hide:
 
 <section class="knowledge-lane" markdown="1">
 
-<span class="knowledge-lane__label">01 / 表达与实现</span>
-
 ### 把想法写成程序
 
-变量、控制流、函数，再到常用容器。
+表达与实现：变量、控制流、函数，再到常用容器。
 
 [C++ 容器](c++基础/index.md) · [Python 基础](python基础/引言.md)
 
-<span class="knowledge-lane__bridge">↓ 为算法提供实现工具</span>
+<span class="knowledge-lane__bridge">为算法提供实现工具</span>
 
 </section>
 
 <section class="knowledge-lane" markdown="1">
-
-<span class="knowledge-lane__label">02 / 建模与求解</span>
 
 ### 从题意找到算法
 
-缩小范围、递推状态、搜索路径。
+建模与求解：缩小范围、递推状态、搜索路径。
 
 [算法知识地图](洛谷题目/引言.md#algorithm-map) · [二分逐步演示](洛谷题目/1_1/二分查找.md#binary-demo)
 
-<span class="knowledge-lane__bridge">↔ 用代码验证推理过程</span>
+<span class="knowledge-lane__bridge">用代码验证推理过程</span>
 
 </section>
 
 <section class="knowledge-lane" markdown="1">
-
-<span class="knowledge-lane__label">03 / 运行与管理</span>
 
 ### 看懂程序背后的系统
 
-硬件执行指令，操作系统管理资源。
+运行与管理：硬件执行指令，操作系统管理资源。
 
 [计算机组成原理](计算机组成原理/引言.md) · [操作系统学习地图](操作系统/index.md#os-map)
 
-<span class="knowledge-lane__bridge">↔ 把软件行为与硬件机制接起来</span>
+<span class="knowledge-lane__bridge">把软件行为与硬件机制接起来</span>
 
 </section>
 
 <section class="knowledge-lane" markdown="1">
 
-<span class="knowledge-lane__label">04 / 数据与思考</span>
-
 ### 从观察走向理解
 
-一条线学习数据与模型，一条线记录生活中的思考。
+数据与思考：一条线学习数据与模型，一条线记录生活中的思考。
 
 [模式识别](模式识别/引言.md) · [人生思考](人生思考/引言.md)
 

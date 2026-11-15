@@ -1,5 +1,5 @@
 /* 学习导航与机制实验。所有规则限定到显式组件，保留原笔记排版。 */
-.md-typeset .learning-home { clear: both; }
+.md-typeset .learning-home { clear: both; min-width: 0; }
 /* 首页编辑入口保留在首屏，避免浮动按钮挤窄插画区域。 */
 .md-content__inner:has(> .learning-home) { position: relative; }
 .md-content__inner:has(> .learning-home) > .md-content__button {
@@ -17,33 +17,48 @@
 }
 .md-typeset .home-hero {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.12fr 1fr;
   overflow: hidden;
   border-radius: 18px;
   background: #153f3b;
   color: #f5f4e8;
   box-shadow: 0 12px 32px #0a393b16;
 }
-.md-typeset .home-hero__copy { z-index: 1; padding: 2.3rem 1.8rem; }
-.md-typeset .home-eyebrow { color: #b8dccb; font-size: .68rem; letter-spacing: .18em; }
-.md-typeset .home-hero h1 { margin: .65rem 0 .8rem; color: #fffdf2; font-size: 2.05rem; font-weight: 700; }
-.md-typeset .home-hero__copy p { font-size: .8rem; line-height: 1.9; }
-.md-typeset .home-hero__copy .home-hero__lead { max-width: 19em; font-size: 1.13rem; line-height: 1.7; }
-.md-typeset .home-hero__note { display: block; margin-top: .9rem; color: #c4ddd2; font-size: .63rem; }
+.md-typeset .home-hero__copy { z-index: 1; align-self: center; min-width: 0; padding: 1.8rem; }
+.md-typeset .home-hero h1 { margin: 0 0 .7rem; color: #fffdf2; font-size: 2.05rem; font-weight: 700; text-wrap: balance; }
+.md-typeset .home-hero__copy p { margin: .75rem 0; font-size: .8rem; line-height: 1.9; }
+.md-typeset .home-hero__copy .home-hero__lead { max-width: 19em; font-size: 1.1rem; line-height: 1.7; text-wrap: pretty; }
+.md-typeset .home-hero__note { display: block; margin-top: .8rem; color: #c4ddd2; font-size: .65rem; line-height: 1.7; }
 .md-typeset .home-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 .5rem; }
 .md-typeset .home-actions p { display: contents; }
-.md-typeset .home-actions .md-button { padding: .55em .95em; border: 1px solid #bad4ca; border-radius: 6px; color: #fffdf2; font-size: .72rem; }
+.md-typeset .home-actions .md-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .55em .95em; border: 1px solid #bad4ca; border-radius: 6px; color: #fffdf2; font-size: .75rem; }
 .md-typeset .home-actions .md-button--primary { border-color: #eeebd9; background: #eeebd9; color: #153f3b; }
 .md-typeset .home-actions .md-button:hover { background: #d2e8d9; color: #153f3b; }
 .md-typeset .home-hero__art { position: relative; min-width: 0; }
 .md-typeset .home-hero__art::before { position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, #153f3b, transparent 30%); content: ""; pointer-events: none; }
 .md-typeset .home-hero__art p { height: 100%; margin: 0; }
 .md-typeset .home-hero__art img { width: 100%; height: 100%; margin: 0; border-radius: 0; object-fit: cover; object-position: 70% center; box-shadow: none; }
-.md-typeset .learning-home > h2 { margin-top: 2.5rem; }
-.md-typeset .learning-home .knowledge-atlas { margin: 1.3rem 0; }
-.md-typeset .learning-home .knowledge-lane { padding: 1.2rem; }
+.md-typeset .learning-home > h2 { margin-top: 2.5rem; border-bottom: 0; padding-bottom: 0; }
+
+.md-typeset .home-section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem; margin-top: 2.2rem; }
+.md-typeset .home-section-heading h2 { margin: 0; padding: 0; border: 0; }
+.md-typeset .home-section-heading > p { margin: 0; font-size: .72rem; }
+.md-typeset .home-section-heading a { display: inline-flex; align-items: center; min-height: 44px; }
+.md-typeset .learning-home > p { max-width: 65ch; font-size: .8rem; line-height: 1.9; }
+.md-typeset .learning-home a:focus-visible,
+.md-typeset .learning-home summary:focus-visible { outline: 2px solid var(--md-typeset-a-color); outline-offset: 4px; border-radius: 2px; }
+.md-typeset .home-actions a:focus-visible { outline-color: #fffdf2; }
+
+/* 知识地图改为逐行阅读路径，避免与实验精选使用相同的卡片层级。 */
+.md-typeset .learning-home .knowledge-atlas { display: block; margin: 1.3rem 0; }
+.md-typeset .learning-home .knowledge-lane { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); column-gap: 2rem; padding: 1.2rem 0; border: 0; border-top: 1px solid var(--md-default-fg-color--lightest); border-radius: 0; background: transparent; }
+.md-typeset .learning-home .knowledge-lane h3 { grid-row: 1 / span 3; margin: .3rem 0; font-size: 1rem; text-wrap: balance; }
+.md-typeset .learning-home .knowledge-lane p { grid-column: 2; margin: 0; font-size: .78rem; line-height: 1.8; }
+.md-typeset .learning-home .knowledge-lane a { display: inline-flex; align-items: center; min-height: 44px; }
+.md-typeset .learning-home .knowledge-lane__bridge { grid-column: 2; margin: 0; padding: .2rem 0 0; border: 0; color: var(--md-default-fg-color); font-size: .68rem; }
+.md-typeset .learning-home .learning-route { border: 1px solid var(--md-default-fg-color--lightest); border-radius: 12px; background: transparent; }
 .md-typeset .learning-home .home-about { margin-top: 2rem; border-color: var(--md-default-fg-color--lightest); }
-.md-typeset .home-about > summary { font-size: .8rem; }
+.md-typeset .home-about > summary { min-height: 44px; font-size: .8rem; }
 
 .md-typeset .learning-route,
 .md-typeset .concept-summary {
@@ -82,7 +97,13 @@
 .md-typeset .lab-catalog p:last-child { margin-bottom: 0; }
 .md-typeset .lab-catalog > ul > li > p > strong { font-size: .88rem; line-height: 1.7; }
 .md-typeset .lab-tag { color: var(--md-typeset-a-color); font-size: .63rem; font-weight: 700; letter-spacing: .04em; }
-.md-typeset .home-experiments > ul > li { border-top: 3px solid var(--md-typeset-a-color); }
+.md-typeset .home-experiments > ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem 1.4rem; }
+.md-typeset .home-experiments > ul > li { display: flex; flex-direction: column; padding: 1rem 0 .7rem; border: 0; border-bottom: 1px solid var(--md-default-fg-color--lightest); border-radius: 0; background: transparent; }
+.md-typeset .home-experiments h3 { margin: 0 0 .45rem; font-size: .95rem; line-height: 1.65; text-wrap: pretty; }
+.md-typeset .home-experiments .lab-tag { font-size: .65rem; font-weight: 400; letter-spacing: 0; }
+.md-typeset .home-experiments li > p { margin: .25rem 0 .55rem; }
+.md-typeset .home-experiments li > p:last-child { margin-top: auto; margin-bottom: 0; }
+.md-typeset .home-experiments a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: underline; text-underline-offset: .25em; }
 .md-typeset .concept-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 1.3rem 0; }
 .md-typeset .flow-step { padding: .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-top: 3px solid var(--md-typeset-a-color); border-radius: 8px; font-size: .74rem; }
 .md-typeset .flow-step p { margin: .3rem 0; }
@@ -296,6 +317,7 @@
 @media screen and (max-width: 60em) {
   .md-typeset .home-hero__copy { padding: 1.5rem; }
   .md-typeset .home-hero h1 { font-size: 1.7rem; }
+  .md-typeset .home-experiments > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media screen and (max-width: 47em) {
   /* 主题通过行内 top 定位该按钮；手机上改到右下角，避开锚点标题。 */
@@ -313,9 +335,13 @@
   }
   .md-top > svg { width: 1.2rem; height: 1.2rem; margin: 0; }
   .md-typeset .home-hero { grid-template-columns: minmax(0, 1fr); }
-  .md-typeset .home-hero__art { height: 13rem; }
+  .md-typeset .home-hero__art { height: 9rem; }
   .md-typeset .home-hero__art::before { background: linear-gradient(180deg, #153f3b, transparent 30%); }
   .md-typeset .home-hero__art img { object-position: center 65%; }
+  .md-typeset .learning-home .knowledge-lane { grid-template-columns: minmax(0, 1fr); gap: .3rem; }
+  .md-typeset .learning-home .knowledge-lane h3 { grid-row: auto; }
+  .md-typeset .learning-home .knowledge-lane p,
+  .md-typeset .learning-home .knowledge-lane__bridge { grid-column: 1; }
   .md-typeset .concept-compare { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .concept-flow { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .concept-roc text { font-size: 22px; }
@@ -326,14 +352,18 @@
   .md-typeset .lab-toolbar { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .lab-filter-reset { justify-self: start; }
   .md-typeset .lab-catalog > ul { grid-template-columns: minmax(0, 1fr); }
-  .md-typeset .home-hero__copy { padding: 1.05rem .9rem .8rem; }
-  .md-typeset .home-hero h1 { margin: .3rem 0 .4rem; font-size: 1.3rem; }
-  .md-typeset .home-hero__copy p { margin: .55rem 0; font-size: .72rem; }
-  .md-typeset .home-hero__copy .home-hero__lead { font-size: .9rem; }
+  .md-typeset .home-hero__copy { padding: 1.7rem 1rem .7rem; }
+  .md-typeset .home-hero h1 { margin: 0 0 .55rem; padding-right: .5rem; font-size: 1.55rem; }
+  .md-typeset .home-hero__copy p { margin: .6rem 0; font-size: .78rem; }
+  .md-typeset .home-hero__copy .home-hero__lead { font-size: .95rem; }
   .md-typeset .home-actions { margin: .75rem 0 .25rem; }
-  .md-typeset .home-actions .md-button { padding: .55em .7em; font-size: .65rem; }
-  .md-typeset .home-hero__note { margin-top: .6rem; font-size: .6rem; line-height: 1.6; }
-  .md-typeset .home-hero__art { height: 11rem; }
+  .md-typeset .home-actions .md-button { padding: .55em .8em; font-size: .72rem; }
+  .md-typeset .home-hero__note { margin-top: .6rem; font-size: .65rem; }
+  .md-typeset .home-hero__art { height: 7.5rem; }
+  .md-typeset .home-section-heading { margin-top: 1.6rem; }
+  .md-typeset .home-section-heading h2,
+  .md-typeset .learning-home > h2 { font-size: 1.25em; }
+  .md-typeset .home-experiments > ul { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .object-row { grid-template-columns: 3rem minmax(0, 1fr); }
   .md-typeset .object-shared { margin-left: 0; }
   .md-typeset .concept-settings { align-items: stretch; }

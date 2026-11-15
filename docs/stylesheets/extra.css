@@ -50,7 +50,17 @@ body[data-md-color-scheme="slate"] {
   background-color: #81e5db;
 }
 
+/* 窄屏仍保留顶部栏目，沿用主题自带的横向滚动列表。 */
+@media screen and (max-width: 76.234375em) {
+  .md-tabs {
+    display: block;
+  }
+}
+
 .md-tabs__link {
+  align-items: center;
+  min-height: 2.4rem;
+  margin-top: 0;
   color: #063c37;
   opacity: 0.8;
 }
