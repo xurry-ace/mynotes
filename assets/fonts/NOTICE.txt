@@ -1,0 +1,10 @@
+本站使用以下字体的子集文件，均来自 Google Fonts，按 SIL Open Font License 1.1 授权：
+
+- NotoSerifSC-subset.woff2
+  来源：Noto Serif SC（variable），https://github.com/google/fonts/tree/main/ofl/notoserifsc
+  许可：OFL-NotoSerifSC.txt
+- FiraCode-subset.woff2
+  来源：Fira Code（variable），https://github.com/google/fonts/tree/main/ofl/firacode
+  许可：OFL-FiraCode.txt
+
+子集由 fonttools 的 pyftsubset 按站点实际用字生成；新增大量生僻字后，需要重新提取字符并生成子集。
