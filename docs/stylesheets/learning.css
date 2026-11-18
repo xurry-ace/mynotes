@@ -1,64 +1,67 @@
 /* 学习导航与机制实验。所有规则限定到显式组件，保留原笔记排版。 */
-.md-typeset .learning-home { clear: both; min-width: 0; }
-/* 首页编辑入口保留在首屏，避免浮动按钮挤窄插画区域。 */
-.md-content__inner:has(> .learning-home) { position: relative; }
-.md-content__inner:has(> .learning-home) > .md-content__button {
-  position: absolute;
-  z-index: 2;
-  top: 1rem;
-  right: 1rem;
-  width: 1.8rem;
-  height: 1.8rem;
-  margin: 0;
-  padding: .3rem;
-  border-radius: 50%;
-  background: #153f3bbd;
-  color: #f5f4e8;
+.md-typeset .learning-home {
+  --home-accent: var(--md-typeset-a-color);
+  --home-line: var(--md-default-fg-color--lightest);
+  --home-wash: color-mix(in srgb, var(--home-accent) 7%, var(--md-default-bg-color));
+  --home-tint: color-mix(in srgb, var(--home-accent) 13%, var(--md-default-bg-color));
+  clear: both;
+  min-width: 0;
 }
-.md-typeset .home-hero {
-  display: grid;
-  grid-template-columns: 1.12fr 1fr;
-  overflow: hidden;
-  border-radius: 18px;
-  background: #153f3b;
-  color: #f5f4e8;
-  box-shadow: 0 12px 32px #0a393b16;
+.md-content__inner:has(> .learning-home) {
+  position: relative;
+  max-width: 56rem;
+  margin-inline: auto;
+  padding: .35rem clamp(.8rem, 3vw, 1.6rem) 2rem;
 }
-.md-typeset .home-hero__copy { z-index: 1; align-self: center; min-width: 0; padding: 1.8rem; }
-.md-typeset .home-hero h1 { margin: 0 0 .7rem; color: #fffdf2; font-size: 2.05rem; font-weight: 700; text-wrap: balance; }
-.md-typeset .home-hero__copy p { margin: .75rem 0; font-size: .8rem; line-height: 1.9; }
-.md-typeset .home-hero__copy .home-hero__lead { max-width: 19em; font-size: 1.1rem; line-height: 1.7; text-wrap: pretty; }
-.md-typeset .home-hero__note { display: block; margin-top: .8rem; color: #c4ddd2; font-size: .65rem; line-height: 1.7; }
-.md-typeset .home-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 .5rem; }
-.md-typeset .home-actions p { display: contents; }
-.md-typeset .home-actions .md-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .55em .95em; border: 1px solid #bad4ca; border-radius: 6px; color: #fffdf2; font-size: .75rem; }
-.md-typeset .home-actions .md-button--primary { border-color: #eeebd9; background: #eeebd9; color: #153f3b; }
-.md-typeset .home-actions .md-button:hover { background: #d2e8d9; color: #153f3b; }
-.md-typeset .home-hero__art { position: relative; min-width: 0; }
-.md-typeset .home-hero__art::before { position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, #153f3b, transparent 30%); content: ""; pointer-events: none; }
-.md-typeset .home-hero__art p { height: 100%; margin: 0; }
-.md-typeset .home-hero__art img { width: 100%; height: 100%; margin: 0; border-radius: 0; object-fit: cover; object-position: 70% center; box-shadow: none; }
-.md-typeset .learning-home > h2 { margin-top: 2.5rem; border-bottom: 0; padding-bottom: 0; }
+.md-content__inner:has(> .learning-home) > .md-content__button { position: absolute; top: 0; right: clamp(.8rem, 3vw, 1.6rem); margin: 0; }
+.md-typeset .home-intro { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center; gap: clamp(1.2rem, 4vw, 2.7rem); padding-top: .85rem; }
+.md-typeset .home-intro h1 { margin: 0 0 .7rem; color: var(--md-default-fg-color); font-size: clamp(1.75rem, 4vw, 2.65rem); text-wrap: balance; }
+.md-typeset .home-intro__copy > p { max-width: 30em; margin: .65rem 0 0; font-size: .89rem; text-wrap: pretty; }
+.md-typeset .home-intro__copy > p:last-child { display: flex; align-items: center; flex-wrap: wrap; gap: .2rem .85rem; margin-top: 1.05rem; }
+.md-typeset .learning-home .md-button { padding: .46rem .75rem; min-height: 44px; border-width: 1px; border-radius: 6px; font-size: .76rem; font-weight: 600; }
+.md-typeset .learning-home a:not(.md-button) { text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 60%, transparent); text-decoration-thickness: 1px; text-underline-offset: .22em; }
+.md-typeset .learning-home a:not(.md-button):hover { text-decoration-color: currentColor; }
+.md-typeset .learning-home a:focus-visible { outline: 2px solid var(--home-accent); outline-offset: 3px; }
+.md-typeset .home-jump, .md-typeset .home-feature__link { display: inline-flex; align-items: center; min-height: 44px; font-size: .76rem; font-weight: 600; }
 
-.md-typeset .home-section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .3rem 1rem; margin-top: 2.2rem; }
-.md-typeset .home-section-heading h2 { margin: 0; padding: 0; border: 0; }
-.md-typeset .home-section-heading > p { margin: 0; font-size: .72rem; }
-.md-typeset .home-section-heading a { display: inline-flex; align-items: center; min-height: 44px; }
-.md-typeset .learning-home > p { max-width: 65ch; font-size: .8rem; line-height: 1.9; }
-.md-typeset .learning-home a:focus-visible,
-.md-typeset .learning-home summary:focus-visible { outline: 2px solid var(--md-typeset-a-color); outline-offset: 4px; border-radius: 2px; }
-.md-typeset .home-actions a:focus-visible { outline-color: #fffdf2; }
+.md-typeset .home-feature { display: block; width: 100%; max-width: none; margin: 0; padding: .9rem 1.2rem .4rem; border: 1px solid var(--home-line); border-radius: 14px; background: var(--home-wash); text-align: left; }
+.md-typeset .home-feature figcaption { display: block; max-width: none; margin: 0; font-size: 1rem; font-style: normal; text-align: left; }
+.md-typeset .home-feature figcaption p, .md-typeset .home-feature > p { margin: 0; }
+.md-typeset .home-tree { display: block; width: 100%; max-width: 15.8rem; height: auto; margin: .2rem auto; }
+.md-typeset .home-tree path { fill: none; stroke: var(--home-accent); stroke-opacity: .65; stroke-width: 1.2; }
+.md-typeset .home-tree circle { fill: var(--md-default-bg-color); stroke: var(--home-accent); stroke-width: 1.2; }
+.md-typeset .home-tree g:first-of-type circle { fill: var(--home-tint); }
+.md-typeset .home-tree text { fill: var(--md-default-fg-color); font: 600 13px var(--md-code-font); text-anchor: middle; dominant-baseline: central; }
+.md-typeset .home-orders { padding: .5rem 0 .2rem; border-top: 1px solid var(--home-line); font-size: .72rem; line-height: 1.85; }
+.md-typeset .home-orders p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .5rem; margin: 0; }
+.md-typeset .home-orders strong { flex-basis: 4.9rem; }
+.md-typeset .home-orders p > code { margin: 0; padding: 0; border: 0; box-shadow: none; background: transparent; color: var(--md-default-fg-color); font-size: .64rem; white-space: nowrap; }
 
-/* 知识地图改为逐行阅读路径，避免与实验精选使用相同的卡片层级。 */
-.md-typeset .learning-home .knowledge-atlas { display: block; margin: 1.3rem 0; }
-.md-typeset .learning-home .knowledge-lane { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr); column-gap: 2rem; padding: 1.2rem 0; border: 0; border-top: 1px solid var(--md-default-fg-color--lightest); border-radius: 0; background: transparent; }
-.md-typeset .learning-home .knowledge-lane h3 { grid-row: 1 / span 3; margin: .3rem 0; font-size: 1rem; text-wrap: balance; }
-.md-typeset .learning-home .knowledge-lane p { grid-column: 2; margin: 0; font-size: .78rem; line-height: 1.8; }
-.md-typeset .learning-home .knowledge-lane a { display: inline-flex; align-items: center; min-height: 44px; }
-.md-typeset .learning-home .knowledge-lane__bridge { grid-column: 2; margin: 0; padding: .2rem 0 0; border: 0; color: var(--md-default-fg-color); font-size: .68rem; }
-.md-typeset .learning-home .learning-route { border: 1px solid var(--md-default-fg-color--lightest); border-radius: 12px; background: transparent; }
-.md-typeset .learning-home .home-about { margin-top: 2rem; border-color: var(--md-default-fg-color--lightest); }
-.md-typeset .home-about > summary { min-height: 44px; font-size: .8rem; }
+.md-typeset .home-section { margin-top: 2rem; padding-top: .8rem; border-top: 1px solid var(--home-line); }
+.md-typeset .home-section > h2 { margin: 0 0 .65rem; padding: 0; border: 0; font-size: clamp(1.12rem, 2.5vw, 1.35rem); scroll-margin-top: 3.2rem; }
+.md-typeset .home-section > p { margin: .45rem 0 .75rem; }
+.md-typeset .home-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.5rem; }
+.md-typeset .home-index section { min-width: 0; padding: .75rem 0 .3rem; }
+.md-typeset .home-index section:nth-child(n + 3) { border-top: 1px solid var(--home-line); }
+.md-typeset .home-index h3, .md-typeset .home-routes h3 { margin: 0 0 .25rem; font-size: .96rem; }
+.md-typeset .home-index p, .md-typeset .home-routes li { margin: 0; font-size: .77rem; }
+.md-typeset .home-index a, .md-typeset .home-routes a { display: inline-block; min-height: 44px; padding-block: .35rem; }
+.md-typeset .home-routes { margin-top: .6rem; padding: .75rem .95rem .45rem; border-radius: 12px; background: var(--home-wash); }
+.md-typeset .home-routes ul { margin: .15rem 0 0; }
+.md-typeset .home-experiments > ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1.5rem; margin: .65rem 0 .85rem; padding: 0; list-style: none; }
+.md-typeset .home-experiments > ul > li { min-width: 0; margin: 0; padding: .45rem 0 .65rem; border-bottom: 1px solid var(--home-line); font-size: .77rem; line-height: 1.65; }
+.md-typeset .home-experiments li p { margin: 0; }
+.md-typeset .home-experiments li a { display: inline-block; min-height: 44px; padding: .3rem 0; font-size: .85rem; font-weight: 600; }
+
+.md-typeset .home-signoff > blockquote { max-width: 44em; margin: .5rem 0; padding: 0; border: 0; background: transparent; color: var(--md-default-fg-color); font-size: 1rem; }
+.md-typeset .home-progress > ul { margin: .65rem 0 1rem; padding: 0; list-style: none; }
+.md-typeset .home-progress > ul > li { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); align-items: baseline; gap: .7rem; margin: 0; padding: .65rem 0; border-top: 1px solid var(--home-line); }
+.md-typeset .home-progress li p { max-width: 43em; margin: 0; }
+.md-typeset .home-status { display: inline-flex; align-items: center; gap: .3rem; padding: .15rem .45rem; border: 1px solid var(--home-line); border-radius: 999px; font-size: .65rem; font-weight: 600; white-space: nowrap; }
+.md-typeset .home-status::before { width: .32rem; height: .32rem; border-radius: 50%; border: 1px solid currentColor; content: ""; }
+.md-typeset .home-status--ready { border-color: transparent; background: var(--home-tint); color: var(--home-accent); }
+.md-typeset .home-status--ready::before { background: currentColor; }
+.md-typeset .home-status--ongoing { border-color: var(--home-accent); color: var(--home-accent); }
 
 .md-typeset .learning-route,
 .md-typeset .concept-summary {
@@ -97,13 +100,6 @@
 .md-typeset .lab-catalog p:last-child { margin-bottom: 0; }
 .md-typeset .lab-catalog > ul > li > p > strong { font-size: .88rem; line-height: 1.7; }
 .md-typeset .lab-tag { color: var(--md-typeset-a-color); font-size: .63rem; font-weight: 700; letter-spacing: .04em; }
-.md-typeset .home-experiments > ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem 1.4rem; }
-.md-typeset .home-experiments > ul > li { display: flex; flex-direction: column; padding: 1rem 0 .7rem; border: 0; border-bottom: 1px solid var(--md-default-fg-color--lightest); border-radius: 0; background: transparent; }
-.md-typeset .home-experiments h3 { margin: 0 0 .45rem; font-size: .95rem; line-height: 1.65; text-wrap: pretty; }
-.md-typeset .home-experiments .lab-tag { font-size: .65rem; font-weight: 400; letter-spacing: 0; }
-.md-typeset .home-experiments li > p { margin: .25rem 0 .55rem; }
-.md-typeset .home-experiments li > p:last-child { margin-top: auto; margin-bottom: 0; }
-.md-typeset .home-experiments a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: underline; text-underline-offset: .25em; }
 .md-typeset .concept-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin: 1.3rem 0; }
 .md-typeset .flow-step { padding: .9rem; border: 1px solid var(--md-default-fg-color--lightest); border-top: 3px solid var(--md-typeset-a-color); border-radius: 8px; font-size: .74rem; }
 .md-typeset .flow-step p { margin: .3rem 0; }
@@ -314,11 +310,6 @@
 .md-typeset .lab-directory li[hidden],
 .md-typeset .lab-empty[hidden] { display: none; }
 
-@media screen and (max-width: 60em) {
-  .md-typeset .home-hero__copy { padding: 1.5rem; }
-  .md-typeset .home-hero h1 { font-size: 1.7rem; }
-  .md-typeset .home-experiments > ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
 @media screen and (max-width: 47em) {
   /* 主题通过行内 top 定位该按钮；手机上改到右下角，避开锚点标题。 */
   .md-top {
@@ -334,14 +325,8 @@
     transform: none;
   }
   .md-top > svg { width: 1.2rem; height: 1.2rem; margin: 0; }
-  .md-typeset .home-hero { grid-template-columns: minmax(0, 1fr); }
-  .md-typeset .home-hero__art { height: 9rem; }
-  .md-typeset .home-hero__art::before { background: linear-gradient(180deg, #153f3b, transparent 30%); }
-  .md-typeset .home-hero__art img { object-position: center 65%; }
-  .md-typeset .learning-home .knowledge-lane { grid-template-columns: minmax(0, 1fr); gap: .3rem; }
-  .md-typeset .learning-home .knowledge-lane h3 { grid-row: auto; }
-  .md-typeset .learning-home .knowledge-lane p,
-  .md-typeset .learning-home .knowledge-lane__bridge { grid-column: 1; }
+  .md-typeset .home-intro { grid-template-columns: minmax(0, 1fr); }
+  .md-typeset .home-intro h1 { text-wrap: initial; }
   .md-typeset .concept-compare { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .concept-flow { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .concept-roc text { font-size: 22px; }
@@ -352,18 +337,12 @@
   .md-typeset .lab-toolbar { grid-template-columns: minmax(0, 1fr); }
   .md-typeset .lab-filter-reset { justify-self: start; }
   .md-typeset .lab-catalog > ul { grid-template-columns: minmax(0, 1fr); }
-  .md-typeset .home-hero__copy { padding: 1.7rem 1rem .7rem; }
-  .md-typeset .home-hero h1 { margin: 0 0 .55rem; padding-right: .5rem; font-size: 1.55rem; }
-  .md-typeset .home-hero__copy p { margin: .6rem 0; font-size: .78rem; }
-  .md-typeset .home-hero__copy .home-hero__lead { font-size: .95rem; }
-  .md-typeset .home-actions { margin: .75rem 0 .25rem; }
-  .md-typeset .home-actions .md-button { padding: .55em .8em; font-size: .72rem; }
-  .md-typeset .home-hero__note { margin-top: .6rem; font-size: .65rem; }
-  .md-typeset .home-hero__art { height: 7.5rem; }
-  .md-typeset .home-section-heading { margin-top: 1.6rem; }
-  .md-typeset .home-section-heading h2,
-  .md-typeset .learning-home > h2 { font-size: 1.25em; }
-  .md-typeset .home-experiments > ul { grid-template-columns: minmax(0, 1fr); }
+  .md-typeset .home-intro__copy { padding-right: .8rem; }
+  .md-typeset .home-feature { padding-inline: .8rem; }
+  .md-typeset .home-section { margin-top: 1.5rem; }
+  .md-typeset .home-index, .md-typeset .home-experiments > ul { grid-template-columns: minmax(0, 1fr); }
+  .md-typeset .home-index section + section { border-top: 1px solid var(--home-line); }
+  .md-typeset .home-progress > ul > li { grid-template-columns: minmax(0, 1fr); gap: .3rem; }
   .md-typeset .object-row { grid-template-columns: 3rem minmax(0, 1fr); }
   .md-typeset .object-shared { margin-left: 0; }
   .md-typeset .concept-settings { align-items: stretch; }
